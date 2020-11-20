@@ -1,10 +1,13 @@
 exports.tb_users = 
-    [{
-        "id": 1,
-        "name": "Fulano de tal",
-        "pass": 1234,
-        "avatar_url": "img"
-    }]
+    [
+        {
+            "id": 1,
+            "name": "Fulano de tal",
+            "email": "email@email.com",
+            "pass": 1234,
+            "avatar_url": "img"
+        }
+    ]
 
 exports.tb_tasks = 
     [{
