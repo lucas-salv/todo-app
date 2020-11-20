@@ -35,13 +35,32 @@ exports.putUser = (req, res, next) => {
         avatar_url != undefined ? user.avatar_url = avatar_url : null;
     
         res.status(200).json({
-            "success": "200 - Success",
-            "users": tb_users
+            "success": "200 - Edited"
         });
     } else {
         res.status(404).json({
             "error": "404 - Not Found"
         });
     }
+}
 
+exports.deleteUser = (req, res, next) => {
+    if(isNaN(req.params.id)){
+        res.status(400).json({
+            "error": "400 - Bad Request"
+        });
+    }
+
+    const index = tb_users.findIndex(user => user.id == req.params.id);
+
+    if(index == -1) {
+        res.status(404).json({
+            "error": "404 - Not Found"
+        });
+    } else {
+        tb_users.splice(index, 1);
+        res.status(200).json({
+            "success": "200 - Removed"
+        });
+    }
 }
