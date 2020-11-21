@@ -20,3 +20,21 @@ exports.getTasks = (req, res, next) => {
         res.json(tb_tasks);
     }
 }
+
+exports.getTaskById = (req, res, next) => {
+    if(isNaN(req.params.id)){
+        res.status(400).json({
+            "error": "400 - Bad Request"
+        });
+    }
+
+    const gTasks = tb_tasks.filter(task => task.group_task_id == req.params.id);
+
+    if(gTasks.length < 1) {
+        res.status(404).json({
+            "error": "404 - Not Found"
+        });
+    }
+
+    res.json(gTasks);
+}
