@@ -49,7 +49,7 @@ exports.postGroupTask = (req, res, next) => {
     } else {
         const newGroupTask = {
             user_id,
-            group_task_id: tb_tasks[tb_tasks.length-1].group_task_id+1,
+            group_task_id: tb_tasks.length == 0 ? 1 : tb_tasks[tb_tasks.length-1].group_task_id+1,
             title_group_task,
             tasks: []
         }
@@ -57,7 +57,39 @@ exports.postGroupTask = (req, res, next) => {
         tb_tasks.push(newGroupTask);
     
         res.status(201).json({
-            "success": "201 - created"
+            "success": "201 - created",
         });
+    }
+}
+
+exports.postTask = (req, res, next) => {
+    if(isNaN(req.params.id)){
+        res.status(400).json({
+            "error": "400 - Bad Request"
+        });
+    } else {
+        const { title_task, date } = req.body;
+    
+        if(!title_task) {
+            res.status(400).json({
+                "error": "400 - Bad Request"
+            });
+        } else {
+            const [ task ] = tb_tasks.filter(task => task.group_task_id == req.params.id);
+
+            const newTask = {
+                task_id: task.tasks.length == 0 ? 1 : task.tasks[task.tasks.length-1].task_id+1,
+                title_task,
+                desc_task: "",
+                tags: [],
+                date
+            }
+
+            task.tasks.push(newTask);
+
+            res.status(201).json({
+                "success": "201 - created"
+            });
+        }
     }
 }
