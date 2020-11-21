@@ -38,3 +38,26 @@ exports.getTaskById = (req, res, next) => {
 
     res.json(gTasks);
 }
+
+exports.postGroupTask = (req, res, next) => {
+    const { user_id, title_group_task } = req.body;
+
+    if(user_id == undefined || title_group_task == undefined){
+        res.status(400).json({
+            "error": "400 - Bad Request"
+        });
+    } else {
+        const newGroupTask = {
+            user_id,
+            group_task_id: tb_tasks[tb_tasks.length-1].group_task_id+1,
+            title_group_task,
+            tasks: []
+        }
+    
+        tb_tasks.push(newGroupTask);
+    
+        res.status(201).json({
+            "success": "201 - created"
+        });
+    }
+}
