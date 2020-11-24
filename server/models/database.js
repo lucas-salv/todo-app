@@ -19,6 +19,7 @@ exports.tb_tasks =
                 "task_id": 1,
                 "title_task": "Nome da tarefa 1",
                 "desc_task": "descrição da tarefa",
+                "checked": false,
                 "tags": ["importante", "muito importante"],
                 "date": "01/01/2020"
             },
@@ -26,6 +27,7 @@ exports.tb_tasks =
                 "task_id": 2,
                 "title_task": "Nome da tarefa 2",
                 "desc_task": "descrição da tarefa",
+                "checked": false,
                 "tags": ["importante", "muito importante"],
                 "date": "01/01/2020"
             }

@@ -116,3 +116,41 @@ exports.putGroupTask = (req, res, next) => {
         });
     }
 }
+
+exports.putTask = (req, res, next) => {
+    if(isNaN(req.params.id)) {
+        res.status(400).json({
+            "error": "400 - Bad Request"
+        });
+    }
+
+    const { group_task_id, title_task, desc_task, checked, tags } = req.body;
+
+    const gTask = tb_tasks.find(gtask => gtask.group_task_id == group_task_id);
+
+    if(gTask == undefined) {
+        res.status(404).json({
+            "error": "404 - Not Found"
+        });
+        return;
+    }
+    
+    const task = gTask.tasks.find(task => task.task_id == req.params.id);
+
+    if(task != undefined) {
+        title_task != undefined ? task.title_task = title_task : null;
+        desc_task != undefined ? task.desc_task = desc_task : null;
+        checked != undefined ? task.checked = checked : null;
+        tags.length != 0 ? task.tags = tags : null;
+
+        res.status(200).json({
+            "success": "200 - success",
+            "task_list": tb_tasks
+        });
+    } else {
+        res.status(404).json({
+            "error": "404 - Not Found"
+        });
+    }
+
+}
