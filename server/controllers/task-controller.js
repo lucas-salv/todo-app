@@ -93,3 +93,26 @@ exports.postTask = (req, res, next) => {
         }
     }
 }
+
+exports.putGroupTask = (req, res, next) => {
+    if(isNaN(req.params.id)){
+        res.status(400).json({
+            "error": "400 - Bad Request"
+        });
+    }
+
+    const groupTask = tb_tasks.find(task => task.group_task_id == req.params.id);
+
+    if(groupTask != undefined) {
+        const { title_group_task } = req.body;
+        title_group_task != undefined ? groupTask.title_group_task = title_group_task : null;
+
+        res.status(200).json({
+            "success": "200 - success"
+        });
+    } else {
+        res.status(404).json({
+            "error": "404 - Not Found"
+        });
+    }
+}
