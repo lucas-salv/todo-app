@@ -144,13 +144,33 @@ exports.putTask = (req, res, next) => {
         tags.length != 0 ? task.tags = tags : null;
 
         res.status(200).json({
-            "success": "200 - success",
-            "task_list": tb_tasks
+            "success": "200 - success"
         });
     } else {
         res.status(404).json({
             "error": "404 - Not Found"
         });
     }
+}
 
+exports.deleteGroupTask = (req, res, next) => {
+    if(isNaN(req.params.id)) {
+        res.status(400).json({
+            "error": "400 - Bad Request"
+        });
+    }
+
+    const groupIndex = tb_tasks.findIndex(gTask => gTask.group_task_id == req.params.id);
+
+    if(groupIndex == -1) {
+        res.status(404).json({
+            "error": "404 - Not Found"
+        });
+    } else {
+        tb_tasks.splice(groupIndex, 1);
+        res.status(200).json({
+            "success": "200 - success",
+            "tasks": tb_tasks
+        });
+    }
 }
