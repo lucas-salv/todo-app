@@ -169,8 +169,37 @@ exports.deleteGroupTask = (req, res, next) => {
     } else {
         tb_tasks.splice(groupIndex, 1);
         res.status(200).json({
-            "success": "200 - success",
-            "tasks": tb_tasks
+            "success": "200 - success"
+        });
+    }
+}
+
+exports.deleteTask = (req, res, next) => {
+    if(isNaN(req.params.group_id) && isNaN(req.params.task_id)) {
+        res.status(400).json({
+            "error": "400 - Bad Request"
+        });
+    }
+
+    const gTask = tb_tasks.find(gtask => gtask.group_task_id == req.params.group_id);
+
+    if(gTask == undefined) {
+        res.status(404).json({
+            "error": "404 - Not Found"
+        });
+        return;
+    }
+
+    const taskIndex = gTask.tasks.findIndex(task => task.task_id == req.params.task_id);
+
+    if(taskIndex == -1) {
+        res.status(404).json({
+            "error": "404 - Not Found"
+        });
+    } else {
+        gTask.tasks.splice(taskIndex, 1);
+        res.status(200).json({
+            "success": "200 - success"
         });
     }
 }
