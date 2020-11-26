@@ -10,7 +10,7 @@ exports.getTasks = (req, res, next) => {
     
         if(tasks.length < 1) {
             res.status(404).json({
-                error: "404 - Not Found"
+                "message": "404 - Not Found"
             });
         } else {
             res.json(tasks);
@@ -24,7 +24,7 @@ exports.getTasks = (req, res, next) => {
 exports.getTaskById = (req, res, next) => {
     if(isNaN(req.params.id)){
         res.status(400).json({
-            "error": "400 - Bad Request"
+            "message": "400 - Bad Request"
         });
     }
 
@@ -32,7 +32,7 @@ exports.getTaskById = (req, res, next) => {
 
     if(gTasks.length < 1) {
         res.status(404).json({
-            "error": "404 - Not Found"
+            "message": "404 - Not Found"
         });
     }
 
@@ -44,7 +44,7 @@ exports.postGroupTask = (req, res, next) => {
 
     if(user_id == undefined || title_group_task == undefined){
         res.status(400).json({
-            "error": "400 - Bad Request"
+            "message": "400 - Bad Request"
         });
     } else {
         const newGroupTask = {
@@ -57,7 +57,7 @@ exports.postGroupTask = (req, res, next) => {
         tb_tasks.push(newGroupTask);
     
         res.status(201).json({
-            "success": "201 - created",
+            "message": "201 - Created",
         });
     }
 }
@@ -65,14 +65,14 @@ exports.postGroupTask = (req, res, next) => {
 exports.postTask = (req, res, next) => {
     if(isNaN(req.params.id)){
         res.status(400).json({
-            "error": "400 - Bad Request"
+            "message": "400 - Bad Request"
         });
     } else {
         const { title_task, date } = req.body;
     
         if(!title_task) {
             res.status(400).json({
-                "error": "400 - Bad Request"
+                "message": "400 - Bad Request"
             });
         } else {
             const [ task ] = tb_tasks.filter(task => task.group_task_id == req.params.id);
@@ -88,7 +88,7 @@ exports.postTask = (req, res, next) => {
             task.tasks.push(newTask);
 
             res.status(201).json({
-                "success": "201 - created"
+                "message": "201 - Created"
             });
         }
     }
@@ -97,7 +97,7 @@ exports.postTask = (req, res, next) => {
 exports.putGroupTask = (req, res, next) => {
     if(isNaN(req.params.id)){
         res.status(400).json({
-            "error": "400 - Bad Request"
+            "message": "400 - Bad Request"
         });
     }
 
@@ -108,11 +108,11 @@ exports.putGroupTask = (req, res, next) => {
         title_group_task != undefined ? groupTask.title_group_task = title_group_task : null;
 
         res.status(200).json({
-            "success": "200 - success"
+            "message": "200 - Success"
         });
     } else {
         res.status(404).json({
-            "error": "404 - Not Found"
+            "message": "404 - Not Found"
         });
     }
 }
@@ -120,7 +120,7 @@ exports.putGroupTask = (req, res, next) => {
 exports.putTask = (req, res, next) => {
     if(isNaN(req.params.id)) {
         res.status(400).json({
-            "error": "400 - Bad Request"
+            "message": "400 - Bad Request"
         });
     }
 
@@ -130,7 +130,7 @@ exports.putTask = (req, res, next) => {
 
     if(gTask == undefined) {
         res.status(404).json({
-            "error": "404 - Not Found"
+            "message": "404 - Not Found"
         });
         return;
     }
@@ -144,11 +144,11 @@ exports.putTask = (req, res, next) => {
         tags.length != 0 ? task.tags = tags : null;
 
         res.status(200).json({
-            "success": "200 - success"
+            "message": "200 - Success"
         });
     } else {
         res.status(404).json({
-            "error": "404 - Not Found"
+            "message": "404 - Not Found"
         });
     }
 }
@@ -156,7 +156,7 @@ exports.putTask = (req, res, next) => {
 exports.deleteGroupTask = (req, res, next) => {
     if(isNaN(req.params.id)) {
         res.status(400).json({
-            "error": "400 - Bad Request"
+            "message": "400 - Bad Request"
         });
     }
 
@@ -164,12 +164,12 @@ exports.deleteGroupTask = (req, res, next) => {
 
     if(groupIndex == -1) {
         res.status(404).json({
-            "error": "404 - Not Found"
+            "message": "404 - Not Found"
         });
     } else {
         tb_tasks.splice(groupIndex, 1);
         res.status(200).json({
-            "success": "200 - success"
+            "message": "200 - Success"
         });
     }
 }
@@ -177,7 +177,7 @@ exports.deleteGroupTask = (req, res, next) => {
 exports.deleteTask = (req, res, next) => {
     if(isNaN(req.params.group_id) && isNaN(req.params.task_id)) {
         res.status(400).json({
-            "error": "400 - Bad Request"
+            "message": "400 - Bad Request"
         });
     }
 
@@ -185,7 +185,7 @@ exports.deleteTask = (req, res, next) => {
 
     if(gTask == undefined) {
         res.status(404).json({
-            "error": "404 - Not Found"
+            "message": "404 - Not Found"
         });
         return;
     }
@@ -194,12 +194,12 @@ exports.deleteTask = (req, res, next) => {
 
     if(taskIndex == -1) {
         res.status(404).json({
-            "error": "404 - Not Found"
+            "message": "404 - Not Found"
         });
     } else {
         gTask.tasks.splice(taskIndex, 1);
         res.status(200).json({
-            "success": "200 - success"
+            "message": "200 - Success"
         });
     }
 }

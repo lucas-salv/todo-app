@@ -14,14 +14,14 @@ exports.postUser = (req, res, next) => {
     tb_users.push(user);
 
     res.status(201).json({
-        "success": "201 - created"
+        "message": "201 - Created"
     });
 }
 
 exports.putUser = (req, res, next) => {
     if(isNaN(req.params.id)){
         res.status(400).json({
-            "error": "400 - Bad Request"
+            "message": "400 - Bad Request"
         });
     }
 
@@ -35,11 +35,11 @@ exports.putUser = (req, res, next) => {
         avatar_url != undefined ? user.avatar_url = avatar_url : null;
     
         res.status(200).json({
-            "success": "200 - Edited"
+            "message": "200 - Success"
         });
     } else {
         res.status(404).json({
-            "error": "404 - Not Found"
+            "message": "404 - Not Found"
         });
     }
 }
@@ -47,7 +47,7 @@ exports.putUser = (req, res, next) => {
 exports.deleteUser = (req, res, next) => {
     if(isNaN(req.params.id)){
         res.status(400).json({
-            "error": "400 - Bad Request"
+            "message": "400 - Bad Request"
         });
     }
 
@@ -55,12 +55,12 @@ exports.deleteUser = (req, res, next) => {
 
     if(index == -1) {
         res.status(404).json({
-            "error": "404 - Not Found"
+            "message": "404 - Not Found"
         });
     } else {
         tb_users.splice(index, 1);
         res.status(200).json({
-            "success": "200 - Removed"
+            "message": "200 - Success"
         });
     }
 }
