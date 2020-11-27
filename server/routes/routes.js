@@ -4,7 +4,7 @@ const userController = require('./../controllers/user-controller');
 const taskController = require('./../controllers/task-controller');
 
 // user routes
-router.post('/user', userController.postUser);
+router.post('/signup', userController.postUser);
 router.put('/user/:id', userController.putUser);
 router.delete('/user/:id', userController.deleteUser);
 
