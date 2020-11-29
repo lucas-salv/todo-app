@@ -21,24 +21,25 @@ exports.getTasks = (req, res, next) => {
 exports.postGroupTask = (req, res, next) => {
     const { user_id, title_group_task } = req.body;
 
-    if(user_id == undefined || title_group_task == undefined){
-        res.status(400).json({
+    if(!user_id || !title_group_task){
+        return res.status(400).json({
             "message": "400 - Bad Request"
         });
-    } else {
-        const newGroupTask = {
-            user_id,
-            group_task_id: tb_tasks.length == 0 ? 1 : tb_tasks[tb_tasks.length-1].group_task_id+1,
-            title_group_task,
-            tasks: []
-        }
-    
-        tb_tasks.push(newGroupTask);
-    
-        res.status(201).json({
-            "message": "201 - Created",
-        });
     }
+
+    const [userTaskGroup] = tb_tasks.filter(userTaskGroup => userTaskGroup.user_id == user_id);
+    
+    const newGroupTask = {
+        id: userTaskGroup.group_task.length == 0 ? 1 : userTaskGroup.group_task[userTaskGroup.group_task.length-1].id+1,
+        title_group_task,
+        tasks: []
+    }
+
+    userTaskGroup.group_task.push(newGroupTask);
+
+    res.status(201).json({
+        "message": "201 - Created"
+    });
 }
 
 exports.postTask = (req, res, next) => {
