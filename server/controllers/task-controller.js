@@ -121,36 +121,37 @@ exports.putGroupTask = (req, res, next) => {
 }
 
 exports.putTask = (req, res, next) => {
-    if(isNaN(req.params.id)) {
-        res.status(400).json({
-            "message": "400 - Bad Request"
-        });
-    }
-
-    const { group_task_id, title_task, desc_task, checked, tags } = req.body;
-
-    const gTask = tb_tasks.find(gtask => gtask.group_task_id == group_task_id);
-
-    if(gTask == undefined) {
-        return res.status(404).json({
-            "message": "404 - Not Found"
-        });
-    }
+    try{
+        if(isNaN(req.params.id)) {
+            res.status(400).json({
+                "message": "400 - Bad Request"
+            });
+        }
     
-    const task = gTask.tasks.find(task => task.task_id == req.params.id);
-
-    if(task != undefined) {
+        const { user_id, group_task_id, title_task, desc_task, checked, tags } = req.body;
+    
+        const task = tb_tasks.find(userTaskGroup => userTaskGroup.user_id == user_id)
+                              .group_task.find(gtask => gtask.id == group_task_id)
+                              .tasks.find(task => task.task_id == req.params.id);
+    
+        if(!task) {
+            return res.status(404).json({
+                "message": "404 - Not Found"
+            });
+        }
+    
         title_task != undefined ? task.title_task = title_task : null;
         desc_task != undefined ? task.desc_task = desc_task : null;
         checked != undefined ? task.checked = checked : null;
         tags.length != 0 ? task.tags = tags : null;
-
+    
         res.status(200).json({
             "message": "200 - Success"
         });
-    } else {
-        res.status(404).json({
-            "message": "404 - Not Found"
+
+    } catch(err){
+        res.status(500).json({
+            "message": "500 - Internal Server Error"
         });
     }
 }
