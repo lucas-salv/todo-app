@@ -1,76 +1,91 @@
 const { tb_tasks } = require('./../models/database');
 
 exports.getTasks = (req, res, next) => {
-    if(isNaN(req.params.user_id)){
-        return res.status(400).json({
-            "message": "400 - Bad Request"
+    try{
+        if(isNaN(req.params.user_id)){
+            return res.status(400).json({
+                "message": "400 - Bad Request"
+            });
+        }
+    
+        const [gTasks] = tb_tasks.filter(gtask => gtask.user_id == req.params.user_id);
+    
+        if(!gTasks){
+            return res.status(404).json({
+                "message": "404 - Not Found"
+            });
+        }
+    
+        res.json(gTasks);
+
+    } catch(err) {
+        res.status(500).json({
+            "message": "500 - Internal Server Error"
         });
     }
-
-    const [gTasks] = tb_tasks.filter(gtask => gtask.user_id == req.params.user_id);
-
-    if(!gTasks){
-        return res.status(404).json({
-            "message": "404 - Not Found"
-        });
-    }
-
-    res.json(gTasks);
 }
 
 exports.postGroupTask = (req, res, next) => {
-    const { user_id, title_group_task } = req.body;
-
-    if(!user_id || !title_group_task){
-        return res.status(400).json({
-            "message": "400 - Bad Request"
+    try {
+        const { user_id, title_group_task } = req.body;
+    
+        if(!user_id || !title_group_task){
+            return res.status(400).json({
+                "message": "400 - Bad Request"
+            });
+        }
+    
+        const [userTaskGroup] = tb_tasks.filter(userTaskGroup => userTaskGroup.user_id == user_id);
+        
+        const newGroupTask = {
+            id: userTaskGroup.group_task.length == 0 ? 1 : userTaskGroup.group_task[userTaskGroup.group_task.length-1].id+1,
+            title_group_task,
+            tasks: []
+        }
+    
+        userTaskGroup.group_task.push(newGroupTask);
+    
+        res.status(201).json({
+            "message": "201 - Created"
+        });
+    } catch(err){
+        res.status(500).json({
+            "message": "500 - Internal Server Error"
         });
     }
-
-    const [userTaskGroup] = tb_tasks.filter(userTaskGroup => userTaskGroup.user_id == user_id);
-    
-    const newGroupTask = {
-        id: userTaskGroup.group_task.length == 0 ? 1 : userTaskGroup.group_task[userTaskGroup.group_task.length-1].id+1,
-        title_group_task,
-        tasks: []
-    }
-
-    userTaskGroup.group_task.push(newGroupTask);
-
-    res.status(201).json({
-        "message": "201 - Created"
-    });
 }
 
 exports.postTask = (req, res, next) => {
-    if(isNaN(req.params.id)){
-        res.status(400).json({
-            "message": "400 - Bad Request"
-        });
-    } else {
-        const { title_task, date } = req.body;
-    
+    try {
+        const { user_id, group_task_id, title_task, date } = req.body;
+        
         if(!title_task) {
-            res.status(400).json({
+            return res.status(400).json({
                 "message": "400 - Bad Request"
             });
-        } else {
-            const [ task ] = tb_tasks.filter(task => task.group_task_id == req.params.id);
-
-            const newTask = {
-                task_id: task.tasks.length == 0 ? 1 : task.tasks[task.tasks.length-1].task_id+1,
-                title_task,
-                desc_task: "",
-                tags: [],
-                date
-            }
-
-            task.tasks.push(newTask);
-
-            res.status(201).json({
-                "message": "201 - Created"
-            });
         }
+    
+        const [gTask] = tb_tasks.filter(userTaskGroup => userTaskGroup.user_id == user_id)[0]
+                                        .group_task.filter(gTask => gTask.id == group_task_id);
+    
+    
+        const newTask = {
+            task_id: gTask.tasks.length == 0 ? 1 : gTask.tasks[gTask.tasks.length-1].task_id+1,
+            title_task,
+            desc_task: "",
+            tags: [],
+            date
+        }
+    
+        gTask.tasks.push(newTask);
+    
+        res.status(201).json({
+            "message": "201 - Created"
+        });
+    } catch(err) {
+        res.status(500).json({
+            "message": "500 - Internal Server Error"
+        });
     }
 }
 
