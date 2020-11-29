@@ -13,7 +13,7 @@ router.delete('/user/:id', authMiddleware, userController.deleteUser);
 router.get('/task-groups/:user_id', authMiddleware, taskController.getTasks);
 router.post('/task-group', authMiddleware, taskController.postGroupTask);
 router.post('/task', authMiddleware, taskController.postTask);
-router.put('/group-task/:id', authMiddleware, taskController.putGroupTask);
+router.put('/task-group/:id', authMiddleware, taskController.putGroupTask);
 router.put('/task/:id', authMiddleware, taskController.putTask);
 router.delete('/group-task/:id', authMiddleware, taskController.deleteGroupTask);
 router.delete('/task/:group_id/:task_id', authMiddleware, taskController.deleteTask);
