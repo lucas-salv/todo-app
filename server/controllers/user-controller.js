@@ -1,21 +1,37 @@
 const { tb_users } = require('./../models/database');
+const jwt = require('./../utils/jwt');
 
 exports.postUser = (req, res, next) => {
     const { name, email, pass, avatar_url } = req.body;
 
-    const user = {
-        id: tb_users[tb_users.length-1].id+1,
-        name,
-        email,
-        pass,
-        avatar_url
+    const userValidate = tb_users.findIndex(user => user.email == email);
+
+    if(userValidate == -1) {
+        const user = {
+            id: tb_users[tb_users.length-1].id+1,
+            name,
+            email,
+            pass,
+            avatar_url
+        }
+    
+        tb_users.push(user);
+    
+        delete user.pass;
+    
+        const token = jwt.sign({ user: user.id });
+    
+        res.status(201).json({
+            "message": "201 - Created",
+            user,
+            token
+        });
+    } else {
+        res.status(400).json({
+            "message": "400 - Bad Request"
+        });
     }
 
-    tb_users.push(user);
-
-    res.status(201).json({
-        "message": "201 - Created"
-    });
 }
 
 exports.putUser = (req, res, next) => {

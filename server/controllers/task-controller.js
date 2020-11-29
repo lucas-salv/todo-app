@@ -31,7 +31,7 @@ exports.getTaskById = (req, res, next) => {
     const gTasks = tb_tasks.filter(task => task.group_task_id == req.params.id);
 
     if(gTasks.length < 1) {
-        res.status(404).json({
+        return res.status(404).json({
             "message": "404 - Not Found"
         });
     }
@@ -129,10 +129,9 @@ exports.putTask = (req, res, next) => {
     const gTask = tb_tasks.find(gtask => gtask.group_task_id == group_task_id);
 
     if(gTask == undefined) {
-        res.status(404).json({
+        return res.status(404).json({
             "message": "404 - Not Found"
         });
-        return;
     }
     
     const task = gTask.tasks.find(task => task.task_id == req.params.id);
@@ -184,10 +183,9 @@ exports.deleteTask = (req, res, next) => {
     const gTask = tb_tasks.find(gtask => gtask.group_task_id == req.params.group_id);
 
     if(gTask == undefined) {
-        res.status(404).json({
+        return res.status(404).json({
             "message": "404 - Not Found"
         });
-        return;
     }
 
     const taskIndex = gTask.tasks.findIndex(task => task.task_id == req.params.task_id);
