@@ -86,6 +86,7 @@ exports.deleteUser = (req, res, next) => {
         }
     
         const index = tb_users.findIndex(user => user.id == req.params.id);
+        const taskIndex = tb_tasks.findIndex(task => task.user_id == req.params.id);
     
         if(index == -1) {
             res.status(404).json({
@@ -93,6 +94,7 @@ exports.deleteUser = (req, res, next) => {
             });
         } else {
             tb_users.splice(index, 1);
+            tb_tasks.splice(taskIndex, 1);
             res.status(200).json({
                 "message": "200 - Success"
             });
