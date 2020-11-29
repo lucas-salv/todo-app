@@ -1,4 +1,4 @@
-const { tb_users } = require('./../models/database');
+const { tb_users, tb_tasks } = require('./../models/database');
 const jwt = require('./../utils/jwt');
 
 exports.postUser = (req, res, next) => {
@@ -15,8 +15,14 @@ exports.postUser = (req, res, next) => {
                 pass,
                 avatar_url
             }
+
+            const userGroupTask = {
+                user_id: user.id,
+                group_task: []
+            }
         
             tb_users.push(user);
+            tb_tasks.push(userGroupTask);
         
             delete user.pass;
         
