@@ -6,6 +6,13 @@ exports.tb_users =
             "email": "email@email.com",
             "pass": 1234,
             "avatar_url": "img"
+        },
+        {
+            "id": 2,
+            "name": "Fulano de tal 2",
+            "email": "teste@email.com",
+            "pass": 5678,
+            "avatar_url": "img"
         }
     ]
 
