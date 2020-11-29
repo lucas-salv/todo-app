@@ -187,30 +187,33 @@ exports.deleteGroupTask = (req, res, next) => {
 }
 
 exports.deleteTask = (req, res, next) => {
-    if(isNaN(req.params.group_id) && isNaN(req.params.task_id)) {
-        res.status(400).json({
-            "message": "400 - Bad Request"
-        });
-    }
+    try{
+        if(isNaN(req.params.group_id) || isNaN(req.params.task_id) || isNaN(req.params.user_id)) {
+            res.status(400).json({
+                "message": "400 - Bad Request"
+            });
+        }
 
-    const gTask = tb_tasks.find(gtask => gtask.group_task_id == req.params.group_id);
+        const gTask = tb_tasks.find(userGroup => userGroup.user_id == req.params.user_id).group_task
+        .find(gtask => gtask.id == req.params.group_id);
+    
+        const taskIndex = tb_tasks.find(userGroup => userGroup.user_id == req.params.user_id).group_task
+                              .find(gtask => gtask.id == req.params.group_id).tasks
+                              .findIndex(task => task.task_id == req.params.task_id);
+    
+        if(taskIndex == -1) {
+            return res.status(404).json({
+                "message": "404 - Not Found"
+            });
+        }
 
-    if(gTask == undefined) {
-        return res.status(404).json({
-            "message": "404 - Not Found"
-        });
-    }
-
-    const taskIndex = gTask.tasks.findIndex(task => task.task_id == req.params.task_id);
-
-    if(taskIndex == -1) {
-        res.status(404).json({
-            "message": "404 - Not Found"
-        });
-    } else {
         gTask.tasks.splice(taskIndex, 1);
         res.status(200).json({
             "message": "200 - Success"
+        });
+    } catch(err){
+        res.status(500).json({
+            "message": "500 - Internal Server Error"
         });
     }
 }

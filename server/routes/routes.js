@@ -16,6 +16,6 @@ router.post('/task', authMiddleware, taskController.postTask);
 router.put('/task-group/:id', authMiddleware, taskController.putGroupTask);
 router.put('/task/:id', authMiddleware, taskController.putTask);
 router.delete('/task-group/:user_id/:group_id', authMiddleware, taskController.deleteGroupTask);
-router.delete('/task/:group_id/:task_id', authMiddleware, taskController.deleteTask);
+router.delete('/task/:user_id/:group_id/:task_id', authMiddleware, taskController.deleteTask);
 
 module.exports = router;
