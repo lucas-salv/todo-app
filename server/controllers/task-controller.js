@@ -18,24 +18,6 @@ exports.getTasks = (req, res, next) => {
     res.json(gTasks);
 }
 
-exports.getTaskById = (req, res, next) => {
-    if(isNaN(req.params.id)){
-        res.status(400).json({
-            "message": "400 - Bad Request"
-        });
-    }
-
-    const gTasks = tb_tasks.filter(task => task.group_task_id == req.params.id);
-
-    if(gTasks.length < 1) {
-        return res.status(404).json({
-            "message": "404 - Not Found"
-        });
-    }
-
-    res.json(gTasks);
-}
-
 exports.postGroupTask = (req, res, next) => {
     const { user_id, title_group_task } = req.body;
 
