@@ -1,4 +1,6 @@
 const { tb_tasks } = require('./../models/database');
+const authCheck = require('./../utils/authCheck');
+const formatError = require('./../utils/formatError');
 
 exports.getTasks = (req, res, next) => {
     try{
@@ -7,21 +9,22 @@ exports.getTasks = (req, res, next) => {
                 "message": "400 - Bad Request"
             });
         }
-    
+
+        
         const [gTasks] = tb_tasks.filter(gtask => gtask.user_id == req.params.user_id);
-    
+        
         if(!gTasks){
             return res.status(404).json({
                 "message": "404 - Not Found"
             });
         }
-    
+        
+        authCheck(req);
+
         res.json(gTasks);
 
     } catch(err) {
-        res.status(500).json({
-            "message": "500 - Internal Server Error"
-        });
+        formatError(err.message, res);
     }
 }
 
