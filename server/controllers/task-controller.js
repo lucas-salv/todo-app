@@ -1,4 +1,6 @@
 const { tb_tasks } = require('./../models/database');
+const authCheck = require('./../utils/authCheck');
+const formatError = require('./../utils/formatError');
 
 exports.getTasks = (req, res, next) => {
     try{
@@ -7,21 +9,22 @@ exports.getTasks = (req, res, next) => {
                 "message": "400 - Bad Request"
             });
         }
-    
+
+        
         const [gTasks] = tb_tasks.filter(gtask => gtask.user_id == req.params.user_id);
-    
+        
         if(!gTasks){
             return res.status(404).json({
                 "message": "404 - Not Found"
             });
         }
-    
+        
+        authCheck(req.auth, req.params.user_id);
+
         res.json(gTasks);
 
     } catch(err) {
-        res.status(500).json({
-            "message": "500 - Internal Server Error"
-        });
+        formatError(err.message, res);
     }
 }
 
@@ -34,6 +37,8 @@ exports.postGroupTask = (req, res, next) => {
                 "message": "400 - Bad Request"
             });
         }
+
+        authCheck(req.auth, user_id);
     
         const [userTaskGroup] = tb_tasks.filter(userTaskGroup => userTaskGroup.user_id == user_id);
         
@@ -49,9 +54,7 @@ exports.postGroupTask = (req, res, next) => {
             "message": "201 - Created"
         });
     } catch(err){
-        res.status(500).json({
-            "message": "500 - Internal Server Error"
-        });
+        formatError(err.message, res);
     }
 }
 
@@ -64,6 +67,8 @@ exports.postTask = (req, res, next) => {
                 "message": "400 - Bad Request"
             });
         }
+
+        authCheck(req.auth, user_id);
     
         const [gTask] = tb_tasks.filter(userTaskGroup => userTaskGroup.user_id == user_id)[0]
                                         .group_task.filter(gTask => gTask.id == group_task_id);
@@ -83,9 +88,7 @@ exports.postTask = (req, res, next) => {
             "message": "201 - Created"
         });
     } catch(err) {
-        res.status(500).json({
-            "message": "500 - Internal Server Error"
-        });
+        formatError(err.message, res);
     }
 }
 
@@ -107,6 +110,8 @@ exports.putGroupTask = (req, res, next) => {
             });
         }
 
+        authCheck(req.auth, user_id);
+
         title_group_task != undefined ? gTask.title_group_task = title_group_task : null;
 
         res.status(200).json({
@@ -114,9 +119,7 @@ exports.putGroupTask = (req, res, next) => {
         });
         
     } catch(err){
-        res.status(500).json({
-            "message": "500 - Internal Server Error"
-        });
+        formatError(err.message, res);
     }
 }
 
@@ -139,6 +142,8 @@ exports.putTask = (req, res, next) => {
                 "message": "404 - Not Found"
             });
         }
+
+        authCheck(req.auth, user_id);
     
         title_task != undefined ? task.title_task = title_task : null;
         desc_task != undefined ? task.desc_task = desc_task : null;
@@ -150,9 +155,7 @@ exports.putTask = (req, res, next) => {
         });
 
     } catch(err){
-        res.status(500).json({
-            "message": "500 - Internal Server Error"
-        });
+        formatError(err.message, res);
     }
 }
 
@@ -175,14 +178,14 @@ exports.deleteGroupTask = (req, res, next) => {
             });
         }
 
+        authCheck(req.auth, req.params.user_id);
+
         gTask.group_task.splice(groupIndex, 1);
         res.status(200).json({
             "message": "200 - Success"
         });
     } catch(err){
-        res.status(500).json({
-            "message": "500 - Internal Server Error"
-        });
+        formatError(err.message, res);
     }
 }
 
@@ -193,13 +196,19 @@ exports.deleteTask = (req, res, next) => {
                 "message": "400 - Bad Request"
             });
         }
+        
+        authCheck(req.auth, req.params.user_id);
 
         const gTask = tb_tasks.find(userGroup => userGroup.user_id == req.params.user_id).group_task
         .find(gtask => gtask.id == req.params.group_id);
+
+        if(!gTask) {
+            return res.status(404).json({
+                "message": "404 - Not Found"
+            });
+        }
     
-        const taskIndex = tb_tasks.find(userGroup => userGroup.user_id == req.params.user_id).group_task
-                              .find(gtask => gtask.id == req.params.group_id).tasks
-                              .findIndex(task => task.task_id == req.params.task_id);
+        const taskIndex = gTask.tasks.findIndex(task => task.task_id == req.params.task_id);
     
         if(taskIndex == -1) {
             return res.status(404).json({
@@ -207,13 +216,12 @@ exports.deleteTask = (req, res, next) => {
             });
         }
 
+
         gTask.tasks.splice(taskIndex, 1);
         res.status(200).json({
             "message": "200 - Success"
         });
     } catch(err){
-        res.status(500).json({
-            "message": "500 - Internal Server Error"
-        });
+        formatError(err.message, res);
     }
 }

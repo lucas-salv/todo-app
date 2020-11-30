@@ -1,5 +1,5 @@
-module.exports = (req) => {
-    if(req.auth.id != req.params.user_id){
+module.exports = (authUser, id) => {
+    if(authUser.id != id){
         throw new Error(["400", "400 - Bad Request"]);
     }
 }

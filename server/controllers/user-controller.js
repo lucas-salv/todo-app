@@ -1,5 +1,7 @@
 const { tb_users, tb_tasks } = require('./../models/database');
 const jwt = require('./../utils/jwt');
+const authCheck = require('./../utils/authCheck');
+const formatError = require('./../utils/formatError');
 
 exports.postUser = (req, res, next) => {
     try{
@@ -52,6 +54,8 @@ exports.putUser = (req, res, next) => {
                 "message": "400 - Bad Request"
             });
         }
+
+        authCheck(req.auth, req.params.id);
     
         const user = tb_users.find(user => user.id == req.params.id);
     
@@ -71,9 +75,7 @@ exports.putUser = (req, res, next) => {
             });
         }
     } catch(err){
-        res.status(500).json({
-            "message": "500 - Internal Server Error"
-        });
+        formatError(err.message, res);
     }
 }
 
@@ -93,6 +95,7 @@ exports.deleteUser = (req, res, next) => {
                 "message": "404 - Not Found"
             });
         } else {
+            authCheck(req.auth, req.params.id);
             tb_users.splice(index, 1);
             tb_tasks.splice(taskIndex, 1);
             res.status(200).json({
@@ -100,8 +103,6 @@ exports.deleteUser = (req, res, next) => {
             });
         }
     } catch(err){
-        res.status(500).json({
-            "message": "500 - Internal Server Error"
-        });
+        formatError(err.message, res);
     }
 }
