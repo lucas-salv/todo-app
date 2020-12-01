@@ -11,7 +11,7 @@ exports.postUser = (req, res, next) => {
     
         if(userValidate == -1) {
             const user = {
-                id: tb_users[tb_users.length-1].id+1,
+                id: tb_users.length == 0 ? 1 : tb_users[tb_users.length-1].id+1,
                 name,
                 email,
                 pass,
