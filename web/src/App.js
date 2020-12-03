@@ -1,9 +1,9 @@
-function App() {
+import Login from './pages/Login';
+
+export default function App() {
   return (
     <div className="App">
-      ToDo App
+      <Login />
     </div>
   );
 }
-
-export default App;
