@@ -1,4 +1,5 @@
 import { FiUser, FiLock } from 'react-icons/fi'
+import Button from './../Button';
 import { Form, Label } from './styles';
 
 export default function FormLogin() {
@@ -12,6 +13,7 @@ export default function FormLogin() {
                 <FiLock color="#9B9B9B" />
                 <input type="password" id="pass" name="password" />
             </Label>
+            <Button>Entrar</Button>
         </Form>
     )
 }
