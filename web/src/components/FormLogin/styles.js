@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Form = styled.form`
     display:flex;
     flex-direction: column;
-    padding: 10px;
+    width: 100%;
 `;
 
 export const Label = styled.label`
@@ -17,7 +17,6 @@ export const Label = styled.label`
     input {
         width: 100%;
         margin-left: 5px;
-        letter-spacing: 1px;
         color: #9B9B9B;
         background: none;
         border: none;

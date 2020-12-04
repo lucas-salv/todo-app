@@ -1,9 +1,10 @@
 import FormLogin from './../../components/FormLogin';
+import { Container } from './styles';
 
 export default function Login(){
     return (
-        <div>
+        <Container>
             <FormLogin />
-        </div>
+        </Container>
     )
 }

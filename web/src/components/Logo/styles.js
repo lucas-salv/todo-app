@@ -8,7 +8,6 @@ export const LogoComponent = styled.div`
 
 export const TitleLogo = styled.h1`
     font-size: 22px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bold;
     margin: 10px 0 15px 0;
     color: #707070;
