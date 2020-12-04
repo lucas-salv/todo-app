@@ -1,5 +1,6 @@
 import { FiUser, FiLock } from 'react-icons/fi'
 import Button from './../Button';
+import Link from './../Link';
 import { Form, Label } from './styles';
 
 export default function FormLogin() {
@@ -14,6 +15,7 @@ export default function FormLogin() {
                 <input type="password" id="pass" name="password" />
             </Label>
             <Button>Entrar</Button>
+            <Link>Criar uma conta</Link>
         </Form>
     )
 }
