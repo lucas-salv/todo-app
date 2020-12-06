@@ -12,11 +12,11 @@ export default function FormLogin() {
             <Title>Faça seu login</Title>
             <Label htmlFor="email">
                 <HiOutlineMail color="#9B9B9B" />
-                <input type="text" id="email" name="email" autoFocus />
+                <input type="email" id="email" name="email" autoFocus placeholder="Email" />
             </Label>
             <Label htmlFor="pass">
                 <FiLock color="#9B9B9B" />
-                <input type="password" id="pass" name="password" />
+                <input type="password" id="pass" name="password" placeholder="Senha" />
             </Label>
             <Button>Entrar</Button>
             <Link>Criar uma conta</Link>

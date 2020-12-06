@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const LinkComponent = styled.a`
+    display: flex;
+    align-items: center;
     font-size: 0.7rem;
     font-family: sans-serif;
     margin-top: 5px;

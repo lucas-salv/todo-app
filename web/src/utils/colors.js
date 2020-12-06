@@ -3,5 +3,6 @@ export const colors = {
     whiteColor: "#FFF",
     grayBackground: "#F5F5F5",
     grayTextColor: "#9B9B9B",
-    textLogoColor: "#707070"
+    textLogoColor: "#707070",
+    placeholderColor: "#D4D4D4"
 }
