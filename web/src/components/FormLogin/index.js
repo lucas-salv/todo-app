@@ -1,4 +1,5 @@
-import { FiUser, FiLock } from 'react-icons/fi'
+import { FiLock } from 'react-icons/fi';
+import { HiOutlineMail } from "react-icons/hi";
 import Button from './../Button';
 import Link from './../Link';
 import Logo from './../Logo';
@@ -10,7 +11,7 @@ export default function FormLogin() {
             <Logo />
             <Title>Faça seu login</Title>
             <Label htmlFor="email">
-                <FiUser color="#9B9B9B" />
+                <HiOutlineMail color="#9B9B9B" />
                 <input type="text" id="email" name="email" autoFocus />
             </Label>
             <Label htmlFor="pass">

@@ -1,5 +1,7 @@
 export const colors = {
     main: "#38A0FF",
+    whiteColor: "#FFF",
     grayBackground: "#F5F5F5",
-    grayTextColor: "#9B9B9B"
+    grayTextColor: "#9B9B9B",
+    textLogoColor: "#707070"
 }

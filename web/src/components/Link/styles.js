@@ -4,10 +4,11 @@ export const LinkComponent = styled.a`
     font-size: 0.7rem;
     font-family: sans-serif;
     margin-top: 5px;
-    color: #38A0FF;
+    color: ${props => props.theme.main};
+    text-decoration: none;
     transition: color .5s ease-in-out;
 
-    &.active {
-        color: #9BCFFF;
+    &:active {
+        color: ${props => props.theme.grayTextColor};
     }
 `;
