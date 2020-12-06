@@ -22,4 +22,11 @@ export const Label = styled.label`
         border: none;
         outline: none;
     }
+`;
+
+export const Title = styled.h2`
+    font-size: 0.8rem;
+    color: #9B9B9B;
+    font-weight: normal;
+    margin-bottom: 10px;
 `
