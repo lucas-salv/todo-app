@@ -16,11 +16,15 @@ export const Label = styled.label`
 
     input {
         width: 100%;
-        margin-left: 5px;
+        margin-left: 10px;
         color: ${props => props.theme.grayTextColor};
         background: none;
         border: none;
         outline: none;
+
+        &::-webkit-input-placeholder {
+            color: ${props => props.theme.placeholderColor};
+        }
     }
 `;
 
