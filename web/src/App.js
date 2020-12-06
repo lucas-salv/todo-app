@@ -1,7 +1,8 @@
 import Login from './pages/Login';
+import { colors } from './utils/colors';
 
 // global styles
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
   * {
@@ -15,11 +16,11 @@ const GlobalStyles = createGlobalStyle`
 
 export default function App() {
   return (
-    <>
-    <GlobalStyles />
-    <div className="App">
-      <Login />
-    </div>
-    </>
+    <ThemeProvider theme={colors}>
+      <GlobalStyles />
+      <div className="App">
+        <Login />
+      </div>
+    </ThemeProvider>
   );
 }

@@ -11,13 +11,13 @@ export const Label = styled.label`
     align-items: center;
     padding: 10px;
     margin-bottom: 10px;
-    background-color: #F5F5F5;
+    background-color: ${props => props.theme.grayBackground};
     border-radius: 5px;
 
     input {
         width: 100%;
         margin-left: 5px;
-        color: #9B9B9B;
+        color: ${props => props.theme.grayTextColor};
         background: none;
         border: none;
         outline: none;
@@ -26,7 +26,7 @@ export const Label = styled.label`
 
 export const Title = styled.h2`
     font-size: 0.8rem;
-    color: #9B9B9B;
+    color: ${props => props.theme.grayTextColor};
     font-weight: normal;
     margin-bottom: 10px;
 `
