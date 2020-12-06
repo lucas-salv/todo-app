@@ -1,11 +1,11 @@
 import React from 'react';
 import Button from './../components/Button';
 
-const componentObj = {
+const defaultObj = {
     title: "components/Button",
     component: Button
 }
 
-export default componentObj;
+export default defaultObj;
 
 export const Default = () => <Button>Default</Button>
