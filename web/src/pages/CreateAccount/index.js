@@ -1,5 +1,10 @@
+import FormCreateAccount from './../../components/FormCreateAccount';
+import { Container } from './styles';
+
 export default function CreateAccount() {
     return (
-        <div></div>
+        <Container>
+            <FormCreateAccount />
+        </Container>
     )
 }
