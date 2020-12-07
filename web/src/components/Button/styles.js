@@ -8,6 +8,7 @@ export const ButtonComponent = styled.button`
     background-color: ${props => props.theme.main};
     border-radius: 5px;
     border: 1px solid ${props => props.theme.main};
+    cursor: pointer;
     transition: all .5s ease-in-out;
 
     &:active {

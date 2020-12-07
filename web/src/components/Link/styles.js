@@ -8,6 +8,7 @@ export const LinkComponent = styled.a`
     margin-top: 5px;
     color: ${props => props.theme.main};
     text-decoration: none;
+    cursor: pointer;
     transition: color .5s ease-in-out, font-size .5s ease-in-out;
 
     &:active {
