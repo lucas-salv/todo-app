@@ -5,6 +5,7 @@ export const LogoComponent = styled.a`
     flex-direction: column;
     align-items: center;
     text-decoration: none;
+    cursor: pointer;
 `;
 
 export const TitleLogo = styled.h1`
