@@ -4,6 +4,23 @@ export const Form = styled.form`
     display:flex;
     flex-direction: column;
     width: 100%;
+    transition: width 0.5s ease-in-out;
+
+    @media (min-width: 600px){
+        width: 70%;
+    }
+
+    @media (min-width: 900px){
+        width: 50%;
+    }
+
+    @media (min-width: 1200px){
+        width: 40%;
+    }
+
+    @media (min-width: 1800px){
+        width: 25%;
+    }
 `;
 
 export const Label = styled.label`
@@ -12,6 +29,7 @@ export const Label = styled.label`
     padding: 10px;
     margin-bottom: 10px;
     background-color: ${props => props.theme.grayBackground};
+    border: 1px solid ${props => props.theme.grayBackground};
     border-radius: 5px;
 
     input {
