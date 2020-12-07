@@ -1,4 +1,4 @@
-import FormLogin from './../../components/FormLogin';
+import FormLogin from './../../components/FormCreateAccount';
 import { Container } from './styles';
 
 export default function Login(){
