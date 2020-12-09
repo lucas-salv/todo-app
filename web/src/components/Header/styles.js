@@ -2,10 +2,16 @@ import styled from 'styled-components';
 
 export const HeaderContainer = styled.header`
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    flex-direction: column;
     position: fixed;
     width: 100%;
+    background-color: ${props => props.theme.whiteColor};
+`;
+
+export const Container = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     padding: 10px 10%;
 `;
 
@@ -21,7 +27,7 @@ export const MenuIcon = styled.div`
         content: '';
         position: absolute;
         top: 0;
-        width: 25px;
+        width: 20px;
         height: 2px;
         background-color: ${props => props.theme.placeholderColor};
         transform: ${props => props.open ? 'rotate(135deg)' : 'rotate(0)'};
@@ -32,7 +38,7 @@ export const MenuIcon = styled.div`
         content: '';
         position: absolute;
         top: ${props => props.open ? '0' : '5px'};
-        width: 25px;
+        width: 20px;
         height: 2px;
         background-color: ${props => props.theme.placeholderColor};
         transform: ${props => props.open ? 'rotate(45deg)' : 'rotate(0)'};
@@ -45,7 +51,7 @@ export const PerfilContainer = styled.div`
     align-items: center;
 `;
 
-export const Perfil = styled.div`
+export const Perfil = styled.img`
     width:  40px;
     height: 40px;
     margin-left: 20px;
