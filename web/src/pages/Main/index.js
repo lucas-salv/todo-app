@@ -1,5 +1,10 @@
+import { Container } from './styles';
+import Header from './../../components/Header';
+
 export default function Main() {
     return (
-        <div>Main Page</div>
+        <Container>
+            <Header />
+        </Container>
     )
 }
