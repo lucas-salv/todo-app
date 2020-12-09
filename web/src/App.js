@@ -1,4 +1,5 @@
-import Login from './pages/Login';
+//import Login from './pages/Login';
+import Main from './pages/Main';
 import { colors } from './utils/colors';
 
 import GlobalStyles from './utils/globalStyles';
@@ -10,7 +11,7 @@ export default function App() {
     <ThemeProvider theme={colors}>
       <GlobalStyles />
       <div className="App">
-        <Login />
+        <Main />
       </div>
     </ThemeProvider>
   );
