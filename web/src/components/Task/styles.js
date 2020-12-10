@@ -6,6 +6,12 @@ export const Container = styled.li`
     padding: 5px;
     margin-bottom: 10px;
     list-style: none;
+    border-radius: 5px;
+    transition: background-color .5s ease-in-out;
+
+    &:active, &:hover {
+        background-color: ${props => props.theme.grayBackground};
+    }
 `;
 
 export const TitleTask = styled.p`
