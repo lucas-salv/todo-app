@@ -1,9 +1,9 @@
 import { FiTrash2 } from 'react-icons/fi';
-import { Container, TitleTask, ContentContainer, TaskContainer, TagContainer, Tag } from './styles';
+import { Container, TitleTask, ContentContainer, TaskContainer, Button, TagContainer, Tag } from './styles';
 
 export default function Task() {
     return (
-        <Container>
+        <Container color="#38A0FF">
             <input type="checkbox" />
             
             <ContentContainer>
@@ -15,7 +15,9 @@ export default function Task() {
                         <Tag color="#38A0FF" />
                     </TagContainer>
                 </TaskContainer>
-                <FiTrash2 color="#9B9B9B" />
+                <Button>
+                    <FiTrash2 className="trashIcon" />
+                </Button>
             </ContentContainer>
         </Container>
     )
