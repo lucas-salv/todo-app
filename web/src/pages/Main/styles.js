@@ -7,3 +7,8 @@ export const Container = styled.div`
 export const TaskContainer = styled.ul`
     margin-top: 20px;
 `
+
+export const Title = styled.h4`
+    color: ${props => props.theme.grayTextColor};
+    font-size: 0.8rem;
+`

@@ -28,6 +28,7 @@ export const Label = styled.div`
 export const Title = styled.h1`
     font-size: 1.5rem;
     margin-bottom: 10px;
+    color: ${props => props.theme.textLogoColor};
 `;
 
 export const Button = styled.button`
