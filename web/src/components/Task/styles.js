@@ -39,6 +39,7 @@ export const Container = styled.li`
                 opacity: ${props => props.checked ? 0.4 : 1};
                 display: flex;
                 margin-top: 2px;
+                z-index: -1;
             }
         }
     }
