@@ -16,30 +16,33 @@ export const Container = styled.li`
     &:active, &:hover {
         background-color: ${props => props.theme.grayBackground};
     }
+
+    .content-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-left: 10px;
+
+        .task-container {
+            display: flex;
+            flex-direction: column;
+
+            .title {
+                text-decoration: ${props => props.checked ? 'line-through' : 'none' };
+                font-size: 0.8rem;
+                color: ${props => props.theme.grayTextColor};
+            }
+
+            .tagContainer {
+                filter: contrast(${props => props.checked ? 0 : 1});
+                opacity: ${props => props.checked ? 0.4 : 1};
+                display: flex;
+                margin-top: 2px;
+            }
+        }
+    }
 `;
-
-export const TitleTask = styled.p`
-    font-size: 0.8rem;
-    color: ${props => props.theme.grayTextColor};
-`
-
-export const ContentContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-left: 10px;
-`
-
-export const TaskContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-`
-
-export const TagContainer = styled.div`
-    display: flex;
-    margin-top: 2px;
-`
 
 export const Tag = styled.div`
    width: 15px;
