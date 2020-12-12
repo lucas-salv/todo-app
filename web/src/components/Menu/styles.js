@@ -4,13 +4,26 @@ export const Container = styled.div`
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 2;
     display: flex;
     width: 80%;
     height: 100vh;
     background-color: ${props => props.theme.whiteColor};
+    box-shadow: 5px 0px 11px -7px #707070;
     transition: transform .5s ease-in-out;
-    transform: translateX(${props => props.open ? 0 : -100}%);
+    transform: translateX(${props => props.open ? 0 : -110}%);
+    
+    & ~ .backgroundMenu {
+        z-index: 1;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0,0,0,0.1);
+        transition: transform .5s ease-in-out;
+        transform: translateX(${props => props.open ? 0 : 110}%);
+    }
 `;
 
 export const MainMenu = styled.nav`
@@ -40,4 +53,7 @@ export const Item = styled.a`
     }
 `
 
-export const SecondaryMenu = styled.div``;
+export const SecondaryMenu = styled.div`
+    padding: 60px 10px 10px 10px;
+    width:  80%;
+`;
