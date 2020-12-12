@@ -12,6 +12,7 @@ export const HeaderContainer = styled.header`
 
 export const Container = styled.div`
     display: flex;
+    position: relative;
     justify-content: flex-end;
     align-items: center;
     padding: 10px 10%;
@@ -21,11 +22,13 @@ export const MenuIcon = styled.div`
     display: flex;
     align-items: center;
     position: fixed;
-    left: 10%;
+    left: ${props => props.open ? 5.5 : 10}%;
+    z-index: 2;
     width: 25px;
     height: 5px;
     cursor: pointer;
     outline: none;
+    transition: left .5s ease-in-out;
 
     &::before {
         content: '';
@@ -34,8 +37,8 @@ export const MenuIcon = styled.div`
         width: 20px;
         height: 2px;
         background-color: ${props => props.theme.placeholderColor};
-        transform: ${props => props.open ? 'rotate(135deg)' : 'rotate(0)'};
-        transition: transform .3s ease-in-out;
+        transform: ${props => props.open ? 'rotate(-315deg)' : 'rotate(0)'};
+        transition: transform .5s ease-in-out;
     }
 
     &::after {
@@ -45,8 +48,8 @@ export const MenuIcon = styled.div`
         width: 20px;
         height: 2px;
         background-color: ${props => props.theme.placeholderColor};
-        transform: ${props => props.open ? 'rotate(45deg)' : 'rotate(0)'};
-        transition: top .3s ease-in-out, transform .3s ease-in-out;
+        transform: ${props => props.open ? 'rotate(-225deg)' : 'rotate(0)'};
+        transition: top .5s ease-in-out, transform .5s ease-in-out;
     }
 `;
 
