@@ -24,6 +24,8 @@ export const MenuIcon = styled.div`
     left: 10%;
     width: 25px;
     height: 5px;
+    cursor: pointer;
+    outline: none;
 
     &::before {
         content: '';
