@@ -14,9 +14,30 @@ export const Container = styled.div`
 `;
 
 export const MainMenu = styled.nav`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 20%;
     height: 100%;
+    padding: 60px 5px;
     border-right: 1px solid ${props => props.theme.grayBackground};
 `;
+
+export const Item = styled.a`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: ${props => props.active ? props.theme.main : 'transparent'};
+    margin-bottom: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+
+    .icon {
+        fill: ${props => props.active ? props.theme.whiteColor : props.theme.placeholderColor};
+    }
+`
 
 export const SecondaryMenu = styled.div``;

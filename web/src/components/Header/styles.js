@@ -22,7 +22,7 @@ export const MenuIcon = styled.div`
     display: flex;
     align-items: center;
     position: fixed;
-    left: ${props => props.open ? 6 : 10}%;
+    left: ${props => props.open ? 5.5 : 10}%;
     z-index: 2;
     width: 25px;
     height: 5px;
