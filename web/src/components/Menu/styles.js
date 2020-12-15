@@ -31,6 +31,8 @@ export const Container = styled.div`
 
     @media (min-width: 900px) {
         width: 40%;
+        box-shadow: none;
+        transform: translateX(${props => props.open ? 0 : -20}%);
 
         & ~ .backgroundMenu {
             display: none;
@@ -46,6 +48,12 @@ export const MainMenu = styled.nav`
     height: 100%;
     padding: 60px 5px;
     border-right: 1px solid ${props => props.theme.grayBackground};
+
+    @media (min-width: 900px) {
+        margin-top: 60px;
+        padding-top: 10px;
+        border-top: 1px solid ${props => props.theme.grayBackground};
+    }
 `;
 
 export const Item = styled.a`
@@ -66,6 +74,13 @@ export const Item = styled.a`
 `
 
 export const SecondaryMenu = styled.div`
-    padding: 60px 10px 10px 10px;
+    padding: 30px 10px 10px 10px;
     width:  80%;
+
+    @media (min-width: 900px) {
+        margin-top: 60px;
+        padding-top: 10px;
+        border-top: 1px solid ${props => props.theme.grayBackground};
+        border-right: 1px solid ${props => props.theme.grayBackground};
+    }
 `;

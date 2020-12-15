@@ -6,6 +6,11 @@ export const Progress = styled.div`
     width: 100%;
     height: 4px;
     background-color: ${props => props.theme.grayBackground};
+
+    @media (min-width: 900px) {
+        width: 60%;
+        align-self: flex-end;
+    }
 `;
 
 export const Bar = styled.div`
