@@ -51,6 +51,12 @@ export const MenuIcon = styled.div`
         transform: ${props => props.open ? 'rotate(-225deg)' : 'rotate(0)'};
         transition: top .5s ease-in-out, transform .5s ease-in-out;
     }
+
+    @media (min-width: 600px) {
+        left: ${props => props.open ? 4.5 : 10}%;
+    }
+
+    
 `;
 
 export const PerfilContainer = styled.div`

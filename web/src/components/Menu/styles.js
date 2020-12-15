@@ -24,6 +24,18 @@ export const Container = styled.div`
         transition: transform .5s ease-in-out;
         transform: translateX(${props => props.open ? 0 : 110}%);
     }
+
+    @media (min-width: 600px) {
+        width: 60%;
+    }
+
+    @media (min-width: 900px) {
+        width: 40%;
+
+        & ~ .backgroundMenu {
+            display: none;
+        }
+    }
 `;
 
 export const MainMenu = styled.nav`

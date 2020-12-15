@@ -6,6 +6,12 @@ export const Container = styled.div`
 
 export const TaskContainer = styled.ul`
     margin-top: 20px;
+`;
+
+export const MainContainer = styled.main`
+    @media (min-width: 900px) {
+        padding-left: 40%;
+    }
 `
 
 export const Title = styled.h4`
