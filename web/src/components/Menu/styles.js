@@ -33,10 +33,6 @@ export const Container = styled.div`
         width: 40%;
         box-shadow: none;
         transform: translateX(${props => props.open ? 0 : -20}%);
-
-        & ~ .backgroundMenu {
-            display: none;
-        }
     }
 `;
 
@@ -79,7 +75,7 @@ export const SecondaryMenu = styled.div`
 
     @media (min-width: 900px) {
         margin-top: 60px;
-        padding-top: 10px;
+        padding: 10px 20px 10px 20px;
         border-top: 1px solid ${props => props.theme.grayBackground};
         border-right: 1px solid ${props => props.theme.grayBackground};
     }

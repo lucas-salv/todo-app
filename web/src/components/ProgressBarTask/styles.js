@@ -8,7 +8,7 @@ export const Progress = styled.div`
     background-color: ${props => props.theme.grayBackground};
 
     @media (min-width: 900px) {
-        width: 60%;
+        width: 70%;
         align-self: flex-end;
     }
 `;

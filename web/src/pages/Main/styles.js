@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    padding: 100px 10% 0 10%;
+    padding: 100px 0;
 `;
 
 export const TaskContainer = styled.ul`
@@ -9,8 +9,11 @@ export const TaskContainer = styled.ul`
 `;
 
 export const MainContainer = styled.main`
+    padding: 0 10%;
+
     @media (min-width: 900px) {
-        padding-left: 40%;
+        margin-left: 32%;
+        padding: 0 10%;
     }
 `
 
