@@ -16,6 +16,10 @@ export const Container = styled.div`
     justify-content: flex-end;
     align-items: center;
     padding: 10px 10%;
+
+    @media (min-width: 1200px) {
+        padding: 10px 5%;
+    }
 `;
 
 export const MenuIcon = styled.div`
@@ -70,6 +74,10 @@ export const MenuIcon = styled.div`
 export const PerfilContainer = styled.div`
     display: flex;
     align-items: center;
+
+    .notify {
+        cursor: pointer;
+    }
 `;
 
 export const Perfil = styled.img`
@@ -78,4 +86,5 @@ export const Perfil = styled.img`
     margin-left: 20px;
     background-color: ${props => props.theme.main};
     border-radius: 5px;
+    cursor: pointer;
 `

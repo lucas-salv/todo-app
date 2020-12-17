@@ -18,6 +18,7 @@ export const Button = styled.button`
     border: none;
     background-color: ${props => props.theme.main};
     border-radius: 5px;
+    cursor: pointer;
 `;
 
 export const GroupContainer = styled.div`
@@ -52,6 +53,7 @@ export const Group = styled.div`
 
         .eb-icon {
             color: ${props => props.active ? props.theme.whiteColor : props.theme.grayTextColor};
+            cursor: pointer;
         }
     }
 `;
