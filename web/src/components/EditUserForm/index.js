@@ -30,7 +30,6 @@ export default function EditUserForm({ open, setOpen }) {
                         <FiLock color="#9B9B9B" />
                         <input type="password" id="confirm-pass" placeholder="Confirmar senha"/>
                     </Label>
-                    <Label>
                         <ImgContainer>
                             <ImgPerfil />
                             <ImgPerfil />
@@ -41,7 +40,6 @@ export default function EditUserForm({ open, setOpen }) {
                             <ImgPerfil />
                             <ImgPerfil />
                         </ImgContainer>
-                    </Label>
                     <Button>Editar</Button>
                 </Form>
             </Container>

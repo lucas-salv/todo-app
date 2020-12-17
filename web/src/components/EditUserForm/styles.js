@@ -8,12 +8,12 @@ export const Container = styled.div`
     height: 100vh;
     padding: 20px;
     background-color: ${props => props.theme.whiteColor};
-    z-index: 2;
+    z-index: 3;
     transition: transform .5s ease-in-out;
     transform: translateX(${props => props.open ? 0 : 110}%);
 
     & ~ .backgroundMenu {
-        z-index: 1;
+        z-index: 2;
         position: fixed;
         top: 0;
         left: 0;
@@ -24,6 +24,18 @@ export const Container = styled.div`
         transition: transform .5s ease-in-out;
         transform: translateX(${props => props.open ? 0 : -110}%);
     }
+
+    @media (min-width: 600px) {
+        width: 60%;
+    }
+
+    @media (min-width: 900px) {
+        width: 40%;
+    }
+
+    @media (min-width: 1200px) {
+        width: 355px;
+    }
 `
 
 export const Form = styled.form`
@@ -31,22 +43,6 @@ export const Form = styled.form`
     flex-direction: column;
     width: 100%;
     transition: width 0.5s ease-in-out;
-
-    @media (min-width: 600px){
-        width: 70%;
-    }
-
-    @media (min-width: 900px){
-        width: 50%;
-    }
-
-    @media (min-width: 1200px){
-        width: 40%;
-    }
-
-    @media (min-width: 1800px){
-        width: 25%;
-    }
 `;
 
 export const Label = styled.label`
@@ -83,7 +79,7 @@ export const ImgContainer = styled.div`
     display: flex;
     width: 100%;
     flex-wrap: wrap;
-    background-color: ${props => props.theme.grayBackground};
+    margin-bottom: 10px;
 `
 
 export const ImgPerfil = styled.img`
