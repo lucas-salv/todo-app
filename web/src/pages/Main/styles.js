@@ -15,6 +15,10 @@ export const MainContainer = styled.main`
         margin-left: 32%;
         padding: 0 10%;
     }
+
+    @media (min-width: 1200px) {
+        margin-left: 355px;
+    }
 `
 
 export const Title = styled.h4`

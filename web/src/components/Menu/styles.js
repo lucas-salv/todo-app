@@ -34,6 +34,11 @@ export const Container = styled.div`
         box-shadow: none;
         transform: translateX(${props => props.open ? 0 : -20}%);
     }
+
+    @media (min-width: 1200px) {
+        width: 355px;
+        transform: translateX(${props => props.open ? 0 : 0}%);
+    }
 `;
 
 export const MainMenu = styled.nav`
@@ -42,13 +47,17 @@ export const MainMenu = styled.nav`
     align-items: center;
     width: 20%;
     height: 100%;
-    padding: 60px 5px;
+    padding: 60px 0;
     border-right: 1px solid ${props => props.theme.grayBackground};
 
     @media (min-width: 900px) {
         margin-top: 60px;
         padding-top: 10px;
         border-top: 1px solid ${props => props.theme.grayBackground};
+    }
+
+    @media (min-width: 1200px) {
+        width: 75px;
     }
 `;
 
@@ -70,7 +79,7 @@ export const Item = styled.a`
 `
 
 export const SecondaryMenu = styled.div`
-    padding: 30px 10px 10px 10px;
+    padding: 40px 10px 10px 10px;
     width:  80%;
 
     @media (min-width: 900px) {
@@ -78,5 +87,9 @@ export const SecondaryMenu = styled.div`
         padding: 10px 20px 10px 20px;
         border-top: 1px solid ${props => props.theme.grayBackground};
         border-right: 1px solid ${props => props.theme.grayBackground};
+    }
+
+    @media (min-width: 1200px) {
+        width: 300px;
     }
 `;

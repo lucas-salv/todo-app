@@ -11,6 +11,10 @@ export const Progress = styled.div`
         width: 70%;
         align-self: flex-end;
     }
+
+    @media (min-width: 1200px) {
+        width: calc(100% - 355px);
+    }
 `;
 
 export const Bar = styled.div`

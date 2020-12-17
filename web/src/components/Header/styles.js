@@ -56,6 +56,14 @@ export const MenuIcon = styled.div`
         left: ${props => props.open ? 4.5 : 10}%;
     }
 
+    @media (min-width: 900px) {
+        left: ${props => props.open ? 3.5 : 10}%;
+    }
+
+    @media (min-width: 1200px) {
+        display: none;
+    }
+
     
 `;
 
