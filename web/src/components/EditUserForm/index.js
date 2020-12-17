@@ -4,12 +4,12 @@ import { Container, Form, Title, Label, ImgContainer, ImgPerfil } from './styles
 import Button from './../Button';
 import Link from './../Link';
 
-export default function EditUserForm({ open }) {
+export default function EditUserForm({ open, setOpen }) {
     return (
         <>
             <Container open={open}>
                 <Form action="#">
-                    <Link>
+                    <Link setOpen={setOpen}>
                         <FiChevronLeft />
                         Voltar
                     </Link>

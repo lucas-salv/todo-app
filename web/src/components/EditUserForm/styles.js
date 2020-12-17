@@ -9,6 +9,8 @@ export const Container = styled.div`
     padding: 20px;
     background-color: ${props => props.theme.whiteColor};
     z-index: 2;
+    transition: transform .5s ease-in-out;
+    transform: translateX(${props => props.open ? 0 : 110}%);
 
     & ~ .backgroundMenu {
         z-index: 1;
@@ -19,8 +21,8 @@ export const Container = styled.div`
         height: 100vh;
         background-color: rgba(0,0,0,0.1);
         transition: transform .5s ease-in-out;
-        //transform: translateX(${props => props.open ? 0 : 110}%);
-        transform: translateX(0%)
+        transition: transform .5s ease-in-out;
+        transform: translateX(${props => props.open ? 0 : -110}%);
     }
 `
 
