@@ -9,7 +9,6 @@ export const Container = styled.div`
     width: 80%;
     height: 100vh;
     background-color: ${props => props.theme.whiteColor};
-    box-shadow: 5px 0px 11px -7px #707070;
     transition: transform .5s ease-in-out;
     transform: translateX(${props => props.open ? 0 : -110}%);
     

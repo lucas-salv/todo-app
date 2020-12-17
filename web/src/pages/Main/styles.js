@@ -18,6 +18,7 @@ export const MainContainer = styled.main`
 
     @media (min-width: 1200px) {
         margin-left: 355px;
+        padding: 0 5%;
     }
 `
 

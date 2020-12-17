@@ -17,7 +17,7 @@ export default function Header() {
             <Container>
                 <MenuIcon onClick={menuAnimation} open={isOpenMenu} />
                 <PerfilContainer>
-                    <FiBell color="#D4D4D4" size={22} />
+                    <FiBell className="notify" color="#D4D4D4" size={22} />
                     <Perfil />
                 </PerfilContainer>
             </Container>
