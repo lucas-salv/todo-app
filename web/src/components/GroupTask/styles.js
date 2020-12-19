@@ -16,13 +16,12 @@ export const Form = styled.form`
 `;
 
 export const Label = styled.div`
-    display: flex;
+    display: ${props => props.open ? 'flex' : 'none'};
     background-color: ${props => props.theme.grayBackground};
     border-radius: 5px;
 
     input {
         width: 100%;
-        margin-left: 10px;
         padding: 10px;
         color: ${props => props.theme.grayTextColor};
         background: none;
@@ -74,6 +73,14 @@ export const Group = styled.div`
 
     .name {
         color: ${props => props.active ? props.theme.whiteColor : props.theme.grayTextColor};
+    }
+
+    .float {
+        width: 100%;
+        position: absolute;
+        top: 35px;
+        left: 0;
+        z-index: 2;
     }
 
     .edit-button {
