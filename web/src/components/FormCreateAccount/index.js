@@ -5,7 +5,7 @@ import Link from './../Link';
 import Logo from './../Logo';
 import { Form, Label, Title } from './styles';
 
-export default function FormLogin() {
+export default function FormCreateAccount() {
     return (
         <Form action="#">
             <Link>

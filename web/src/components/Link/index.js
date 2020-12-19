@@ -1,8 +1,8 @@
 import { LinkComponent } from './styles';
 
-export default function Link({ children }) {
+export default function Link({ children, setOpen }) {
     return (
-        <LinkComponent>
+        <LinkComponent onClick={setOpen}>
             { children }
         </LinkComponent>
     )
