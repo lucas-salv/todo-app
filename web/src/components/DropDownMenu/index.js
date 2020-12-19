@@ -1,8 +1,8 @@
 import { Container } from './styles';
 
-export default function DropDownMenu({children, open}) {
+export default function DropDownMenu({children, open, position}) {
     return (
-        <Container open={open}>
+        <Container open={open} position={position}>
             {children}
         </Container>
     )

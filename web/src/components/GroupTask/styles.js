@@ -61,6 +61,7 @@ export const Group = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
     font-size: 0.9rem;
     padding: 5px;
     background-color: ${props => props.active ? props.theme.secondary : 'transparent'};
@@ -80,6 +81,7 @@ export const Group = styled.div`
         background: none;
         width: 10px;
         height: 25px;
+        outline: none;
 
         .eb-icon {
             color: ${props => props.active ? props.theme.whiteColor : props.theme.grayTextColor};
