@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const ButtonComponent = styled.button`
     padding: 10px;
     margin-bottom: 10px;
-    color: ${props => props.type === 'delete' ? 'red' : props.theme.whiteColor};
+    color: ${props => props.type === 'delete' ? '#ed2f2f' : props.theme.whiteColor};
     font-weight: bold;
     outline: none;
     background-color: ${props => props.type === 'delete' ? props.theme.whiteColor : props.theme.main};

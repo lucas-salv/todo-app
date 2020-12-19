@@ -74,6 +74,7 @@ export const MenuIcon = styled.div`
 export const PerfilContainer = styled.div`
     display: flex;
     align-items: center;
+    position: relative;
 
     .notify {
         cursor: pointer;

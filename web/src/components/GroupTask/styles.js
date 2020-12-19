@@ -68,7 +68,7 @@ export const Group = styled.div`
     cursor: pointer;
 
     &:hover {
-        background-color: ${props => props.theme.grayBackground};
+        background-color: ${props => props.active ? props.theme.secondary : props.theme.grayBackground};
     }
 
     .name {
