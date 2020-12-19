@@ -1,8 +1,8 @@
 import { ButtonComponent } from './styles';
 
-export default function Button({ children}) {
+export default function Button({ children, type}) {
     return (
-        <ButtonComponent>
+        <ButtonComponent type={type}>
             {children}
         </ButtonComponent>
     )

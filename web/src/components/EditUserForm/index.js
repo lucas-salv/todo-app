@@ -41,6 +41,7 @@ export default function EditUserForm({ open, setOpen }) {
                             <ImgPerfil />
                         </ImgContainer>
                     <Button>Editar</Button>
+                    <Button type="delete">Excluir conta</Button>
                 </Form>
             </Container>
             <div className="backgroundMenu"></div>
