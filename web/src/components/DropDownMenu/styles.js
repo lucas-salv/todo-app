@@ -12,6 +12,11 @@ export const Container = styled.ul`
     border: 1px solid ${props => props.theme.grayBackground};
     border-radius: 5px;
 
+    @media (min-width: 900px) {
+        top: ${props => props.position === 'bottom' ? '0' : '60px'};
+        right: ${props => props.position === 'bottom' ? '-210px' : '0'};
+    }
+
     li {
         list-style: none;
         padding: 10px;

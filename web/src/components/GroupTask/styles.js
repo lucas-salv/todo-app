@@ -16,7 +16,7 @@ export const Form = styled.form`
 `;
 
 export const Label = styled.div`
-    display: ${props => props.open ? 'flex' : 'none'};
+    display: flex;
     background-color: ${props => props.theme.grayBackground};
     border-radius: 5px;
 
@@ -54,45 +54,4 @@ export const Text = styled.p`
     font-size: 0.7rem;
     color: ${props => props.theme.textLogoColor};
     margin-bottom: 5px;
-`;
-
-export const Group = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    font-size: 0.9rem;
-    padding: 5px;
-    background-color: ${props => props.active ? props.theme.secondary : 'transparent'};
-    border-radius: 5px;
-    cursor: pointer;
-
-    &:hover {
-        background-color: ${props => props.active ? props.theme.secondary : props.theme.grayBackground};
-    }
-
-    .name {
-        color: ${props => props.active ? props.theme.whiteColor : props.theme.grayTextColor};
-    }
-
-    .float {
-        width: 100%;
-        position: absolute;
-        top: 35px;
-        left: 0;
-        z-index: 2;
-    }
-
-    .edit-button {
-        border: none;
-        background: none;
-        width: 10px;
-        height: 25px;
-        outline: none;
-
-        .eb-icon {
-            color: ${props => props.active ? props.theme.whiteColor : props.theme.grayTextColor};
-            cursor: pointer;
-        }
-    }
 `;

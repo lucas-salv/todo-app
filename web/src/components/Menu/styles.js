@@ -22,6 +22,10 @@ export const Container = styled.div`
         background-color: rgba(0,0,0,0.1);
         transition: transform .5s ease-in-out;
         transform: translateX(${props => props.open ? 0 : 110}%);
+
+        @media (min-width: 1200px) {
+            display: none;
+        }
     }
 
     @media (min-width: 600px) {
