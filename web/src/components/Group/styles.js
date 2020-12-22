@@ -19,14 +19,6 @@ export const Group = styled.div`
         color: ${props => props.active ? props.theme.whiteColor : props.theme.grayTextColor};
     }
 
-    .float {
-        width: 100%;
-        position: absolute;
-        top: 35px;
-        left: 0;
-        z-index: 2;
-    }
-
     .edit-button {
         border: none;
         background: none;
@@ -43,6 +35,11 @@ export const Group = styled.div`
 
 export const Label = styled.div`
     display: ${props => props.open ? 'flex' : 'none'};
+    width: 100%;
+    position: absolute;
+    top: 35px;
+    left: 0;
+    z-index: 2;
     background-color: ${props => props.theme.grayBackground};
     border-radius: 5px;
 

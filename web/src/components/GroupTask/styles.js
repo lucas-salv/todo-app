@@ -16,7 +16,7 @@ export const Form = styled.form`
 `;
 
 export const Label = styled.div`
-    display: ${props => props.open ? 'flex' : 'none'};
+    display: flex;
     background-color: ${props => props.theme.grayBackground};
     border-radius: 5px;
 

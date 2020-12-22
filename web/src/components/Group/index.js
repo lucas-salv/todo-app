@@ -19,7 +19,7 @@ export default function GroupItem({active}) {
     return (
         <Group active={active}>
             <p className="name">Nome do grupo</p>
-            <Label className="float" open={isEditGroup}>
+            <Label open={isEditGroup}>
                 <input type="text" placeholder="Nome da tarefa" />
                 <Button>
                     <FiEdit3 color="#FFF" size={20}/>
