@@ -6,6 +6,7 @@ import history from './../../history';
 export default function useAuth() {
     const [authenticated, setAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [user, setUser] = useState();
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -19,11 +20,12 @@ export default function useAuth() {
     }, []);
 
     async function handleLogin() {
-        const { data: { token }} = await api.get('/login');
+        const { data: { token, user }} = await api.get('/login');
 
         localStorage.setItem('token', JSON.stringify(token));
         api.defaults.headers.Authorization = `Bearer ${token}`;
         setAuthenticated(true);
+        setUser(user);
         history.push('/');
     };
 
@@ -34,5 +36,5 @@ export default function useAuth() {
         history.push('/login');
     };
 
-    return { authenticated, loading, handleLogin, handleLogout};
+    return { authenticated, loading, user,  handleLogin, handleLogout};
 }
