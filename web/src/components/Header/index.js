@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { FiBell } from 'react-icons/fi'
 import { HeaderContainer, Container, MenuIcon, PerfilContainer, Perfil } from './styles';
 import Progress from './../ProgressBarTask';
@@ -6,7 +6,10 @@ import Menu from './../Menu';
 import EditUserForm from './../EditUserForm';
 import DropDownMenu from './../DropDownMenu';
 
+import { Context } from './../../utils/AuthContext';
+
 export default function Header() {
+    const { handleLogout } = useContext(Context);
     const [isOpenMenu, setOpenMenu] = useState(false);
     const [isDropDown, setDropDown] = useState(false);
     const [isEditUserForm, setEditUserForm] = useState(false);
@@ -33,7 +36,7 @@ export default function Header() {
                     <Perfil onClick={DropDownAnimation}/>
                     <DropDownMenu open={isDropDown}>
                         <li onClick={EditUserFormAnimation}>Editar Usuário</li>
-                        <li>Logout</li>
+                        <li onClick={handleLogout}>Logout</li>
                     </DropDownMenu>
                     <EditUserForm open={isEditUserForm} setOpen={EditUserFormAnimation}/>
                 </PerfilContainer>

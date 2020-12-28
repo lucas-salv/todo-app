@@ -19,13 +19,19 @@ export default function useAuth() {
         setLoading(false);
     }, []);
 
-    async function handleLogin() {
-        const { data: { token, user }} = await api.get('/login');
+    async function handleLogin(email, pass) {
+        const { data: { token, user }} = await api.get('/login', {
+            auth: {
+                username: email,
+                password: pass
+            }
+        });
 
         localStorage.setItem('token', JSON.stringify(token));
         api.defaults.headers.Authorization = `Bearer ${token}`;
         setAuthenticated(true);
         setUser(user);
+        console.log(token, user);
         history.push('/');
     };
 
