@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Form = styled.form`
+export const Form = styled.div`
     display:flex;
     flex-direction: column;
     width: 100%;
@@ -52,3 +52,23 @@ export const Title = styled.h2`
     font-weight: normal;
     margin-bottom: 10px;
 `
+
+export const Button = styled.button`
+    padding: 10px;
+    margin-bottom: 10px;
+    color: ${props => props.theme.whiteColor};
+    font-weight: bold;
+    outline: none;
+    background-color: ${props => props.theme.main};
+    border-radius: 5px;
+    border: 1px solid ${props => props.theme.main};
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+
+    &:active {
+        border: 1px solid ${props => props.theme.grayTextColor};
+        color: ${props => props.theme.grayTextColor};
+        background-color: ${props => props.theme.whiteColor};
+    }
+
+`;

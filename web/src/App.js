@@ -7,16 +7,20 @@ import { colors } from './utils/colors';
 import GlobalStyles from './utils/globalStyles';
 import { ThemeProvider } from 'styled-components';
 
+import { AuthProvider } from './utils/AuthContext';
+
 
 export default function App() {
   return (
-    <ThemeProvider theme={colors}>
-      <GlobalStyles />
-      <div className="App">
-        <Router history={history}>
-          <Routes />
-        </Router>
-      </div>
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider theme={colors}>
+        <GlobalStyles />
+        <div className="App">
+          <Router history={history}>
+            <Routes />
+          </Router>
+        </div>
+      </ThemeProvider>
+    </AuthProvider>
   );
 }

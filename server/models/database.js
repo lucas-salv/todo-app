@@ -5,14 +5,14 @@ exports.tb_users =
             "name": "Fulano de tal",
             "email": "email@email.com",
             "pass": 1234,
-            "avatar_url": "img"
+            "avatar_url": "http://localhost:4000/todo-app/static/avatars/01.jpg"
         },
         {
             "id": 2,
             "name": "Fulano de tal 2",
             "email": "teste@email.com",
             "pass": 5678,
-            "avatar_url": "img"
+            "avatar_url": "http://localhost:4000/todo-app/static/avatars/11.jpg"
         }
     ]
 
