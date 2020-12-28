@@ -29,7 +29,7 @@ app.get('/api/v1/login', (req, res) => {
     const [, hash] = req.headers.authorization.split(' ');
     const [email, pass] = Buffer.from(hash, 'base64').toString().split(':');
 
-    const user = tb_users.find(user => user.email == email && user.pass == pass);
+    const {...user} = tb_users.find(user => user.email == email && user.pass == pass);
 
     delete user.pass;
 
