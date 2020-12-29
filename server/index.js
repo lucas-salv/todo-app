@@ -26,26 +26,30 @@ app.get('/api/v1', (req, res) => {
 });
 
 app.get('/api/v1/login', (req, res) => {
-    const [, hash] = req.headers.authorization.split(' ');
-    const [email, pass] = Buffer.from(hash, 'base64').toString().split(':');
-
-    const {...user} = tb_users.find(user => user.email == email && user.pass == pass);
-
-    delete user.pass;
-
-    if(!user) {
-        return res.status(404).json({
-            "message": "404 - Not Found"
+    try {
+        const [, hash] = req.headers.authorization.split(' ');
+        const [email, pass] = Buffer.from(hash, 'base64').toString().split(':');
+    
+        const {...user} = tb_users.find(user => user.email == email && user.pass == pass);
+    
+        if(!user) {
+            return res.status(404).json({
+                "message": "404 - Not Found"
+            });
+        }
+    
+        const token = jwt.sign({ user: user.id })
+    
+        res.status(200).json({
+            "message": "200 - Success",
+            token
         });
+
+    } catch(err) {
+        return res.status(401).json({
+            "message": "401 - unauthorized"
+        })
     }
-
-    const token = jwt.sign({ user: user.id })
-
-    res.status(200).json({
-        "message": "200 - Success",
-        user,
-        token
-    });
 
 })
 

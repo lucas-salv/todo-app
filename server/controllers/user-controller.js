@@ -3,6 +3,18 @@ const jwt = require('./../utils/jwt');
 const authCheck = require('./../utils/authCheck');
 const formatError = require('./../utils/formatError');
 
+exports.getUser = (req, res, next) => {
+    try {
+
+        res.status(200).json(req.auth);
+
+    } catch(err){
+        res.status(500).json({
+            "message": "500 - Internal Server Error"
+        });
+    }
+}
+
 exports.postUser = (req, res, next) => {
     try{
         const { name, email, pass, avatar_url } = req.body;
