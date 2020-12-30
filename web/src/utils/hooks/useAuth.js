@@ -6,7 +6,7 @@ import history from './../../history';
 export default function useAuth() {
     const [authenticated, setAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState();
+    //const [error, setError] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -20,18 +20,18 @@ export default function useAuth() {
     }, []);
 
     async function handleLogin(email, pass) {
-        const { data: { token, user }} = await api.get('/login', {
+        const { data: { token }, /*statusText: {status} */} = await api.get('/login', {
             auth: {
                 username: email,
                 password: pass
             }
         });
 
+        // criar uma função para tratar possiveis erros q vem da api
+
         localStorage.setItem('token', JSON.stringify(token));
         api.defaults.headers.Authorization = `Bearer ${token}`;
         setAuthenticated(true);
-        setUser(user);
-        console.log(token, user);
         history.push('/');
     };
 
@@ -42,5 +42,5 @@ export default function useAuth() {
         history.push('/login');
     };
 
-    return { authenticated, loading, user,  handleLogin, handleLogout};
+    return { authenticated, loading, handleLogin, handleLogout};
 }

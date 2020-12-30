@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
                 });
             }
     
-            const user = tb_users.find(user => user.id == decoded.user);
+            const {...user} = tb_users.find(user => user.id == decoded.user);
     
             delete user.pass;
     
