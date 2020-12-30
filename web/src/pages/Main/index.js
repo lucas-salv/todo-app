@@ -27,7 +27,7 @@ export default function Main() {
 
     return (
         <>
-        {user === undefined ? <h1>Loading...</h1> : 
+            {user === undefined ? <h1>Loading...</h1> : 
             <Container>
                 <Header data={user}/>
                 <MainContainer>
@@ -41,7 +41,7 @@ export default function Main() {
                     </TaskContainer>
                 </MainContainer>
             </Container>
-        }
+            }
         </>
     )
 }
