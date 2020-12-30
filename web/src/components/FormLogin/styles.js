@@ -23,13 +23,28 @@ export const Form = styled.div`
     }
 `;
 
+export const ErrorModal = styled.div`
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 250px;
+    padding: 10px;
+    color: white;
+    background-color: red;
+    border-radius: 5px;
+    transform: ${props => props.status ? 'translateY(0)' : 'translateY(-70px)'};
+    transition: transform .5s;
+`
+
 export const Label = styled.label`
     display:flex;
     align-items: center;
     padding: 10px;
     margin-bottom: 10px;
     background-color: ${props => props.theme.grayBackground};
-    border: 1px solid ${props => props.theme.grayBackground};
+    border: 1px solid ${props => props.status ? 'red' : props.theme.grayBackground};
     border-radius: 5px;
 
     input {
