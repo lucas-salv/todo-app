@@ -1,14 +1,15 @@
 import { FiLock, FiUser, FiChevronLeft } from 'react-icons/fi';
 import { HiOutlineMail } from "react-icons/hi";
 import Button from './../Button';
-import Link from './../Link';
 import Logo from './../Logo';
 import { Form, Label, Title } from './styles';
+
+import { Link } from 'react-router-dom';
 
 export default function FormCreateAccount() {
     return (
         <Form action="#">
-            <Link>
+            <Link to="/login" style={{ textDecoration: 'none', fontFamily: 'sans-serif', fontSize: '0.8rem', color: '#38A0FF'}}>
                 <FiChevronLeft />
                 Voltar
             </Link>

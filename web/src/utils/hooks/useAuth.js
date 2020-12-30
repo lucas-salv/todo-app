@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react';
 
 import api from './../api';
 import history from './../../history';
+import errorFunction from './../errorFunction';
 
 export default function useAuth() {
     const [authenticated, setAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
-    //const [error, setError] = useState(false);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -20,19 +21,23 @@ export default function useAuth() {
     }, []);
 
     async function handleLogin(email, pass) {
-        const { data: { token }, /*statusText: {status} */} = await api.get('/login', {
-            auth: {
-                username: email,
-                password: pass
-            }
-        });
-
-        // criar uma função para tratar possiveis erros q vem da api
-
-        localStorage.setItem('token', JSON.stringify(token));
-        api.defaults.headers.Authorization = `Bearer ${token}`;
-        setAuthenticated(true);
-        history.push('/');
+        try {
+            const { data: { token } } = await api.get('/login', {
+                auth: {
+                    username: email,
+                    password: pass
+                }
+            });
+    
+            localStorage.setItem('token', JSON.stringify(token));
+            api.defaults.headers.Authorization = `Bearer ${token}`;
+            setAuthenticated(true);
+            setError(false);
+            history.push('/');
+        } catch(err) {
+            const r = errorFunction(err.response.status);
+            setError(r);
+        }
     };
 
     function handleLogout() {
@@ -42,5 +47,5 @@ export default function useAuth() {
         history.push('/login');
     };
 
-    return { authenticated, loading, handleLogin, handleLogout};
+    return { authenticated, loading, error, setError, handleLogin, handleLogout};
 }
