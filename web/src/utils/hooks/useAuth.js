@@ -8,6 +8,7 @@ export default function useAuth() {
     const [authenticated, setAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+    const [user, setUser] = useState({});
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -47,5 +48,5 @@ export default function useAuth() {
         history.push('/login');
     };
 
-    return { authenticated, loading, error, setError, handleLogin, handleLogout};
+    return { authenticated, loading, error, setError, user, setUser, handleLogin, handleLogout};
 }

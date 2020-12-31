@@ -8,8 +8,8 @@ import DropDownMenu from './../DropDownMenu';
 
 import { Context } from './../../utils/AuthContext';
 
-export default function Header({ data }) {
-    const { handleLogout } = useContext(Context);
+export default function Header() {
+    const { handleLogout, user } = useContext(Context);
     const [isOpenMenu, setOpenMenu] = useState(false);
     const [isDropDown, setDropDown] = useState(false);
     const [isEditUserForm, setEditUserForm] = useState(false);
@@ -33,7 +33,7 @@ export default function Header({ data }) {
                     <MenuIcon onClick={menuAnimation} open={isOpenMenu} />
                     <PerfilContainer>
                         <FiBell className="notify" color="#D4D4D4" size={22} />
-                        <Perfil src={data.avatar_url} onClick={DropDownAnimation}/>
+                        <Perfil src={user.avatar_url} onClick={DropDownAnimation}/>
                         <DropDownMenu open={isDropDown}>
                             <li onClick={EditUserFormAnimation}>Editar Usuário</li>
                             <li onClick={handleLogout}>Logout</li>
