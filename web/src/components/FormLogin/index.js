@@ -34,6 +34,7 @@ export default function FormLogin() {
             <Button onClick={(e) => {
                 e.preventDefault();
                 handleLogin(email, pass);
+                setPass('');
             }} >Entrar</Button>
             <Link to="/create-account" style={{ textDecoration: 'none', fontFamily: 'sans-serif', fontSize: '0.8rem', color: '#38A0FF'}}>Criar uma conta</Link>
         </Form>
