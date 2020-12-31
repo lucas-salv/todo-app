@@ -25,6 +25,11 @@ app.get('/api/v1', (req, res) => {
     });
 });
 
+// para análise
+app.get('/api/v1/all-users', (req, res) => {
+    res.json(tb_users);
+})
+
 app.get('/api/v1/login', (req, res) => {
     try {
         const [, hash] = req.headers.authorization.split(' ');

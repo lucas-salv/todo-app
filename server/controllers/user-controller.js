@@ -17,41 +17,51 @@ exports.getUser = (req, res, next) => {
 
 exports.postUser = (req, res, next) => {
     try{
-        const { name, email, pass, avatar_url } = req.body;
-    
-        const userValidate = tb_users.findIndex(user => user.email == email);
-    
-        if(userValidate == -1) {
-            const user = {
-                id: tb_users.length == 0 ? 1 : tb_users[tb_users.length-1].id+1,
-                name,
-                email,
-                pass,
-                avatar_url
-            }
+        const { name, email, pass } = req.body;
 
-            const userGroupTask = {
-                user_id: user.id,
-                group_task: []
-            }
-        
-            tb_users.push(user);
-            tb_tasks.push(userGroupTask);
-        
-            delete user.pass;
-        
-            const token = jwt.sign({ user: user.id });
-        
-            res.status(201).json({
-                "message": "201 - Created",
-                user,
-                token
-            });
-        } else {
-            res.status(400).json({
+        if(!name || name.length < 3) {
+            return res.status(400).json({
                 "message": "400 - Bad Request"
             });
+        } else if(!email || email.indexOf('@') === -1) {
+            return res.status(400).json({
+                "message": "400 - Bad Request"
+            });
+        } else if(!pass || pass.length < 3 && pass !== confirmPass) {
+            return res.status(400).json({
+                "message": "400 - Bad Request"
+            });
+        } else {
+
+            const userValidate = tb_users.findIndex(user => user.email == email);
+        
+            if(userValidate == -1) {
+                const user = {
+                    id: tb_users.length == 0 ? 1 : tb_users[tb_users.length-1].id+1,
+                    name,
+                    email,
+                    pass,
+                    avatar_url: "http://localhost:4000/todo-app/static/avatars/01.jpg"
+                }
+    
+                const userGroupTask = {
+                    user_id: user.id,
+                    group_task: []
+                }
+            
+                tb_users.push(user);
+                tb_tasks.push(userGroupTask);
+            
+                res.status(201).json({
+                    "message": "201 - Created"
+                });
+            } else {
+                res.status(400).json({
+                    "message": "400 - Bad Request"
+                });
+            }
         }
+    
     } catch(err){
         res.status(500).json({
             "message": "500 - Internal Server Error"
