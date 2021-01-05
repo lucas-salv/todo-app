@@ -2,6 +2,7 @@ require('dotenv-safe').config();
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
+global.io = require('socket.io')(server);
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const routes = require('./routes/routes');
@@ -15,6 +16,14 @@ app.use(bodyParser.json());
 
 // static files
 app.use('/todo-app/static/', express.static('public'));
+
+// socket.io
+io.on('connection', socket => {
+    console.log('A new client connected: ' + socket.id);
+    socket.on('desconnect', () => {
+        console.log('user' + socket.id + 'disconnected')
+    })
+});
 
 // routes
 app.use('/api/v1', routes);
