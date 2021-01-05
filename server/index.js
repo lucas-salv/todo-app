@@ -2,7 +2,13 @@ require('dotenv-safe').config();
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
-global.io = require('socket.io')(server);
+global.io = require('socket.io')(server, {
+    cors: {
+      origin: "http://localhost:3001",
+      methods: ["GET", "POST", "PUT"],
+      credentials: true
+    }
+  });
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const routes = require('./routes/routes');
@@ -18,7 +24,7 @@ app.use(bodyParser.json());
 app.use('/todo-app/static/', express.static('public'));
 
 // socket.io
-io.on('connection', socket => {
+io.on('connection', (socket) => {
     console.log('A new client connected: ' + socket.id);
     socket.on('desconnect', () => {
         console.log('user' + socket.id + 'disconnected')
@@ -27,6 +33,7 @@ io.on('connection', socket => {
 
 // routes
 app.use('/api/v1', routes);
+
 
 app.get('/api/v1', (req, res) => {
     res.status(200).json({
@@ -65,7 +72,7 @@ app.get('/api/v1/login', (req, res) => {
         })
     }
 
-})
+});
 
 
 server.listen(process.env.SERVER_PORT, () => console.log('API is running!'));
