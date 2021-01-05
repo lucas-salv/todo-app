@@ -15,7 +15,12 @@ export default function GroupTask() {
             const { data } = await api.get(`/task-groups/${user.id}`);
             setData(data);
           })();
-    }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const addGroupTask = () => {
+
+    }
 
     return (
         <>
@@ -24,7 +29,7 @@ export default function GroupTask() {
                 <Form action="#">
                     <Label>
                         <input type="text" placeholder="Nome do Grupo" />
-                        <Button>
+                        <Button onClick={addGroupTask}>
                             <FiPlus color="#FFF" size={20}/>
                         </Button>
                     </Label>

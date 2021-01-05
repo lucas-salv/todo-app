@@ -19,6 +19,7 @@ export default function Main() {
             const {data} = await api.get('/user');
             setUser(data);
           })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const EditTaskFormAnimation = (index) => {
