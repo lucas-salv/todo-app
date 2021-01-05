@@ -1,5 +1,5 @@
-import io from 'socket.io-client';
+import { io } from 'socket.io-client';
 
 const URL = 'http://localhost:4000';
 
-export default io(URL);
+export const socket = io(URL);
