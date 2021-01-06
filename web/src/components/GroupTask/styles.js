@@ -10,7 +10,7 @@ export const Title = styled.h4`
     margin-bottom: 5px;
 `;
 
-export const Form = styled.form`
+export const Form = styled.div`
     display: flex;
     flex-direction: column;
 `;

@@ -49,6 +49,8 @@ exports.postGroupTask = (req, res, next) => {
         }
     
         userTaskGroup.group_task.push(newGroupTask);
+
+        io.emit('addGroup', newGroupTask);
     
         res.status(201).json({
             "message": "201 - Created"

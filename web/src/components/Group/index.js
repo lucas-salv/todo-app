@@ -4,7 +4,7 @@ import { FiEdit3 } from 'react-icons/fi'
 import { HiOutlineDotsVertical } from 'react-icons/hi'
 import DropDownMenu from './../DropDownMenu';
 
-export default function GroupItem({active}) {
+export default function GroupItem({ data }) {
     const [isDropDown, setDropDown] = useState(false);
     const [isEditGroup, setEditGroup] = useState(false);
 
@@ -17,8 +17,8 @@ export default function GroupItem({active}) {
     }
 
     return (
-        <Group active={active}>
-            <p className="name">Nome do grupo</p>
+        <Group>
+            <p className="name">{data.title_group_task}</p>
             <Label open={isEditGroup}>
                 <input type="text" placeholder="Nome da tarefa" />
                 <Button>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Container, TaskContainer, MainContainer, Title } from './styles';
 import Header from './../../components/Header';
 import AddTaskForm from './../../components/AddTaskForm';
@@ -6,18 +6,20 @@ import Task from './../../components/Task';
 import EditTaskForm from './../../components/EditTaskForm';
 
 import api from './../../utils/api';
+import { Context } from './../../utils/AuthContext';
 
 export default function Main() {
+    const { user, setUser } = useContext(Context);
     const [isEditTaskForm, setEditTaskForm] = useState(false);
     const [getTasks, ] = useState([1, 2, 3, 4])
     const [index, setIndex] = useState();
-    const [user, setUser] = useState();
 
     useEffect(() => {
         (async () => {
             const {data} = await api.get('/user');
             setUser(data);
           })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const EditTaskFormAnimation = (index) => {
@@ -29,7 +31,7 @@ export default function Main() {
         <>
             {user === undefined ? <h1>Loading...</h1> : 
             <Container>
-                <Header data={user}/>
+                <Header/>
                 <MainContainer>
                     <AddTaskForm />
                     <TaskContainer>
