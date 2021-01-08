@@ -1,12 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Label, Button, Group } from './styles';
 import { FiEdit3 } from 'react-icons/fi'
 import { HiOutlineDotsVertical } from 'react-icons/hi'
 import DropDownMenu from './../DropDownMenu';
 
-export default function GroupItem({ data }) {
+export default function GroupItem({ data, isActive, onClick }) {
     const [isDropDown, setDropDown] = useState(false);
     const [isEditGroup, setEditGroup] = useState(false);
+
+    useEffect(() => {
+        return isActive ? onClick() : null;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     const DropDownAnimation = () => {
         setDropDown(!isDropDown);
@@ -17,7 +22,7 @@ export default function GroupItem({ data }) {
     }
 
     return (
-        <Group>
+        <Group active={isActive} onClick={onClick}>
             <p className="name">{data.title_group_task}</p>
             <Label open={isEditGroup}>
                 <input type="text" placeholder="Nome da tarefa" />

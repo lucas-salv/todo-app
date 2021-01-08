@@ -17,9 +17,10 @@ const groupTaskReducer = (state, action) => {
 }
 
 export default function GroupTask() {
-    const { user } = useContext(Context);
+    const { user, setDataActivated } = useContext(Context);
     const [groupName, setGroupName]  = useState();
     const [groups, dispatch] = useReducer(groupTaskReducer, []);
+    const [activeIndex, setActiveIndex] = useState(0);
 
     useEffect(() => {
         socket.on('addGroup', content => {
@@ -44,6 +45,11 @@ export default function GroupTask() {
         }
     }
 
+    const handleActiveIndex = (index, item) => {
+        setActiveIndex(index);
+        setDataActivated(item);
+    }
+
     return (
         <>
             <TitleContainer>
@@ -61,7 +67,7 @@ export default function GroupTask() {
             <GroupContainer>
                 <Text>Todos os grupos</Text>
                 {groups.length > 0 ? groups.map((item, index) => (
-                    <Group key={index} data={item} />
+                    <Group key={index} data={item} isActive={activeIndex === index} onClick={() => handleActiveIndex(index, item)} />
                 )) : <h4>Nenhum grupo encontrado</h4>}
             </GroupContainer>
         </>

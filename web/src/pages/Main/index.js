@@ -9,7 +9,7 @@ import api from './../../utils/api';
 import { Context } from './../../utils/AuthContext';
 
 export default function Main() {
-    const { user, setUser } = useContext(Context);
+    const { user, setUser, dataActivated } = useContext(Context);
     const [isEditTaskForm, setEditTaskForm] = useState(false);
     const [getTasks, ] = useState([1, 2, 3, 4])
     const [index, setIndex] = useState();
@@ -36,7 +36,7 @@ export default function Main() {
                     <AddTaskForm />
                     <TaskContainer>
                         <EditTaskForm open={isEditTaskForm} setOpen={EditTaskFormAnimation} id={index}/>
-                        <Title>Tarefas</Title>
+                        <Title>Tarefas - {dataActivated ? dataActivated.id : null}</Title>
                         {getTasks.map((item, index) => (
                             <Task key={index} onClick={EditTaskFormAnimation} id={index}/>
                         ))}
