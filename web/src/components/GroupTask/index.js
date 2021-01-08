@@ -11,6 +11,8 @@ const groupTaskReducer = (state, action) => {
     switch(action.type) {
         case 'ADD':
             return [...state, ...action.payload];
+        case 'EDIT':
+            return state.map(item => item.id === action.payload[0].id ? action.payload[0] : item);
         default:
             throw new Error();
     }
@@ -25,6 +27,10 @@ export default function GroupTask() {
     useEffect(() => {
         socket.on('addGroup', content => {
             dispatch({ type: 'ADD', payload: [content]})
+        })
+
+        socket.on('editGroup', content => {
+            dispatch({ type: 'EDIT', payload: [content]})
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

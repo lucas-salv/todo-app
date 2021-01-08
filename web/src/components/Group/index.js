@@ -1,12 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Label, Button, Group } from './styles';
 import { FiEdit3 } from 'react-icons/fi'
 import { HiOutlineDotsVertical } from 'react-icons/hi'
 import DropDownMenu from './../DropDownMenu';
 
+import api from './../../utils/api';
+import { Context } from './../../utils/AuthContext';
+
 export default function GroupItem({ data, isActive, onClick }) {
+    const { user } = useContext(Context);
     const [isDropDown, setDropDown] = useState(false);
     const [isEditGroup, setEditGroup] = useState(false);
+    const [groupTitle, setGroupTitle] = useState(data.title_group_task);
 
     useEffect(() => {
         return isActive ? onClick() : null;
@@ -21,12 +26,24 @@ export default function GroupItem({ data, isActive, onClick }) {
         setEditGroup(!isEditGroup);
     }
 
+    const editGroupApi = async () => {
+        try {
+            await api.put(`/task-group/${data.id}`, {
+                user_id: user.id,
+                title_group_task: groupTitle
+            });
+            setEditGroup(false);
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
     return (
         <Group active={isActive} onClick={onClick}>
-            <p className="name">{data.title_group_task}</p>
+            <p className="name">{groupTitle}</p>
             <Label open={isEditGroup}>
-                <input type="text" placeholder="Nome da tarefa" />
-                <Button>
+                <input type="text" placeholder="Nome da tarefa" onChange={(e) => setGroupTitle(e.target.value)} />
+                <Button onClick={editGroupApi}>
                     <FiEdit3 color="#FFF" size={20}/>
                 </Button>
             </Label>
