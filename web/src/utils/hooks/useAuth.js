@@ -46,6 +46,7 @@ export default function useAuth() {
         setAuthenticated(false);
         localStorage.removeItem('token');
         api.defaults.headers.Authorization = undefined;
+        setUser(undefined);
         history.push('/login');
     };
 
