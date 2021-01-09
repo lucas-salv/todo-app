@@ -11,6 +11,10 @@ export const Group = styled.div`
     border-radius: 5px;
     cursor: pointer;
 
+    div {
+        width: 100%;
+    }
+
     &:hover {
         background-color: ${props => props.active ? props.theme.secondary : props.theme.grayBackground};
     }

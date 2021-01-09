@@ -116,6 +116,8 @@ exports.putGroupTask = (req, res, next) => {
 
         title_group_task != undefined ? gTask.title_group_task = title_group_task : null;
 
+        io.emit('editGroup', gTask);
+
         res.status(200).json({
             "message": "200 - Success"
         });
@@ -181,6 +183,10 @@ exports.deleteGroupTask = (req, res, next) => {
         }
 
         authCheck(req.auth, req.params.user_id);
+
+        const groupRemoved = gTask.group_task[groupIndex];
+
+        io.emit('removeGroup', groupRemoved);
 
         gTask.group_task.splice(groupIndex, 1);
         res.status(200).json({

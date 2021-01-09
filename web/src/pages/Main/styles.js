@@ -2,6 +2,12 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     padding: 100px 0;
+
+    h3 {
+        padding: 0 10%;
+        text-align: center;
+        color: ${props => props.theme.placeholderColor};
+    }
 `;
 
 export const TaskContainer = styled.ul`
