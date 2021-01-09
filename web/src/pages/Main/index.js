@@ -33,6 +33,8 @@ export default function Main() {
             <Container>
                 <Header/>
                 <MainContainer>
+                {dataActivated ? 
+                    <>
                     <AddTaskForm />
                     <TaskContainer>
                         <EditTaskForm open={isEditTaskForm} setOpen={EditTaskFormAnimation} id={index}/>
@@ -41,6 +43,10 @@ export default function Main() {
                             <Task key={index} onClick={EditTaskFormAnimation} id={index}/>
                         ))}
                     </TaskContainer>
+                    </>
+                 : 
+                 <h3>Selecione um grupo de tarefas ou adicione um.</h3>
+                }
                 </MainContainer>
             </Container>
             }

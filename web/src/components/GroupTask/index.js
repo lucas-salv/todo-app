@@ -13,6 +13,11 @@ const groupTaskReducer = (state, action) => {
             return [...state, ...action.payload];
         case 'EDIT':
             return state.map(item => item.id === action.payload[0].id ? action.payload[0] : item);
+        case 'DEL':
+            console.log(state, action.payload[0]);
+            const filt = state.filter(item => item.id !== action.payload[0].id);
+            console.log(filt);
+            return filt;
         default:
             throw new Error();
     }
@@ -31,6 +36,10 @@ export default function GroupTask() {
 
         socket.on('editGroup', content => {
             dispatch({ type: 'EDIT', payload: [content]})
+        })
+
+        socket.on('removeGroup', content => {
+            dispatch({ type: 'DEL', payload: [content]});
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -56,6 +65,11 @@ export default function GroupTask() {
         setDataActivated(item);
     }
 
+    const noGroup = () => {
+        setDataActivated(undefined);
+        return <h4>Nenhum grupo encontrado</h4>
+    }
+
     return (
         <>
             <TitleContainer>
@@ -73,8 +87,8 @@ export default function GroupTask() {
             <GroupContainer>
                 <Text>Todos os grupos</Text>
                 {groups.length > 0 ? groups.map((item, index) => (
-                    <Group key={index} data={item} isActive={activeIndex === index} onClick={() => handleActiveIndex(index, item)} />
-                )) : <h4>Nenhum grupo encontrado</h4>}
+                    <Group key={index} data={item} isActive={activeIndex === index} initialData={groups} index={index} setActiveIndex={setActiveIndex} onClick={() => handleActiveIndex(index, item)} />
+                )) : noGroup()}
             </GroupContainer>
         </>
 
