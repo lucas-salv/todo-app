@@ -47,7 +47,6 @@ export default function GroupItem({ data, initialData, isActive, setActiveIndex,
         try {
             await api.delete(`/task-group/${user.id}/${data.id}`);
             console.log(initialData[0]);
-            setDataActivated(initialData[index + 1]);
             if(index === 0) {
                 setActiveIndex(index);
                 setDataActivated(initialData[index + 1]);
