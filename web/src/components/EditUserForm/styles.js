@@ -88,5 +88,10 @@ export const ImgPerfil = styled.img`
     margin: 2.5px;
     background-color: ${props =>  props.theme.main};
     border-radius: 5px;
+    opacity: ${props => props.check ? '50%' : '100%'};
     cursor: pointer;
+
+    &:hover {
+        opacity: 50%;
+    }
 `
