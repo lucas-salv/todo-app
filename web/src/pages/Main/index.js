@@ -39,7 +39,7 @@ export default function Main() {
                     <TaskContainer>
                         <EditTaskForm open={isEditTaskForm} setOpen={EditTaskFormAnimation} id={index}/>
                         <Title>Tarefas - {dataActivated ? dataActivated.id : null}</Title>
-                        {getTasks.map((item, index) => (
+                        {dataActivated.tasks.map((item, index) => (
                             <Task key={index} onClick={EditTaskFormAnimation} id={index}/>
                         ))}
                     </TaskContainer>
