@@ -11,7 +11,6 @@ import { Context } from './../../utils/AuthContext';
 export default function Main() {
     const { user, setUser, dataActivated } = useContext(Context);
     const [isEditTaskForm, setEditTaskForm] = useState(false);
-    const [getTasks, ] = useState([1, 2, 3, 4])
     const [index, setIndex] = useState();
 
     useEffect(() => {
