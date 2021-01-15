@@ -1,10 +1,12 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { FiLock, FiUser, FiChevronLeft } from 'react-icons/fi';
 import { HiOutlineMail } from "react-icons/hi";
-import { Container, Form, Title, Label, ImgContainer, ImgPerfil } from './styles';
-import Button from './../Button';
+import { Container, Form, Title, Label, ImgContainer, ImgPerfil, ErrorModal, SuccessModal, Button } from './styles';
 import Link from './../Link';
 import { Context } from './../../utils/AuthContext';
+import errorFunction from './../../utils/errorFunction';
+import api from './../../utils/api';
+import { socket } from './../../utils/socketIo';
 
 const avatars = [
     "http://localhost:4000/todo-app/static/avatars/01.jpg",
@@ -18,47 +20,118 @@ const avatars = [
 ]
 
 export default function EditUserForm({ open, setOpen }) {
-    const { user } = useContext(Context);
-    const [username, setUsername] = useState();
-    const [email, setEmail] = useState();
-    const [oldPass, setOldPass] = useState();
-    const [newPass, setNewPass] = useState();
+    const { user, setUser } = useContext(Context);
+    const [username, setUsername] = useState(user.name);
+    const [email, setEmail] = useState(user.email);
+    const [oldPass, setOldPass] = useState('');
+    const [newPass, setNewPass] = useState('');
+    const [avatar, setAvatar] = useState(user.avatar_url);
+    const [status, setStatus] = useState(false);
+    const [editStatus, setEditStatus] = useState(false);
+
+    useEffect(() => {
+        socket.on('userEdited', content => {
+            setUser(content)
+        });
+
+        document.addEventListener('click', e => {
+            if(e.path.indexOf(document.getElementById('modal')) < 0) {
+                setEditStatus(false);
+            }
+        });
+    }, []);
+
+    const validateForm = (username, email, oldPass, newPass, avatar) => {
+        if(!username || username.length < 3) {
+            setStatus(true);
+            console.log('username');
+            return;
+        } else if(!email || email.indexOf('@') === -1) {
+            setStatus(true);
+            console.log('email');
+            return;
+        } else if(!newPass || newPass.length < 3) {
+            setStatus(true);
+            console.log('pass');
+            return;
+        } else if(newPass === oldPass){
+            setStatus(true);
+            console.log('confirmPass')
+            return;
+        } else {
+            const data = {
+                name: username,
+                email,
+                pass: newPass,
+                oldPass,
+                avatar_url: avatar
+            }
+    
+            return data;
+        }
+    }
 
     return (
         <>
+            <SuccessModal id="modal" status={editStatus}><p>Editado com sucesso!</p></SuccessModal>
             <Container open={open}>
-                <Form action="#">
+                <Form>
                     <Link setOpen={setOpen}>
                         <FiChevronLeft />
                         Voltar
                     </Link>
                     <Title>Editar usuário</Title>
+                    <ErrorModal status={status}><p>Ops! Algo deu errado. Mude os valores ou tente novamente!</p></ErrorModal>
                     <Label htmlFor="name">
                         <FiUser color="#9B9B9B" />
-                        <input type="text" id="name" name="name" autoFocus placeholder="Usuário" value={user.name} onChange={(e) => setUsername(e.target.value)}/>
+                        <input type="text" id="name" name="name" autoFocus placeholder="Usuário" value={username} onChange={(e) => setUsername(e.target.value)} onFocus={() => {
+                    setStatus(false);
+                }}/>
                     </Label>
                     <Label htmlFor="email">
                         <HiOutlineMail color="#9B9B9B" />
-                        <input type="email" id="email" name="email" placeholder="Email" value={user.email} onChange={(e) => setEmail(e.target.value)}/>
+                        <input type="email" id="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} onFocus={() => {
+                    setStatus(false);
+                }}/>
                     </Label>
                     <Label htmlFor="pass">
                         <FiLock color="#9B9B9B" />
-                        <input type="password" id="pass" name="password" placeholder="Senha atual" onChange={(e) => setOldPass(e.target.value)}/>
+                        <input type="password" id="pass" name="password" placeholder="Senha atual" value={oldPass} onChange={(e) => setOldPass(e.target.value)} onFocus={() => {
+                    setStatus(false);
+                }}/>
                     </Label>
                     <Label htmlFor="confirm-pass">
                         <FiLock color="#9B9B9B" />
-                        <input type="password" id="confirm-pass" placeholder="Nova senha" onChange={(e) => setNewPass(e.target.value)}/>
+                        <input type="password" id="confirm-pass" placeholder="Nova senha" value={newPass} onChange={(e) => setNewPass(e.target.value)} onFocus={() => {
+                    setStatus(false);
+                }}/>
                     </Label>
                         <ImgContainer>
-                            {avatars.map(item => (
-                                <ImgPerfil src={item} check={item === user.avatar_url}/>
+                            {avatars.map((item, index) => (
+                                <ImgPerfil key={index} src={item} check={item === avatar} onClick={() => setAvatar(item)} />
                             ))}
                         </ImgContainer>
-                    <Button>Editar</Button>
+                    <Button onClick={ async (e) => {
+                        e.preventDefault();
+                        const data = validateForm(username, email, oldPass, newPass, avatar);
+                        if(data) {
+                            try{
+                                const res = await api.put(`/user/${user.id}`, data);
+                                if(res.status === 200) setEditStatus(true);
+                                setOpen();
+                                setOldPass('');
+                                setNewPass('');
+                            }catch(err){
+                                setStatus(errorFunction(err.response.status));
+                            }
+                        } else {
+                            return;
+                        }
+                    }}>Editar</Button>
                     <Button type="delete">Excluir conta</Button>
                 </Form>
             </Container>
-            <div className="backgroundMenu"></div>
+            <div className="backgroundMenu" onClick={() => setOpen()}></div>
         </>
     )
 }
