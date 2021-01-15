@@ -81,11 +81,22 @@ exports.putUser = (req, res, next) => {
         const user = tb_users.find(user => user.id == req.params.id);
     
         if(user != undefined){
-            const { name, email, pass, avatar_url } = req.body;
+            const { name, email, pass, oldPass, avatar_url } = req.body;
             name != undefined ? user.name = name : null;
             email != undefined ? user.email = email : null;
-            pass != undefined ? user.pass = pass : null;
+            pass != undefined ? user.pass == oldPass ? user.pass = pass : res.status(400).json({
+                "message": "400 - Bad Request"
+            }) : null;
             avatar_url != undefined ? user.avatar_url = avatar_url : null;
+
+            const userEdited = {
+                id: user.id,
+                user: user.name,
+                email: user.email,
+                avatar_url: user.avatar_url
+            }
+
+            io.emit('userEdited', userEdited);
         
             res.status(200).json({
                 "message": "200 - Success"
