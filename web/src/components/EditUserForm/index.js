@@ -20,7 +20,7 @@ const avatars = [
 ]
 
 export default function EditUserForm({ open, setOpen }) {
-    const { user, setUser } = useContext(Context);
+    const { handleLogout, user, setUser } = useContext(Context);
     const [username, setUsername] = useState(user.name);
     const [email, setEmail] = useState(user.email);
     const [oldPass, setOldPass] = useState('');
@@ -128,7 +128,10 @@ export default function EditUserForm({ open, setOpen }) {
                             return;
                         }
                     }}>Editar</Button>
-                    <Button type="delete">Excluir conta</Button>
+                    <Button type="delete" onClick={ async () => {
+                        await api.delete(`/user/${user.id}`);
+                        handleLogout();
+                    }}>Excluir conta</Button>
                 </Form>
             </Container>
             <div className="backgroundMenu" onClick={() => setOpen()}></div>
