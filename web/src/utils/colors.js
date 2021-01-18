@@ -7,3 +7,9 @@ export const colors = {
     textLogoColor: "#707070",
     placeholderColor: "#D4D4D4"
 }
+
+export const tagColors = {
+    "importante": "#ed7e2f",
+    "muito importante": "#ed2f2f",
+    "normal": "#38A0FF"
+}
