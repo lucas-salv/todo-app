@@ -4,8 +4,8 @@ const app = express();
 const server = require('http').createServer(app);
 global.io = require('socket.io')(server, {
     cors: {
-      origin: "http://localhost:3001",
-      methods: ["GET", "POST", "PUT"],
+      origin: "http://localhost:3000",
+      methods: ["GET", "POST", "PUT", "DELETE"],
       credentials: true
     }
   });
