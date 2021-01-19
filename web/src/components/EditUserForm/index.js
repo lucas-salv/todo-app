@@ -116,7 +116,7 @@ export default function EditUserForm({ open, setOpen }) {
                         const data = validateForm(username, email, oldPass, newPass, avatar);
                         if(data) {
                             try{
-                                const res = await api.put(`/user/${user.id}`, data);
+                                const res = await api.put(`/user`, data);
                                 if(res.status === 200) setEditStatus(true);
                                 setOpen();
                                 setOldPass('');
@@ -129,7 +129,7 @@ export default function EditUserForm({ open, setOpen }) {
                         }
                     }}>Editar</Button>
                     <Button type="delete" onClick={ async () => {
-                        await api.delete(`/user/${user.id}`);
+                        await api.delete(`/user`);
                         handleLogout();
                     }}>Excluir conta</Button>
                 </Form>

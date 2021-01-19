@@ -1,5 +1,4 @@
 const { tb_users, tb_tasks } = require('./../models/database');
-const authCheck = require('./../utils/authCheck');
 const formatError = require('./../utils/formatError');
 
 exports.getUser = (req, res, next) => {
@@ -70,21 +69,14 @@ exports.postUser = (req, res, next) => {
 
 exports.putUser = (req, res, next) => {
     try{
-        if(isNaN(req.params.id)){
-            res.status(400).json({
-                "message": "400 - Bad Request"
-            });
-        }
-
-        authCheck(req.auth, req.params.id);
     
-        const user = tb_users.find(user => user.id == req.params.id);
+        const user = tb_users.find(user => user.id == req.auth.id);
     
         if(user != undefined){
             const { name, email, pass, oldPass, avatar_url } = req.body;
             name != undefined ? user.name = name : null;
             email != undefined ? user.email = email : null;
-            pass != undefined ? user.pass == oldPass ? user.pass = pass : res.status(400).json({
+            pass != undefined ? user.pass === oldPass ? user.pass = pass : res.status(400).json({
                 "message": "400 - Bad Request"
             }) : null;
             avatar_url != undefined ? user.avatar_url = avatar_url : null;
@@ -113,21 +105,15 @@ exports.putUser = (req, res, next) => {
 
 exports.deleteUser = (req, res, next) => {
     try{
-        if(isNaN(req.params.id)){
-            res.status(400).json({
-                "message": "400 - Bad Request"
-            });
-        }
     
-        const index = tb_users.findIndex(user => user.id == req.params.id);
-        const taskIndex = tb_tasks.findIndex(task => task.user_id == req.params.id);
+        const index = tb_users.findIndex(user => user.id == req.auth.id);
+        const taskIndex = tb_tasks.findIndex(task => task.user_id == req.auth.id);
     
         if(index == -1) {
             res.status(404).json({
                 "message": "404 - Not Found"
             });
         } else {
-            authCheck(req.auth, req.params.id);
             tb_users.splice(index, 1);
             tb_tasks.splice(taskIndex, 1);
             res.status(200).json({

@@ -8,7 +8,7 @@ import api from './../../utils/api';
 import { Context } from './../../utils/AuthContext';
 
 export default function GroupItem({ data, initialData, isActive, setActiveIndex, index, onClick }) {
-    const { user, setDataActivated } = useContext(Context);
+    const { setDataActivated } = useContext(Context);
     const [isDropDown, setDropDown] = useState(false);
     const [isEditGroup, setEditGroup] = useState(false);
     const [groupTitle, setGroupTitle] = useState();
@@ -37,7 +37,6 @@ export default function GroupItem({ data, initialData, isActive, setActiveIndex,
     const editGroupApi = async () => {
         try {
             await api.put(`/task-group/${data.id}`, {
-                user_id: user.id,
                 title_group_task: groupTitle
             });
             setEditGroup(false);
@@ -48,7 +47,7 @@ export default function GroupItem({ data, initialData, isActive, setActiveIndex,
 
     const removeGroupTask = async () => {
         try {
-            await api.delete(`/task-group/${user.id}/${data.id}`);
+            await api.delete(`/task-group/${data.id}`);
             if(index === 0) {
                 setActiveIndex(index);
                 setDataActivated(initialData[index + 1]);

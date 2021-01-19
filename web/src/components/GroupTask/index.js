@@ -24,7 +24,7 @@ const groupTaskReducer = (state, action) => {
 }
 
 export default function GroupTask() {
-    const { user, setDataActivated } = useContext(Context);
+    const { setDataActivated } = useContext(Context);
     const [groupName, setGroupName]  = useState();
     const [groups, dispatch] = useReducer(groupTaskReducer, []);
     const [activeIndex, setActiveIndex] = useState(0);
@@ -50,7 +50,7 @@ export default function GroupTask() {
 
     useEffect(() => {
         (async () => {
-            const { data } = await api.get(`/task-groups/${user.id}`);
+            const { data } = await api.get(`/task-groups`);
             dispatch({type: 'ADD', payload: data.group_task});
           })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -58,7 +58,7 @@ export default function GroupTask() {
 
     const addGroupTask = async () => {
         try{
-            await api.post('/task-group', { user_id: user.id, title_group_task: groupName });
+            await api.post('/task-group', { title_group_task: groupName });
         } catch(err) {
             console.log(err);
         }

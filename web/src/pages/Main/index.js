@@ -34,7 +34,7 @@ export default function Main() {
                 <MainContainer>
                 {dataActivated ? 
                     <>
-                    <AddTaskForm groupName={dataActivated.title_group_task} groupId={dataActivated.id} userId={user.id}/>
+                    <AddTaskForm groupName={dataActivated.title_group_task} groupId={dataActivated.id} />
                     <TaskContainer>
                         <EditTaskForm open={isEditTaskForm} setOpen={EditTaskFormAnimation} id={index}/>
                         <Title>Tarefas - {dataActivated ? JSON.stringify(dataActivated) : null}</Title>
