@@ -62,7 +62,7 @@ exports.postGroupTask = (req, res, next) => {
 
 exports.postTask = (req, res, next) => {
     try {
-        const { user_id, group_task_id, title_task, date } = req.body;
+        const { user_id, group_task_id, title_task } = req.body;
         
         if(!title_task) {
             return res.status(400).json({
@@ -81,10 +81,12 @@ exports.postTask = (req, res, next) => {
             title_task,
             desc_task: "",
             tags: [],
-            date
+            date: new Date()
         }
     
         gTask.tasks.push(newTask);
+
+        io.emit('addNewTask', gTask);
     
         res.status(201).json({
             "message": "201 - Created"

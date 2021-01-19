@@ -4,8 +4,11 @@ import { Container, Tag, Button } from './styles';
 import { Checkbox } from '@trendmicro/react-checkbox';
 import '@trendmicro/react-checkbox/dist/react-checkbox.css';
 
-export default function Task({ onClick, id }) {
+import { tagColors } from './../../utils/colors';
+
+export default function Task({ onClick, id, data }) {
     const [isChecked, setCheckbox] = useState(false);
+    console.log(data);
 
     const checkboxToggle = () => {
         setCheckbox(!isChecked);
@@ -18,11 +21,12 @@ export default function Task({ onClick, id }) {
 
                 <div className="content-container">
                     <div className="task-container">
-                        <p className="title">id0{id} - Lorem ipsum dolor et...</p>
+                        <p className="title">id0{data.task_id} - {data.title_task}</p>
                         <div className="tagContainer">
-                            <Tag color="#ed7e2f" />
-                            <Tag color="#ed2f2f" />
-                            <Tag color="#38A0FF" />
+                            {data.tags.map((item, index) => (
+                                <Tag color={tagColors[item]} key={index} />
+                            ))}
+                            
                         </div>
                     </div>
                     <Button>

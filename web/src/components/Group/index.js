@@ -19,7 +19,10 @@ export default function GroupItem({ data, initialData, isActive, setActiveIndex,
     }, []);
 
     useEffect(() => {
-        console.log(data.title_group_task);
+        return isActive ? setDataActivated(data) : null;
+    }, [data]);
+
+    useEffect(() => {
         setGroupTitle(data.title_group_task);
     }, [data.title_group_task]);
 
@@ -46,7 +49,6 @@ export default function GroupItem({ data, initialData, isActive, setActiveIndex,
     const removeGroupTask = async () => {
         try {
             await api.delete(`/task-group/${user.id}/${data.id}`);
-            console.log(initialData[0]);
             if(index === 0) {
                 setActiveIndex(index);
                 setDataActivated(initialData[index + 1]);
