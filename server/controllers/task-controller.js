@@ -4,22 +4,14 @@ const formatError = require('./../utils/formatError');
 
 exports.getTasks = (req, res, next) => {
     try{
-        if(isNaN(req.params.user_id)){
-            return res.status(400).json({
-                "message": "400 - Bad Request"
-            });
-        }
-
         
-        const [gTasks] = tb_tasks.filter(gtask => gtask.user_id == req.params.user_id);
+        const [gTasks] = tb_tasks.filter(gtask => gtask.user_id == req.auth.id);
         
         if(!gTasks){
             return res.status(404).json({
                 "message": "404 - Not Found"
             });
         }
-        
-        authCheck(req.auth, req.params.user_id);
 
         res.json(gTasks);
 

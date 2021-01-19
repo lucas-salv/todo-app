@@ -11,7 +11,7 @@ router.put('/user', authMiddleware, userController.putUser);
 router.delete('/user', authMiddleware, userController.deleteUser);
 
 // task routes
-router.get('/task-groups/:user_id', authMiddleware, taskController.getTasks);
+router.get('/task-groups', authMiddleware, taskController.getTasks);
 router.post('/task-group', authMiddleware, taskController.postGroupTask);
 router.post('/task', authMiddleware, taskController.postTask);
 router.put('/task-group/:id', authMiddleware, taskController.putGroupTask);
