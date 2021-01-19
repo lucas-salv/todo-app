@@ -1,5 +1,4 @@
 const { tb_tasks } = require('./../models/database');
-const authCheck = require('./../utils/authCheck');
 const formatError = require('./../utils/formatError');
 
 exports.getTasks = (req, res, next) => {
