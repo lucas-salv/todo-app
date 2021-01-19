@@ -70,21 +70,14 @@ exports.postUser = (req, res, next) => {
 
 exports.putUser = (req, res, next) => {
     try{
-        if(isNaN(req.params.id)){
-            res.status(400).json({
-                "message": "400 - Bad Request"
-            });
-        }
-
-        authCheck(req.auth, req.params.id);
     
-        const user = tb_users.find(user => user.id == req.params.id);
+        const user = tb_users.find(user => user.id == req.auth.id);
     
         if(user != undefined){
             const { name, email, pass, oldPass, avatar_url } = req.body;
             name != undefined ? user.name = name : null;
             email != undefined ? user.email = email : null;
-            pass != undefined ? user.pass == oldPass ? user.pass = pass : res.status(400).json({
+            pass != undefined ? user.pass === oldPass ? user.pass = pass : res.status(400).json({
                 "message": "400 - Bad Request"
             }) : null;
             avatar_url != undefined ? user.avatar_url = avatar_url : null;

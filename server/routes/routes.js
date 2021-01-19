@@ -7,7 +7,7 @@ const authMiddleware = require('./../utils/authMiddleware');
 // user routes
 router.get('/user', authMiddleware, userController.getUser);
 router.post('/signup', userController.postUser);
-router.put('/user/:id', authMiddleware, userController.putUser);
+router.put('/user', authMiddleware, userController.putUser);
 router.delete('/user/:id', authMiddleware, userController.deleteUser);
 
 // task routes
