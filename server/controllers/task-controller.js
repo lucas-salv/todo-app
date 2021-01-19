@@ -80,17 +80,15 @@ exports.putGroupTask = (req, res, next) => {
             });
         }
         
-        const { user_id, title_group_task } = req.body;
+        const { title_group_task } = req.body;
     
-        const gTask = tb_tasks.find(userTaskGroup => userTaskGroup.user_id == user_id).group_task.find(gtask => gtask.id == req.params.id);
+        const gTask = tb_tasks.find(userTaskGroup => userTaskGroup.user_id == req.auth.id).group_task.find(gtask => gtask.id == req.params.id);
     
         if(!gTask) {
             return res.status(404).json({
                 "message": "404 - Not Found"
             });
         }
-
-        authCheck(req.auth, user_id);
 
         title_group_task != undefined ? gTask.title_group_task = title_group_task : null;
 
