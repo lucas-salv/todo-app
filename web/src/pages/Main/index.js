@@ -39,7 +39,7 @@ export default function Main() {
                         <EditTaskForm open={isEditTaskForm} setOpen={EditTaskFormAnimation} id={index}/>
                         <Title>Tarefas - {dataActivated ? JSON.stringify(dataActivated) : null}</Title>
                         {dataActivated.tasks.map((item, index) => (
-                            <Task key={index} onClick={EditTaskFormAnimation} id={index} data={item}/>
+                            <Task key={index} onClick={EditTaskFormAnimation} id={index} groupId={dataActivated.id} data={item}/>
                         ))}
                     </TaskContainer>
                     </>

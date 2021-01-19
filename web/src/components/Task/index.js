@@ -5,8 +5,9 @@ import { Checkbox } from '@trendmicro/react-checkbox';
 import '@trendmicro/react-checkbox/dist/react-checkbox.css';
 
 import { tagColors } from './../../utils/colors';
+import api from './../../utils/api';
 
-export default function Task({ onClick, id, data }) {
+export default function Task({ onClick, id, groupId, data }) {
     const [isChecked, setCheckbox] = useState(false);
     console.log(data);
 
@@ -14,12 +15,15 @@ export default function Task({ onClick, id, data }) {
         setCheckbox(!isChecked);
     }
 
+    const removeTask = async () => {
+        await api.delete(`/task/${groupId}/${data.task_id}`);
+    }
+
     return (
-            <Container color="#38A0FF" checked={isChecked} onClick={() => isChecked ? '' : onClick(id)} >
+            <Container color="#38A0FF" checked={isChecked} >
+
                 <Checkbox onClick={checkboxToggle} checked={isChecked}/>
-
-
-                <div className="content-container">
+                <div className="content-container" onClick={() => isChecked ? '' : onClick(id)}>
                     <div className="task-container">
                         <p className="title">id0{data.task_id} - {data.title_task}</p>
                         <div className="tagContainer">
@@ -29,10 +33,10 @@ export default function Task({ onClick, id, data }) {
                             
                         </div>
                     </div>
-                    <Button>
-                        <FiTrash2 className="trashIcon" />
-                    </Button>
                 </div>
+                <Button onClick={removeTask}>
+                    <FiTrash2 className="trashIcon" />
+                </Button>
             </Container>
     )
 }
