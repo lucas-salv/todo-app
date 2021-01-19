@@ -129,7 +129,7 @@ export default function EditUserForm({ open, setOpen }) {
                         }
                     }}>Editar</Button>
                     <Button type="delete" onClick={ async () => {
-                        await api.delete(`/user/${user.id}`);
+                        await api.delete(`/user`);
                         handleLogout();
                     }}>Excluir conta</Button>
                 </Form>
