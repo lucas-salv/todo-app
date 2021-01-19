@@ -172,15 +172,13 @@ exports.deleteGroupTask = (req, res, next) => {
 
 exports.deleteTask = (req, res, next) => {
     try{
-        if(isNaN(req.params.group_id) || isNaN(req.params.task_id) || isNaN(req.params.user_id)) {
+        if(isNaN(req.params.group_id) || isNaN(req.params.task_id)) {
             res.status(400).json({
                 "message": "400 - Bad Request"
             });
         }
-        
-        authCheck(req.auth, req.params.user_id);
 
-        const gTask = tb_tasks.find(userGroup => userGroup.user_id == req.params.user_id).group_task
+        const gTask = tb_tasks.find(userGroup => userGroup.user_id == req.auth.id).group_task
         .find(gtask => gtask.id == req.params.group_id);
 
         if(!gTask) {
