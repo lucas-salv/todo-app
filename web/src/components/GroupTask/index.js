@@ -45,6 +45,10 @@ export default function GroupTask() {
         socket.on('addNewTask', content => {
             dispatch({ type: 'EDIT', payload: [content] });
         })
+
+        socket.on('removeTask', content => {
+            dispatch({ type: 'EDIT', payload: [content] });
+        })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
