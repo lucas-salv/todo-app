@@ -111,19 +111,18 @@ exports.putTask = (req, res, next) => {
             });
         }
     
-        const { user_id, group_task_id, title_task, desc_task, checked, tags } = req.body;
+        const { group_task_id, title_task, desc_task, checked, tags } = req.body;
+
+        const gTask = tb_tasks.find(userTaskGroup => userTaskGroup.user_id == req.auth.id)
+                              .group_task.find(gtask => gtask.id == group_task_id);
     
-        const task = tb_tasks.find(userTaskGroup => userTaskGroup.user_id == user_id)
-                              .group_task.find(gtask => gtask.id == group_task_id)
-                              .tasks.find(task => task.task_id == req.params.id);
+        const task = gTask.tasks.find(task => task.task_id == req.params.id);
     
         if(!task) {
             return res.status(404).json({
                 "message": "404 - Not Found"
             });
         }
-
-        authCheck(req.auth, user_id);
     
         title_task != undefined ? task.title_task = title_task : null;
         desc_task != undefined ? task.desc_task = desc_task : null;
