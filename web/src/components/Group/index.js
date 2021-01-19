@@ -37,7 +37,6 @@ export default function GroupItem({ data, initialData, isActive, setActiveIndex,
     const editGroupApi = async () => {
         try {
             await api.put(`/task-group/${data.id}`, {
-                user_id: user.id,
                 title_group_task: groupTitle
             });
             setEditGroup(false);
