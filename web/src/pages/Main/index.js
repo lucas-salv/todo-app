@@ -34,10 +34,10 @@ export default function Main() {
                 <MainContainer>
                 {dataActivated ? 
                     <>
-                    <AddTaskForm />
+                    <AddTaskForm groupName={dataActivated.title_group_task} groupId={dataActivated.id} userId={user.id}/>
                     <TaskContainer>
                         <EditTaskForm open={isEditTaskForm} setOpen={EditTaskFormAnimation} id={index}/>
-                        <Title>Tarefas - {dataActivated ? dataActivated.id : null}</Title>
+                        <Title>Tarefas - {dataActivated ? JSON.stringify(dataActivated) : null}</Title>
                         {dataActivated.tasks.map((item, index) => (
                             <Task key={index} onClick={EditTaskFormAnimation} id={index} data={item}/>
                         ))}
