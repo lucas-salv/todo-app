@@ -46,23 +46,15 @@ exports.postGroupTask = (req, res, next) => {
 
 exports.postTask = (req, res, next) => {
     try {
-        const { user_id, group_task_id, title_task } = req.body;
-        
-        if(!title_task) {
-            return res.status(400).json({
-                "message": "400 - Bad Request"
-            });
-        }
-
-        authCheck(req.auth, user_id);
+        const { group_task_id, title_task } = req.body;
     
-        const [gTask] = tb_tasks.filter(userTaskGroup => userTaskGroup.user_id == user_id)[0]
+        const [gTask] = tb_tasks.filter(userTaskGroup => userTaskGroup.user_id == req.auth.id)[0]
                                         .group_task.filter(gTask => gTask.id == group_task_id);
     
     
         const newTask = {
             task_id: gTask.tasks.length == 0 ? 1 : gTask.tasks[gTask.tasks.length-1].task_id+1,
-            title_task,
+            title_task: title_task || '',
             desc_task: "",
             tags: [],
             date: new Date()
