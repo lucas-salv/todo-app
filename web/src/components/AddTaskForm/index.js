@@ -4,12 +4,11 @@ import { Form, Title, Label, Button } from './styles';
 
 import api from './../../utils/api';
 
-export default function AddTaskForm({ groupName, groupId, userId }) {
+export default function AddTaskForm({ groupName, groupId }) {
     const [titleTask, setTitleTask] = useState();
 
     const addTask = async () => {
         await api.post('/task', {
-            user_id: userId,
             group_task_id: groupId,
             title_task: titleTask
         })

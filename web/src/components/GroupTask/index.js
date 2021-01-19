@@ -58,7 +58,7 @@ export default function GroupTask() {
 
     const addGroupTask = async () => {
         try{
-            await api.post('/task-group', { user_id: user.id, title_group_task: groupName });
+            await api.post('/task-group', { title_group_task: groupName });
         } catch(err) {
             console.log(err);
         }
