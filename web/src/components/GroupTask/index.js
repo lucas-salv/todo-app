@@ -50,7 +50,7 @@ export default function GroupTask() {
 
     useEffect(() => {
         (async () => {
-            const { data } = await api.get(`/task-groups/${user.id}`);
+            const { data } = await api.get(`/task-groups`);
             dispatch({type: 'ADD', payload: data.group_task});
           })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
