@@ -24,7 +24,7 @@ const groupTaskReducer = (state, action) => {
 }
 
 export default function GroupTask() {
-    const { user, setDataActivated } = useContext(Context);
+    const { setDataActivated } = useContext(Context);
     const [groupName, setGroupName]  = useState();
     const [groups, dispatch] = useReducer(groupTaskReducer, []);
     const [activeIndex, setActiveIndex] = useState(0);

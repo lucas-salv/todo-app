@@ -8,7 +8,7 @@ import api from './../../utils/api';
 import { Context } from './../../utils/AuthContext';
 
 export default function GroupItem({ data, initialData, isActive, setActiveIndex, index, onClick }) {
-    const { user, setDataActivated } = useContext(Context);
+    const { setDataActivated } = useContext(Context);
     const [isDropDown, setDropDown] = useState(false);
     const [isEditGroup, setEditGroup] = useState(false);
     const [groupTitle, setGroupTitle] = useState();
