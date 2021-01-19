@@ -140,15 +140,15 @@ exports.putTask = (req, res, next) => {
 
 exports.deleteGroupTask = (req, res, next) => {
     try{
-        if(isNaN(req.params.user_id) || isNaN(req.params.group_id)) {
+        if(isNaN(req.params.group_id)) {
             res.status(400).json({
                 "message": "400 - Bad Request"
             });
         }
     
 
-        const gTask = tb_tasks.find(userGroup => userGroup.user_id == req.params.user_id);
-        const groupIndex = tb_tasks.find(userGroup => userGroup.user_id == req.params.user_id)
+        const gTask = tb_tasks.find(userGroup => userGroup.user_id == req.auth.id);
+        const groupIndex = tb_tasks.find(userGroup => userGroup.user_id == req.auth.id)
                                    .group_task.findIndex(gtask => gtask.id == req.params.group_id);
     
         if(groupIndex == -1) {
@@ -156,8 +156,6 @@ exports.deleteGroupTask = (req, res, next) => {
                 "message": "404 - Not Found"
             });
         }
-
-        authCheck(req.auth, req.params.user_id);
 
         const groupRemoved = gTask.group_task[groupIndex];
 
