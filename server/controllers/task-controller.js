@@ -194,8 +194,10 @@ exports.deleteTask = (req, res, next) => {
             });
         }
 
-
         gTask.tasks.splice(taskIndex, 1);
+
+        io.emit('removeTask', gTask);
+
         res.status(200).json({
             "message": "200 - Success"
         });
