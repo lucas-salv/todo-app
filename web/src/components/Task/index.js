@@ -23,7 +23,7 @@ export default function Task({ onClick, id, groupId, data }) {
             <Container color="#38A0FF" checked={isChecked} >
 
                 <Checkbox onClick={checkboxToggle} checked={isChecked}/>
-                <div className="content-container" onClick={() => isChecked ? '' : onClick(id)}>
+                <div className="content-container" onClick={() => isChecked ? '' : onClick(id, data)}>
                     <div className="task-container">
                         <p className="title">id0{data.task_id} - {data.title_task}</p>
                         <div className="tagContainer">

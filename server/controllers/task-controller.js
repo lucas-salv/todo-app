@@ -110,7 +110,7 @@ exports.putTask = (req, res, next) => {
             });
         }
     
-        const { group_task_id, title_task, desc_task, checked, tags } = req.body;
+        const { group_task_id, title_task, desc_task, checked } = req.body;
 
         const gTask = tb_tasks.find(userTaskGroup => userTaskGroup.user_id == req.auth.id)
                               .group_task.find(gtask => gtask.id == group_task_id);
@@ -126,7 +126,9 @@ exports.putTask = (req, res, next) => {
         title_task != undefined ? task.title_task = title_task : null;
         desc_task != undefined ? task.desc_task = desc_task : null;
         checked != undefined ? task.checked = checked : null;
-        tags.length != 0 ? task.tags = tags : null;
+        //tags.length != 0 || tags != undefined ? task.tags = tags : null;
+
+        io.emit('editTask', gTask);
     
         res.status(200).json({
             "message": "200 - Success"

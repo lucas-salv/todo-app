@@ -11,6 +11,7 @@ import { Context } from './../../utils/AuthContext';
 export default function Main() {
     const { user, setUser, dataActivated } = useContext(Context);
     const [isEditTaskForm, setEditTaskForm] = useState(false);
+    const [editFormData, setEditFormData] = useState();
     const [index, setIndex] = useState();
 
     useEffect(() => {
@@ -21,7 +22,8 @@ export default function Main() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const EditTaskFormAnimation = (index) => {
+    const EditTaskFormAnimation = (index, data) => {
+        setEditFormData(data);
         setEditTaskForm(!isEditTaskForm);
         setIndex(index);
     }
@@ -36,7 +38,7 @@ export default function Main() {
                     <>
                     <AddTaskForm groupName={dataActivated.title_group_task} groupId={dataActivated.id} />
                     <TaskContainer>
-                        <EditTaskForm open={isEditTaskForm} setOpen={EditTaskFormAnimation} id={index}/>
+                        <EditTaskForm open={isEditTaskForm} setOpen={EditTaskFormAnimation} id={dataActivated.id} data={editFormData} />
                         <Title>Tarefas - {dataActivated ? JSON.stringify(dataActivated) : null}</Title>
                         {dataActivated.tasks.map((item, index) => (
                             <Task key={index} onClick={EditTaskFormAnimation} id={index} groupId={dataActivated.id} data={item}/>
