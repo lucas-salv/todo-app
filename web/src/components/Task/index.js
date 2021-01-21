@@ -8,11 +8,10 @@ import { tagColors } from './../../utils/colors';
 import api from './../../utils/api';
 
 export default function Task({ onClick, id, groupId, data }) {
-    const [isChecked, setCheckbox] = useState(false);
     console.log(data);
 
-    const checkboxToggle = () => {
-        setCheckbox(!isChecked);
+    const checkboxToggle = async () => {
+        await api.put(`/task/${data.task_id}`, { group_task_id: groupId, checked: !data.checked })
     }
 
     const removeTask = async () => {
@@ -20,10 +19,10 @@ export default function Task({ onClick, id, groupId, data }) {
     }
 
     return (
-            <Container color="#38A0FF" checked={isChecked} >
+            <Container color="#38A0FF" checked={data.checked} >
 
-                <Checkbox onClick={checkboxToggle} checked={isChecked}/>
-                <div className="content-container" onClick={() => isChecked ? '' : onClick(id, data)}>
+                <Checkbox onClick={checkboxToggle} checked={data.checked}/>
+                <div className="content-container" onClick={() => data.checked ? '' : onClick(id, data)}>
                     <div className="task-container">
                         <p className="title">id0{data.task_id} - {data.title_task}</p>
                         <div className="tagContainer">

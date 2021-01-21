@@ -7,14 +7,15 @@ export const Container = styled.li`
     list-style: none;
     border-bottom: 1px solid ${props => props.theme.grayBackground};
     cursor: pointer;
-    transition: background-color .5s ease-in-out;
+    transition: border .5s ease-in-out;
+    border-left: 2px solid transparent;
 
     &:last-child {
         border-bottom: none;
     }
 
     &:active, &:hover {
-        background-color: ${props => props.theme.grayBackground};
+        border-left: 2px solid ${props => props.checked ? props.theme.grayBackground : props.theme.main};
     }
 
     .content-container {
