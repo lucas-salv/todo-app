@@ -73,7 +73,7 @@ export default function EditUserForm({ open, setOpen }) {
 
     return (
         <>
-            <SuccessModal id="modal" status={editStatus}><p>Editado com sucesso!</p></SuccessModal>
+            <SuccessModal id="modal" status={editStatus}><p>Usuário editado com sucesso!</p></SuccessModal>
             <Container open={open}>
                 <Form>
                     <Link setOpen={setOpen}>

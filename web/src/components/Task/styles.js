@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.li`
     display: flex;
     align-items: center;
-    padding: 15px 10px;
+    padding: 0px 10px;
     list-style: none;
     border-bottom: 1px solid ${props => props.theme.grayBackground};
     cursor: pointer;
@@ -19,6 +19,7 @@ export const Container = styled.li`
 
     .content-container {
         display: flex;
+        padding: 15px 0px;
         justify-content: space-between;
         align-items: center;
         width: 100%;
