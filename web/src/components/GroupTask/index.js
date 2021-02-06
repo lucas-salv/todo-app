@@ -85,19 +85,18 @@ export default function GroupTask() {
     return (
         <>
             <TitleContainer>
-                <Title>Grupos de Tarefas</Title>
+                
                 <Form>
                     <Label>
-                        <input type="text" placeholder="Nome do Grupo" onChange={(e) => setGroupName(e.target.value)} />
+                        <input type="text" placeholder="Adicionar grupo..." onChange={(e) => setGroupName(e.target.value)} />
                         <Button onClick={addGroupTask}>
                             <FiPlus color="#FFF" size={20}/>
                         </Button>
-                    </Label>
-                    
+                    </Label>    
                 </Form>
             </TitleContainer>
             <GroupContainer>
-                <Text>Todos os grupos</Text>
+                <Text>Grupos de tarefas</Text>
                 {groups.length > 0 ? groups.map((item, index) => (
                     <Group key={index} data={item} isActive={activeIndex === index} initialData={groups} index={index} setActiveIndex={setActiveIndex} onClick={() => handleActiveIndex(index, item)} />
                 )) : noGroup()}

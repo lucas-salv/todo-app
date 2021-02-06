@@ -47,7 +47,7 @@ export const Button = styled.button`
 `;
 
 export const GroupContainer = styled.div`
-    margin-top: 10px;
+    margin-top: 20px;
 `;
 
 export const Text = styled.p`
