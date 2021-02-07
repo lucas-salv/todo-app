@@ -6,9 +6,8 @@ export const Group = styled.div`
     align-items: center;
     position: relative;
     font-size: 0.9rem;
-    padding: 5px;
-    background-color: ${props => props.active ? props.theme.secondary : 'transparent'};
-    border-radius: 5px;
+    padding: 10px;
+    border-left: 2px solid ${props => props.active ? props.theme.main: 'transparent'};
     cursor: pointer;
 
     div {
@@ -16,22 +15,22 @@ export const Group = styled.div`
     }
 
     &:hover {
-        background-color: ${props => props.active ? props.theme.secondary : props.theme.grayBackground};
+        border-left: 2px solid ${props => props.active ? props.theme.main: 'transparent'};
     }
 
     .name {
-        color: ${props => props.active ? props.theme.whiteColor : props.theme.grayTextColor};
+        color: ${props => props.active ? props.theme.grayTextColor : props.theme.placeholderColor};
     }
 
     .edit-button {
         border: none;
         background: none;
         width: 10px;
-        height: 25px;
+        height: 20px;
         outline: none;
 
         .eb-icon {
-            color: ${props => props.active ? props.theme.whiteColor : props.theme.grayTextColor};
+            color: ${props => props.active ? props.theme.grayTextColor : props.theme.placeholderColor};
             cursor: pointer;
         }
     }
@@ -41,7 +40,7 @@ export const Label = styled.div`
     display: ${props => props.open ? 'flex' : 'none'};
     width: 100%;
     position: absolute;
-    top: 35px;
+    top: 40px;
     left: 0;
     z-index: 2;
     background-color: ${props => props.theme.grayBackground};

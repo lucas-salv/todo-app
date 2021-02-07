@@ -87,7 +87,7 @@ export const SecondaryMenu = styled.div`
 
     @media (min-width: 900px) {
         margin-top: 60px;
-        padding: 10px 20px 10px 20px;
+        padding: 20px 20px 10px 20px;
         border-top: 1px solid ${props => props.theme.grayBackground};
         border-right: 1px solid ${props => props.theme.grayBackground};
     }

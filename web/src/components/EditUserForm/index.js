@@ -71,6 +71,29 @@ export default function EditUserForm({ open, setOpen }) {
         }
     }
 
+    const clickEditUser = async (e) => {
+        e.preventDefault();
+        const data = validateForm(username, email, oldPass, newPass, avatar);
+        if(data) {
+            try{
+                const res = await api.put(`/user`, data);
+                if(res.status === 200) setEditStatus(true);
+                setOpen();
+                setOldPass('');
+                setNewPass('');
+            }catch(err){
+                setStatus(errorFunction(err.response.status));
+            }
+        }
+    }
+
+    const pressEnterEditUser = (e) => {
+        if(e.keyCode === 13) {
+            e.preventDefault();
+            document.getElementById('editUserBtn').click();
+        }
+    }
+
     return (
         <>
             <SuccessModal id="modal" status={editStatus}><p>Usuário editado com sucesso!</p></SuccessModal>
@@ -86,48 +109,32 @@ export default function EditUserForm({ open, setOpen }) {
                         <FiUser color="#9B9B9B" />
                         <input type="text" id="name" name="name" autoFocus placeholder="Usuário" value={username} onChange={(e) => setUsername(e.target.value)} onFocus={() => {
                     setStatus(false);
-                }}/>
+                }} onKeyUp={pressEnterEditUser} />
                     </Label>
                     <Label htmlFor="email">
                         <HiOutlineMail color="#9B9B9B" />
                         <input type="email" id="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} onFocus={() => {
                     setStatus(false);
-                }}/>
+                }} onKeyUp={pressEnterEditUser}/>
                     </Label>
                     <Label htmlFor="pass">
                         <FiLock color="#9B9B9B" />
                         <input type="password" id="pass" name="password" placeholder="Senha atual" value={oldPass} onChange={(e) => setOldPass(e.target.value)} onFocus={() => {
                     setStatus(false);
-                }}/>
+                }} onKeyUp={pressEnterEditUser}/>
                     </Label>
                     <Label htmlFor="confirm-pass">
                         <FiLock color="#9B9B9B" />
                         <input type="password" id="confirm-pass" placeholder="Nova senha" value={newPass} onChange={(e) => setNewPass(e.target.value)} onFocus={() => {
                     setStatus(false);
-                }}/>
+                }} onKeyUp={pressEnterEditUser}/>
                     </Label>
                         <ImgContainer>
                             {avatars.map((item, index) => (
                                 <ImgPerfil key={index} src={item} check={item === avatar} onClick={() => setAvatar(item)} />
                             ))}
                         </ImgContainer>
-                    <Button onClick={ async (e) => {
-                        e.preventDefault();
-                        const data = validateForm(username, email, oldPass, newPass, avatar);
-                        if(data) {
-                            try{
-                                const res = await api.put(`/user`, data);
-                                if(res.status === 200) setEditStatus(true);
-                                setOpen();
-                                setOldPass('');
-                                setNewPass('');
-                            }catch(err){
-                                setStatus(errorFunction(err.response.status));
-                            }
-                        } else {
-                            return;
-                        }
-                    }}>Editar</Button>
+                    <Button id="editUserBtn" onClick={clickEditUser}>Editar</Button>
                     <Button type="delete" onClick={ async () => {
                         await api.delete(`/user`);
                         handleLogout();

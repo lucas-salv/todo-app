@@ -37,6 +37,28 @@ export default function EditTaskForm({ open, setOpen, id, data }) {
         }
     }
 
+    const clickBtnEdit = async (e) => {
+        e.preventDefault();
+        const formData = validateForm(title, desc);
+        console.log(formData);
+        if(formData){
+            try{
+                const res = await api.put(`/task/${data.task_id}`, formData);
+                if(res.status === 200) setSuccessStatus(true);
+                setOpen();
+            } catch(err){
+                setStatus(errorFunction(err.response.status))
+            }
+        }
+    }
+
+    const pressEnterEditTask = (e) => {
+        if(e.keyCode === 13) {
+            e.preventDefault();
+            document.getElementById(`editTaskBtn-${data.task_id}`).click();
+        }
+    }
+
     return (
         <>
             <SuccessModal id="modal" status={successStatus}><p>Tarefa editada com sucesso!</p></SuccessModal>
@@ -51,31 +73,19 @@ export default function EditTaskForm({ open, setOpen, id, data }) {
                     <ErrorModal status={status}><p>Ops! Algo deu errado. Mude os valores ou tente novamente!</p></ErrorModal>
                     <Label htmlFor="title">
                         <FiEdit3 color="#9B9B9B" />
-                        <input type="text" id="title" name="title" autoFocus placeholder="Título" value={title} onChange={e => setTitle(e.target.value)} />
+                        <input type="text" id="title" name="title" autoFocus placeholder="Título" value={title} onChange={e => setTitle(e.target.value)} onKeyUp={pressEnterEditTask} />
                     </Label>
                     <Label htmlFor="desc">
                         <textarea id="desc" name="desc" placeholder="Descrição da tarefa" value={desc} onChange={e => setDesc(e.target.value)} />
                     </Label>
                     <Date>{data.date}</Date>
-                    <Button
-                        onClick={ async () => {
-                            const formData = validateForm(title, desc);
-                            console.log(formData);
-                            if(formData){
-                                try{
-                                    const res = await api.put(`/task/${data.task_id}`, formData);
-                                    if(res.status === 200) setSuccessStatus(true);
-                                    setOpen();
-                                } catch(err){
-                                    setStatus(errorFunction(err.response.status))
-                                }
-                            }
-                        }}
+                    <Button id={`editTaskBtn-${data.task_id}`}
+                        onClick={clickBtnEdit}
                     >Editar</Button>
                 </Form>
                 }
             </Container>
-            <div className="backgroundMenu"></div>
+            <div className="backgroundMenu" onClick={() => setOpen()}></div>
         </>
     )
 }

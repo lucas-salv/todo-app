@@ -7,7 +7,7 @@ export const Container = styled.li`
     list-style: none;
     border-bottom: 1px solid ${props => props.theme.grayBackground};
     cursor: pointer;
-    transition: border .5s ease-in-out;
+    transition: border-left .5s ease-in-out;
     border-left: 2px solid transparent;
 
     &:last-child {

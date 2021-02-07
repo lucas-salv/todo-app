@@ -1,5 +1,6 @@
 const { tb_tasks } = require('./../models/database');
 const formatError = require('./../utils/formatError');
+const formatDate = require('./../utils/formatDate');
 
 exports.getTasks = (req, res, next) => {
     try{
@@ -50,13 +51,14 @@ exports.postTask = (req, res, next) => {
         const [gTask] = tb_tasks.filter(userTaskGroup => userTaskGroup.user_id == req.auth.id)[0]
                                         .group_task.filter(gTask => gTask.id == group_task_id);
     
+        const date = new Date()
     
         const newTask = {
             task_id: gTask.tasks.length == 0 ? 1 : gTask.tasks[gTask.tasks.length-1].task_id+1,
             title_task: title_task || '',
             desc_task: "",
             tags: [],
-            date: new Date()
+            date: formatDate(date)
         }
     
         gTask.tasks.push(newTask);

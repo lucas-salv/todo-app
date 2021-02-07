@@ -45,6 +45,26 @@ export default function FormCreateAccount() {
         }
     }
 
+    const pressEnterLogin = (e) => {
+        if(e.keyCode === 13) {
+            e.preventDefault();
+            document.getElementById('createAccountBtn').click();
+        }
+    }
+
+    const clickLogin = async (e) => {
+        e.preventDefault();
+        const data = validateForm(username, email, pass, confirmPass);
+        if(data) {
+            try{
+                await api.post('/signup', data);
+                handleLogin(email, pass);
+            }catch(err){
+                setStatus(errorFunction(err.response.status));
+            }
+        }
+    }
+
     return (
         <Form>
             <ErrorModal status={status}><p>Ops! Algo deu errado. Mude os valores ou tente novamente!</p></ErrorModal>
@@ -58,40 +78,27 @@ export default function FormCreateAccount() {
                 <FiUser color="#9B9B9B" />
                 <input type="text" id="name" name="name" autoFocus placeholder="Usuário" onChange={(e) => setUsername(e.target.value)} onFocus={() => {
                     setStatus(false);
-                }}/>
+                }} onKeyUp={pressEnterLogin}/>
             </Label>
             <Label htmlFor="email" status={status}>
                 <HiOutlineMail color="#9B9B9B" />
                 <input type="email" id="email" name="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} onFocus={() => {
                     setStatus(false);
-                }} />
+                }} onKeyUp={pressEnterLogin}/>
             </Label>
             <Label htmlFor="pass" status={status}>
                 <FiLock color="#9B9B9B" />
                 <input type="password" id="pass" name="password" placeholder="Senha" onChange={(e) => setPass(e.target.value)} onFocus={() => {
                     setStatus(false);
-                }} />
+                }} onKeyUp={pressEnterLogin}/>
             </Label>
             <Label htmlFor="confirm-pass" status={status}>
                 <FiLock color="#9B9B9B" />
                 <input type="password" id="confirm-pass" placeholder="Confirmar senha" onChange={(e) => setConfirmPass(e.target.value)} onFocus={() => {
                     setStatus(false);
-                }} />
+                }} onKeyUp={pressEnterLogin}/>
             </Label>
-            <Button onClick={ async (e) => {
-                e.preventDefault();
-                const data = validateForm(username, email, pass, confirmPass);
-                if(data) {
-                    try{
-                        await api.post('/signup', data);
-                        handleLogin(email, pass);
-                    }catch(err){
-                        setStatus(errorFunction(err.response.status));
-                    }
-                } else {
-                    return;
-                }
-            }}>Criar conta</Button>
+            <Button id="createAccountBtn" onClick={clickLogin}>Criar conta</Button>
         </Form>
     )
 }

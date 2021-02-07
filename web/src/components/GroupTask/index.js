@@ -25,7 +25,7 @@ const groupTaskReducer = (state, action) => {
 
 export default function GroupTask() {
     const { setDataActivated } = useContext(Context);
-    const [groupName, setGroupName]  = useState();
+    const [groupName, setGroupName]  = useState('');
     const [groups, dispatch] = useReducer(groupTaskReducer, []);
     const [activeIndex, setActiveIndex] = useState(0);
 
@@ -67,6 +67,7 @@ export default function GroupTask() {
     const addGroupTask = async () => {
         try{
             await api.post('/task-group', { title_group_task: groupName });
+            setGroupName('');
         } catch(err) {
             console.log(err);
         }
@@ -82,22 +83,28 @@ export default function GroupTask() {
         return <h4>Nenhum grupo encontrado</h4>
     }
 
+    const pressEnterAdd = (e) => {
+        if(e.keyCode === 13) {
+            e.preventDefault();
+            document.getElementById('addGroupBtn').click();
+        }
+    }
+
     return (
         <>
             <TitleContainer>
-                <Title>Grupos de Tarefas</Title>
+                
                 <Form>
                     <Label>
-                        <input type="text" placeholder="Nome do Grupo" onChange={(e) => setGroupName(e.target.value)} />
-                        <Button onClick={addGroupTask}>
+                        <input type="text" placeholder="Adicionar grupo..." value={groupName} onChange={(e) => setGroupName(e.target.value)} onKeyUp={pressEnterAdd} />
+                        <Button id="addGroupBtn" onClick={addGroupTask}>
                             <FiPlus color="#FFF" size={20}/>
                         </Button>
-                    </Label>
-                    
+                    </Label>    
                 </Form>
             </TitleContainer>
             <GroupContainer>
-                <Text>Todos os grupos</Text>
+                <Text>Grupos de tarefas</Text>
                 {groups.length > 0 ? groups.map((item, index) => (
                     <Group key={index} data={item} isActive={activeIndex === index} initialData={groups} index={index} setActiveIndex={setActiveIndex} onClick={() => handleActiveIndex(index, item)} />
                 )) : noGroup()}
