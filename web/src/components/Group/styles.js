@@ -40,7 +40,7 @@ export const Label = styled.div`
     display: ${props => props.open ? 'flex' : 'none'};
     width: 100%;
     position: absolute;
-    top: 35px;
+    top: 40px;
     left: 0;
     z-index: 2;
     background-color: ${props => props.theme.grayBackground};
