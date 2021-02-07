@@ -37,6 +37,21 @@ export default function EditTaskForm({ open, setOpen, id, data }) {
         }
     }
 
+    const clickBtnEdit = async (e) => {
+        e.preventDefault();
+        const formData = validateForm(title, desc);
+        console.log(formData);
+        if(formData){
+            try{
+                const res = await api.put(`/task/${data.task_id}`, formData);
+                if(res.status === 200) setSuccessStatus(true);
+                setOpen();
+            } catch(err){
+                setStatus(errorFunction(err.response.status))
+            }
+        }
+    }
+
     return (
         <>
             <SuccessModal id="modal" status={successStatus}><p>Tarefa editada com sucesso!</p></SuccessModal>
@@ -58,24 +73,12 @@ export default function EditTaskForm({ open, setOpen, id, data }) {
                     </Label>
                     <Date>{data.date}</Date>
                     <Button
-                        onClick={ async () => {
-                            const formData = validateForm(title, desc);
-                            console.log(formData);
-                            if(formData){
-                                try{
-                                    const res = await api.put(`/task/${data.task_id}`, formData);
-                                    if(res.status === 200) setSuccessStatus(true);
-                                    setOpen();
-                                } catch(err){
-                                    setStatus(errorFunction(err.response.status))
-                                }
-                            }
-                        }}
+                        onClick={clickBtnEdit}
                     >Editar</Button>
                 </Form>
                 }
             </Container>
-            <div className="backgroundMenu"></div>
+            <div className="backgroundMenu" onClick={() => setOpen()}></div>
         </>
     )
 }
