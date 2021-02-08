@@ -36,7 +36,14 @@ export const Container = styled.div`
     @media (min-width: 1200px) {
         width: 355px;
     }
-`
+`;
+
+export const LoaderContainer = styled.div`
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+`;
 
 export const Form = styled.div`
     display:flex;

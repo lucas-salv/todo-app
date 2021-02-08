@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { FiEdit3, FiChevronLeft } from 'react-icons/fi';
-import { Container, Form, Title, Label, Date, ErrorModal, SuccessModal, Button } from './styles';
+import { Container, LoaderContainer, Form, Title, Label, Date, ErrorModal, SuccessModal, Button } from './styles';
 import Link from './../Link';
 import api from './../../utils/api';
 import errorFunction from './../../utils/errorFunction';
+import Loading from './../Loading';
 
 export default function EditTaskForm({ open, setOpen, id, data }) {
     const [title, setTitle] = useState();
@@ -63,7 +64,11 @@ export default function EditTaskForm({ open, setOpen, id, data }) {
         <>
             <SuccessModal id="modal" status={successStatus}><p>Tarefa editada com sucesso!</p></SuccessModal>
             <Container open={open}>
-                {!data ? <h3>Loading</h3> : 
+                {!data ? 
+                <LoaderContainer>
+                    <Loading />
+                </LoaderContainer>
+                : 
                 <Form>
                     <Link setOpen={() => setOpen()}>
                         <FiChevronLeft />
