@@ -6,12 +6,13 @@ import DropDownMenu from './../DropDownMenu';
 
 import api from './../../utils/api';
 import { Context } from './../../utils/AuthContext';
+import ellipsis from './../../utils/ellipsis';
 
 export default function GroupItem({ data, initialData, isActive, setActiveIndex, index, onClick }) {
     const { setDataActivated } = useContext(Context);
     const [isDropDown, setDropDown] = useState(false);
     const [isEditGroup, setEditGroup] = useState(false);
-    const [groupTitle, setGroupTitle] = useState();
+    const [groupTitle, setGroupTitle] = useState('');
     const [titleEdit, setTitleEdit] = useState('');
 
     useEffect(() => {
@@ -65,8 +66,10 @@ export default function GroupItem({ data, initialData, isActive, setActiveIndex,
                 setActiveIndex(index);
                 setDataActivated(initialData[index + 1]);
             } else {
-                setActiveIndex(index - 1);
-                setDataActivated(initialData[index - 1]);
+                if(isActive) {
+                    setActiveIndex(index - 1);
+                    setDataActivated(initialData[index - 1]);
+                }
             }
         } catch(err) {
             console.log(err);
@@ -83,7 +86,7 @@ export default function GroupItem({ data, initialData, isActive, setActiveIndex,
     return (
         <Group id={`group-${data.id}`} active={isActive}>
             <div onClick={onClick}>
-                <p className="name">{groupTitle}</p>
+                <p className="name">{ellipsis(groupTitle)}</p>
                 <Label open={isEditGroup}>
                     <input type="text" placeholder="Nome da tarefa" value={titleEdit} onChange={(e) => setTitleEdit(e.target.value)} onKeyUp={pressEnterEdit} />
                     <Button id={`editBtn-${data.id}`} onClick={editGroupApi}>
