@@ -10,6 +10,13 @@ export const Container = styled.div`
     }
 `;
 
+export const LoaderContainer = styled.div`
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+`;
+
 export const TaskContainer = styled.ul`
     margin-top: 20px;
 `;

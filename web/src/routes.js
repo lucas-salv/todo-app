@@ -5,14 +5,26 @@ import Login from './pages/Login';
 import CreateAccount from './pages/CreateAccount';
 import Main from './pages/Main';
 import ErrorPage from './pages/ErrorPage';
-
+import Loading from './components/Loading';
 import { Context } from './utils/AuthContext';
+import styled from 'styled-components';
+
+const LoaderContainer = styled.div`
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+`;
 
 function CustomRoute({ isPrivate, ...rest }) {
     const { loading, authenticated } = useContext(Context);
 
     if(loading) {
-        return <h1>Loading...</h1>
+        return (
+            <LoaderContainer>
+                <Loading />
+            </LoaderContainer>
+        )
     }
 
     if(isPrivate && !authenticated) {

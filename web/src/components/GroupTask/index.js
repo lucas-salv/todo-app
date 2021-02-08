@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState, useReducer } from 'react';
 import { FiPlus } from 'react-icons/fi'
-import { TitleContainer, Title, Form, Label, Button, GroupContainer, Text } from './styles';
+import { TitleContainer, Form, Label, Button, GroupContainer, Text } from './styles';
 import Group from './../Group';
 
 import api from './../../utils/api';

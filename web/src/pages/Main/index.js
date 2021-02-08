@@ -1,9 +1,10 @@
 import { useState, useEffect, useContext } from 'react';
-import { Container, TaskContainer, MainContainer, Title } from './styles';
+import { Container, TaskContainer, MainContainer, Title, LoaderContainer } from './styles';
 import Header from './../../components/Header';
 import AddTaskForm from './../../components/AddTaskForm';
 import Task from './../../components/Task';
 import EditTaskForm from './../../components/EditTaskForm';
+import Loading from './../../components/Loading';
 
 import api from './../../utils/api';
 import { Context } from './../../utils/AuthContext';
@@ -30,7 +31,11 @@ export default function Main() {
 
     return (
         <>
-            {user === undefined ? <h1>Loading...</h1> : 
+            {user === undefined ?
+            <LoaderContainer>
+                <Loading />
+            </LoaderContainer> 
+            : 
             <Container>
                 <Header/>
                 <MainContainer>

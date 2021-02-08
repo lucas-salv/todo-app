@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { FiTrash2 } from 'react-icons/fi';
 import { Container, Tag, Button } from './styles';
 import { Checkbox } from '@trendmicro/react-checkbox';
