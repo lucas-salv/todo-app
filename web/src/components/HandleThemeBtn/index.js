@@ -1,10 +1,16 @@
 import { Btn } from './styles';
-import { FaLightbulb } from 'react-icons/fa'
+import { FaLightbulb, FaRegLightbulb } from 'react-icons/fa'
 
-export default function HandleThemeBtn() {
+export default function HandleThemeBtn({ setTheme, theme }) {
+    console.log(theme);
+
     return (
-        <Btn>
+        <Btn onClick={() => setTheme(!theme)}>
+            {theme ? 
             <FaLightbulb color="#FFF" size={18}/>
+            :
+            <FaRegLightbulb color="#FFF" size={18} />
+            }
         </Btn>
     )
 }

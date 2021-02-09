@@ -34,11 +34,11 @@ function CustomRoute({ isPrivate, ...rest }) {
     return <Route {...rest} />
 }
 
-export default function Routes() {
+export default function Routes({ setTheme, theme }) {
     return (
         <Switch>
             <CustomRoute exact path='/login' component={Login} />
-            <CustomRoute isPrivate exact path='/' component={Main} />
+            <CustomRoute isPrivate exact path='/' component={() => <Main setTheme={setTheme} theme={theme}/>} />
             <CustomRoute exact path='/create-account' component={CreateAccount} />
             <CustomRoute path='*' component={ErrorPage} />
         </Switch>

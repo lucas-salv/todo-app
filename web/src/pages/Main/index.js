@@ -10,7 +10,7 @@ import HandleThemeBtn from './../../components/HandleThemeBtn';
 import api from './../../utils/api';
 import { Context } from './../../utils/AuthContext';
 
-export default function Main() {
+export default function Main({ setTheme, theme }) {
     const { user, setUser, dataActivated } = useContext(Context);
     const [isEditTaskForm, setEditTaskForm] = useState(false);
     const [editFormData, setEditFormData] = useState();
@@ -55,7 +55,7 @@ export default function Main() {
                  <h3>Selecione um grupo de tarefas ou adicione um.</h3>
                 }
                 </MainContainer>
-                <HandleThemeBtn />
+                <HandleThemeBtn setTheme={setTheme} theme={theme}/>
             </Container>
             }
         </>

@@ -71,7 +71,7 @@ export const Title = styled.h2`
 export const Button = styled.button`
     padding: 10px;
     margin-bottom: 10px;
-    color: ${props => props.theme.whiteColor};
+    color: #FFF;
     font-weight: bold;
     outline: none;
     background-color: ${props => props.theme.main};

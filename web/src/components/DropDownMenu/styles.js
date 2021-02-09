@@ -8,8 +8,8 @@ export const Container = styled.ul`
     width: 200px;
     padding: 10px;
     z-index: 2;
-    background-color: ${props => props.theme.whiteColor};
-    border: 1px solid ${props => props.theme.grayBackground};
+    background-color: ${props => props.theme.grayBackground};
+    border: 1px solid ${props => props.theme.placeholderColor};
     border-radius: 5px;
 
     @media (min-width: 900px) {
@@ -20,7 +20,7 @@ export const Container = styled.ul`
     li {
         list-style: none;
         padding: 10px;
-        border-bottom: 1px solid ${props => props.theme.grayBackground};
+        border-bottom: 1px solid ${props => props.theme.placeholderColor};
         color: ${props => props.theme.grayTextColor};
         transition: color .5s ease-in-out;
         text-align: left;

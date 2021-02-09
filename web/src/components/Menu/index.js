@@ -10,10 +10,10 @@ export default function Menu({ open, setOpen }) {
                 
                 <MainMenu>
                     <Item active >
-                        <FaTasks className="icon" size={20} />
+                        <FaTasks className="icon" size={18} />
                     </Item>
                     <Item>
-                        <BsInfoCircle className="icon" size={20} />
+                        <BsInfoCircle className="icon" size={18} />
                     </Item>
                 </MainMenu>
                 <SecondaryMenu>

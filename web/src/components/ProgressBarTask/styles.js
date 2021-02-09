@@ -29,5 +29,5 @@ export const Percent = styled.span`
     font-size: 0.6rem;
     padding: 0 5px;
     color: ${props => props.theme.placeholderColor};
-    background-color: ${props => props.theme.whiteColor};
+    background-color: ${props => props.theme.background};
 `;

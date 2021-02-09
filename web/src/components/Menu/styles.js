@@ -8,7 +8,7 @@ export const Container = styled.div`
     display: flex;
     width: 80%;
     height: 100vh;
-    background-color: ${props => props.theme.whiteColor};
+    background-color: ${props => props.theme.background};
     transition: transform .5s ease-in-out;
     transform: translateX(${props => props.open ? 0 : -110}%);
     
@@ -77,7 +77,7 @@ export const Item = styled.a`
     outline: none;
 
     .icon {
-        fill: ${props => props.active ? props.theme.whiteColor : props.theme.placeholderColor};
+        fill: ${props => props.active ? "#FFF" : props.theme.placeholderColor};
     }
 `
 
