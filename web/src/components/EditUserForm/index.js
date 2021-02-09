@@ -42,27 +42,27 @@ export default function EditUserForm({ open, setOpen }) {
     }, []);
 
     const validateForm = (username, email, oldPass, newPass, avatar) => {
-        if(!username || username.length < 3) {
+        if(username.length > 0 && username.length < 3) {
             setStatus(true);
             console.log('username');
             return;
-        } else if(!email || email.indexOf('@') === -1) {
+        } else if(email.indexOf('@') === -1) {
             setStatus(true);
             console.log('email');
             return;
-        } else if(!newPass || newPass.length < 3) {
+        } else if(newPass.length > 0 && newPass.length < 3) {
             setStatus(true);
             console.log('pass');
             return;
-        } else if(newPass === oldPass){
+        } else if(newPass === oldPass && newPass !== ''){
             setStatus(true);
             console.log('confirmPass')
             return;
         } else {
             const data = {
-                name: username,
-                email,
-                pass: newPass,
+                name: username.length === 0 ? undefined : username,
+                email: email.length === 0 ? undefined : email,
+                pass: newPass.length === 0 ? undefined : newPass,
                 oldPass,
                 avatar_url: avatar
             }
@@ -105,25 +105,25 @@ export default function EditUserForm({ open, setOpen }) {
                     </Link>
                     <Title>Editar usuário</Title>
                     <ErrorModal status={status}><p>Ops! Algo deu errado. Mude os valores ou tente novamente!</p></ErrorModal>
-                    <Label htmlFor="name">
+                    <Label htmlFor="name" status={status}>
                         <FiUser color="#9B9B9B" />
                         <input type="text" id="name" name="name" autoFocus placeholder="Usuário" value={username} onChange={(e) => setUsername(e.target.value)} onFocus={() => {
                     setStatus(false);
                 }} onKeyUp={pressEnterEditUser} />
                     </Label>
-                    <Label htmlFor="email">
+                    <Label htmlFor="email" status={status}>
                         <HiOutlineMail color="#9B9B9B" />
                         <input type="email" id="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} onFocus={() => {
                     setStatus(false);
                 }} onKeyUp={pressEnterEditUser}/>
                     </Label>
-                    <Label htmlFor="pass">
+                    <Label htmlFor="pass" status={status}>
                         <FiLock color="#9B9B9B" />
                         <input type="password" id="pass" name="password" placeholder="Senha atual" value={oldPass} onChange={(e) => setOldPass(e.target.value)} onFocus={() => {
                     setStatus(false);
                 }} onKeyUp={pressEnterEditUser}/>
                     </Label>
-                    <Label htmlFor="confirm-pass">
+                    <Label htmlFor="confirm-pass" status={status}>
                         <FiLock color="#9B9B9B" />
                         <input type="password" id="confirm-pass" placeholder="Nova senha" value={newPass} onChange={(e) => setNewPass(e.target.value)} onFocus={() => {
                     setStatus(false);
