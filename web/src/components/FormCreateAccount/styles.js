@@ -71,7 +71,7 @@ export const Title = styled.h2`
 export const Button = styled.button`
     padding: 10px;
     margin-bottom: 10px;
-    color: ${props => props.type === 'delete' ? '#ed2f2f' : props.theme.whiteColor};
+    color: ${props => props.type === 'delete' ? '#ed2f2f' : '#FFF'};
     font-weight: bold;
     outline: none;
     background-color: ${props => props.type === 'delete' ? props.theme.whiteColor : props.theme.main};

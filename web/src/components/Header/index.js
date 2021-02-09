@@ -5,10 +5,11 @@ import Progress from './../ProgressBarTask';
 import Menu from './../Menu';
 import EditUserForm from './../EditUserForm';
 import DropDownMenu from './../DropDownMenu';
-
+import { ThemeContext } from 'styled-components';
 import { Context } from './../../utils/AuthContext';
 
 export default function Header() {
+    const theme = useContext(ThemeContext);
     const { handleLogout, user } = useContext(Context);
     const [isOpenMenu, setOpenMenu] = useState(false);
     const [isDropDown, setDropDown] = useState(false);
@@ -40,7 +41,7 @@ export default function Header() {
                 <Container>
                     <MenuIcon onClick={menuAnimation} open={isOpenMenu} />
                     <PerfilContainer>
-                        <FiBell className="notify" color="#D4D4D4" size={22} />
+                        <FiBell className="notify" color={theme.placeholderColor} size={18} />
                         <Perfil id='perfil-menu' src={user.avatar_url} onClick={DropDownAnimation}/>
                         <DropDownMenu open={isDropDown}>
                             <li onClick={EditUserFormAnimation}>Editar Usuário</li>

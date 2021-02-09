@@ -8,4 +8,8 @@ export default createGlobalStyle`
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     //letter-spacing: 1px;
   }
+
+  body {
+    background-color: ${props => props.theme.background};
+  }
 `

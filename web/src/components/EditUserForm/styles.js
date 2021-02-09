@@ -7,7 +7,7 @@ export const Container = styled.div`
     width: 80%;
     height: 100vh;
     padding: 20px;
-    background-color: ${props => props.theme.whiteColor};
+    background-color: ${props => props.theme.background};
     z-index: 3;
     transition: transform .5s ease-in-out;
     transform: translateX(${props => props.open ? 0 : 110}%);
@@ -130,10 +130,10 @@ export const SuccessModal = styled.div`
 export const Button = styled.button`
     padding: 10px;
     margin-bottom: 10px;
-    color: ${props => props.type === 'delete' ? '#ed2f2f' : props.theme.whiteColor};
+    color: ${props => props.type === 'delete' ? '#ed2f2f' : '#FFF'};
     font-weight: bold;
     outline: none;
-    background-color: ${props => props.type === 'delete' ? props.theme.whiteColor : props.theme.main};
+    background-color: ${props => props.type === 'delete' ? props.theme.background : props.theme.main};
     border-radius: 5px;
     border: 1px solid ${props => props.type === 'delete' ? 'transparent' : props.theme.main};
     cursor: pointer;
