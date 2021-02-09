@@ -17,6 +17,13 @@ export const Container = styled.ul`
         right: ${props => props.position === 'bottom' ? '-210px' : '0'};
     }
 
+    h5 {
+        padding: 10px;
+        color: ${props => props.theme.grayTextColor};
+        background-color: ${props => props.theme.placeholderColor};
+        border-radius: 5px;
+    }
+
     li {
         list-style: none;
         padding: 10px;

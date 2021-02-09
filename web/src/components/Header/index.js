@@ -44,6 +44,7 @@ export default function Header() {
                         <FiBell className="notify" color={theme.placeholderColor} size={18} />
                         <Perfil id='perfil-menu' src={user.avatar_url} onClick={DropDownAnimation}/>
                         <DropDownMenu open={isDropDown}>
+                            <h5>Olá, {user.name}</h5>
                             <li onClick={EditUserFormAnimation}>Editar Usuário</li>
                             <li onClick={handleLogout}>Logout</li>
                         </DropDownMenu>

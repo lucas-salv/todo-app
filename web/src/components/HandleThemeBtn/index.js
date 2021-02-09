@@ -9,7 +9,7 @@ export default function HandleThemeBtn({ setTheme, theme }) {
             {theme ? 
             <FaLightbulb color="#FFF" size={18}/>
             :
-            <FaRegLightbulb color="#FFF" size={18} />
+            <FaRegLightbulb color="#121212" size={18} />
             }
         </Btn>
     )

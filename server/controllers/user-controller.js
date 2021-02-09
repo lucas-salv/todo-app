@@ -83,7 +83,7 @@ exports.putUser = (req, res, next) => {
 
             const userEdited = {
                 id: user.id,
-                user: user.name,
+                name: user.name,
                 email: user.email,
                 avatar_url: user.avatar_url
             }
