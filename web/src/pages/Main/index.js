@@ -5,6 +5,7 @@ import AddTaskForm from './../../components/AddTaskForm';
 import Task from './../../components/Task';
 import EditTaskForm from './../../components/EditTaskForm';
 import Loading from './../../components/Loading';
+import HandleThemeBtn from './../../components/HandleThemeBtn';
 
 import api from './../../utils/api';
 import { Context } from './../../utils/AuthContext';
@@ -54,6 +55,7 @@ export default function Main() {
                  <h3>Selecione um grupo de tarefas ou adicione um.</h3>
                 }
                 </MainContainer>
+                <HandleThemeBtn />
             </Container>
             }
         </>
