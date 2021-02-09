@@ -8,7 +8,8 @@ export const Progress = styled.div`
     background-color: ${props => props.theme.grayBackground};
 
     @media (min-width: 900px) {
-        width: 70%;
+        width: 68%;
+        margin-left: 32%;
         align-self: flex-end;
     }
 
@@ -18,9 +19,10 @@ export const Progress = styled.div`
 `;
 
 export const Bar = styled.div`
-    width: calc(50% - 31.22px);
+    width: calc(${props => props.percent}% - 31.22px);
     height: 100%;
     background-color: ${props => props.theme.main};
+    transition: width .4s ease-in-out;
 `;
 
 export const Percent = styled.span`
