@@ -105,25 +105,25 @@ export default function EditUserForm({ open, setOpen }) {
                     </Link>
                     <Title>Editar usuário</Title>
                     <ErrorModal status={status}><p>Ops! Algo deu errado. Mude os valores ou tente novamente!</p></ErrorModal>
-                    <Label htmlFor="name">
+                    <Label htmlFor="name" status={status}>
                         <FiUser color="#9B9B9B" />
                         <input type="text" id="name" name="name" autoFocus placeholder="Usuário" value={username} onChange={(e) => setUsername(e.target.value)} onFocus={() => {
                     setStatus(false);
                 }} onKeyUp={pressEnterEditUser} />
                     </Label>
-                    <Label htmlFor="email">
+                    <Label htmlFor="email" status={status}>
                         <HiOutlineMail color="#9B9B9B" />
                         <input type="email" id="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} onFocus={() => {
                     setStatus(false);
                 }} onKeyUp={pressEnterEditUser}/>
                     </Label>
-                    <Label htmlFor="pass">
+                    <Label htmlFor="pass" status={status}>
                         <FiLock color="#9B9B9B" />
                         <input type="password" id="pass" name="password" placeholder="Senha atual" value={oldPass} onChange={(e) => setOldPass(e.target.value)} onFocus={() => {
                     setStatus(false);
                 }} onKeyUp={pressEnterEditUser}/>
                     </Label>
-                    <Label htmlFor="confirm-pass">
+                    <Label htmlFor="confirm-pass" status={status}>
                         <FiLock color="#9B9B9B" />
                         <input type="password" id="confirm-pass" placeholder="Nova senha" value={newPass} onChange={(e) => setNewPass(e.target.value)} onFocus={() => {
                     setStatus(false);

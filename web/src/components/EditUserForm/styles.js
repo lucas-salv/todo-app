@@ -51,8 +51,9 @@ export const Label = styled.label`
     padding: 10px;
     margin-bottom: 10px;
     background-color: ${props => props.theme.grayBackground};
-    border: 1px solid ${props => props.theme.grayBackground};
+    border: 1px solid ${props => props.status ? 'red' : props.theme.grayBackground};
     border-radius: 5px;
+    transition: border-color .2s ease-in-out;
 
     input {
         width: 100%;
