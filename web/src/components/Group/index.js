@@ -87,13 +87,13 @@ export default function GroupItem({ data, initialData, isActive, setActiveIndex,
         <Group id={`group-${data.id}`} active={isActive}>
             <div onClick={onClick}>
                 <p className="name">{ellipsis(groupTitle)}</p>
-                <Label open={isEditGroup}>
-                    <input type="text" placeholder="Nome da tarefa" value={titleEdit} onChange={(e) => setTitleEdit(e.target.value)} onKeyUp={pressEnterEdit} />
-                    <Button id={`editBtn-${data.id}`} onClick={editGroupApi}>
-                        <FiEdit3 color="#FFF" size={20}/>
-                    </Button>
-                </Label>
             </div>
+            <Label open={isEditGroup}>
+                <input type="text" placeholder="Nome da tarefa" value={titleEdit} onChange={(e) => setTitleEdit(e.target.value)} onKeyUp={pressEnterEdit} />
+                <Button id={`editBtn-${data.id}`} onClick={editGroupApi}>
+                    <FiEdit3 color="#FFF" size={20}/>
+                </Button>
+            </Label>
             <button className="edit-button" onClick={DropDownAnimation}>
                 <DropDownMenu open={isDropDown} position="bottom">
                     <li onClick={EditGroupAnimation}>Editar Grupo</li>

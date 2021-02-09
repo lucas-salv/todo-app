@@ -3,7 +3,7 @@ import { BsInfoCircle } from 'react-icons/bs';
 import { Container, MainMenu, SecondaryMenu, Item } from './styles';
 import GroupTask from './../GroupTask';
 
-export default function Menu({ open }) {
+export default function Menu({ open, setOpen }) {
     return (
         <>
             <Container open={open}>
@@ -17,10 +17,10 @@ export default function Menu({ open }) {
                     </Item>
                 </MainMenu>
                 <SecondaryMenu>
-                    <GroupTask />
+                    <GroupTask setMenu={setOpen}/>
                 </SecondaryMenu>
             </Container>
-            <div className="backgroundMenu"></div>
+            <div className="backgroundMenu" onClick={() => setOpen(false)}></div>
         </>
     )
 }

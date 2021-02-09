@@ -23,7 +23,7 @@ const groupTaskReducer = (state, action) => {
     }
 }
 
-export default function GroupTask() {
+export default function GroupTask({ setMenu }) {
     const { setDataActivated } = useContext(Context);
     const [groupName, setGroupName]  = useState('');
     const [groups, dispatch] = useReducer(groupTaskReducer, []);
@@ -76,6 +76,7 @@ export default function GroupTask() {
     const handleActiveIndex = (index, item) => {
         setActiveIndex(index);
         setDataActivated(item);
+        setMenu(false);
     }
 
     const noGroup = () => {
