@@ -36,7 +36,7 @@ export default function Header() {
 
     return (
             <HeaderContainer>
-                <Menu open={isOpenMenu} />
+                <Menu open={isOpenMenu} setOpen={setOpenMenu} />
                 <Container>
                     <MenuIcon onClick={menuAnimation} open={isOpenMenu} />
                     <PerfilContainer>
