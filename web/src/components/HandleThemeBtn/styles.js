@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 export const Btn = styled.button`
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     position: fixed;
     bottom: 50px;
     right: 10%;
     border: none;
     background-color: ${props => props.theme.main};
-    border-radius: 50px;
+    border-radius: 5px;
     cursor: pointer;
     outline: none;
 
