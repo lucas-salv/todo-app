@@ -2,7 +2,6 @@ import { useContext, useEffect, useState, useReducer } from 'react';
 import { FiPlus } from 'react-icons/fi'
 import { TitleContainer, Form, Label, Button, GroupContainer, Text } from './styles';
 import Group from './../Group';
-
 import api from './../../utils/api';
 import { Context } from './../../utils/AuthContext';
 import { socket } from './../../utils/socketIo';
@@ -16,7 +15,6 @@ const groupTaskReducer = (state, action) => {
         case 'DEL':
             console.log(state, action.payload[0]);
             const filt = state.filter(item => item.id !== action.payload[0].id);
-            console.log(filt);
             return filt;
         default:
             throw new Error();

@@ -26,7 +26,7 @@ export default function AddTaskForm({ groupName, groupId }) {
         <Form>
             <Title>{groupName}</Title>
             <Label>
-                <input type="text" placeholder="Nome da tarefa" value={titleTask} onChange={(e) => setTitleTask(e.target.value)} onKeyUp={pressEnterAddTask} />
+                <input type="text" placeholder="Nome da tarefa..." value={titleTask} onChange={(e) => setTitleTask(e.target.value)} onKeyUp={pressEnterAddTask} />
                 <Button id="addTaskBtn" onClick={addTask}>
                     <FiPlus color="#FFF" size={20}/>
                 </Button>

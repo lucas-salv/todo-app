@@ -39,5 +39,5 @@ export const Title = styled.h4`
     color: ${props => props.theme.grayTextColor};
     font-weight: normal;
     font-size: 0.7rem;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 `

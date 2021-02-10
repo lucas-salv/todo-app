@@ -44,19 +44,15 @@ export default function EditUserForm({ open, setOpen }) {
     const validateForm = (username, email, oldPass, newPass, avatar) => {
         if(username.length > 0 && username.length < 3) {
             setStatus(true);
-            console.log('username');
             return;
         } else if(email.indexOf('@') === -1) {
             setStatus(true);
-            console.log('email');
             return;
         } else if(newPass.length > 0 && newPass.length < 3) {
             setStatus(true);
-            console.log('pass');
             return;
         } else if(newPass === oldPass && newPass !== ''){
             setStatus(true);
-            console.log('confirmPass')
             return;
         } else {
             const data = {

@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-
 import Login from './pages/Login';
 import CreateAccount from './pages/CreateAccount';
 import Main from './pages/Main';
