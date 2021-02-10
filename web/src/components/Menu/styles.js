@@ -82,7 +82,8 @@ export const Item = styled.a`
 `
 
 export const SecondaryMenu = styled.div`
-    padding: 40px 10px 10px 10px;
+    position: relative;
+    padding: 60px 10px 10px 10px;
     width:  80%;
 
     @media (min-width: 900px) {
