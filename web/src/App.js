@@ -4,10 +4,8 @@ import { Router } from 'react-router-dom';
 import Routes from './routes';
 import history from './history';
 import { lightTheme, darkTheme } from './utils/colors';
-
 import GlobalStyles from './utils/globalStyles';
 import { ThemeProvider } from 'styled-components';
-
 import { AuthProvider } from './utils/AuthContext';
 
 

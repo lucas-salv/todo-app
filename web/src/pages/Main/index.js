@@ -6,7 +6,6 @@ import Task from './../../components/Task';
 import EditTaskForm from './../../components/EditTaskForm';
 import Loading from './../../components/Loading';
 import HandleThemeBtn from './../../components/HandleThemeBtn';
-
 import api from './../../utils/api';
 import { Context } from './../../utils/AuthContext';
 
@@ -14,7 +13,7 @@ export default function Main({ setTheme, theme }) {
     const { user, setUser, dataActivated } = useContext(Context);
     const [isEditTaskForm, setEditTaskForm] = useState(false);
     const [editFormData, setEditFormData] = useState();
-    const [index, setIndex] = useState();
+    const [, setIndex] = useState();
 
     useEffect(() => {
         (async () => {
@@ -45,7 +44,7 @@ export default function Main({ setTheme, theme }) {
                     <AddTaskForm groupName={dataActivated.title_group_task} groupId={dataActivated.id} />
                     <TaskContainer>
                         <EditTaskForm open={isEditTaskForm} setOpen={EditTaskFormAnimation} id={dataActivated.id} data={editFormData} />
-                        <Title>Tarefas - {dataActivated ? JSON.stringify(dataActivated) : null}</Title>
+                        <Title>Tarefas</Title>
                         {dataActivated.tasks.map((item, index) => (
                             <Task key={index} onClick={EditTaskFormAnimation} id={index} groupId={dataActivated.id} data={item}/>
                         ))}

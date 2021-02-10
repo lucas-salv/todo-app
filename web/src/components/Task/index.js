@@ -7,8 +7,6 @@ import { tagColors } from './../../utils/colors';
 import api from './../../utils/api';
 
 export default function Task({ onClick, id, groupId, data }) {
-    console.log(data);
-
     const checkboxToggle = async () => {
         await api.put(`/task/${data.task_id}`, { group_task_id: groupId, checked: !data.checked })
     }

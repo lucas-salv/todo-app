@@ -41,7 +41,6 @@ export default function EditTaskForm({ open, setOpen, id, data }) {
     const clickBtnEdit = async (e) => {
         e.preventDefault();
         const formData = validateForm(title, desc);
-        console.log(formData);
         if(formData){
             try{
                 const res = await api.put(`/task/${data.task_id}`, formData);
@@ -74,7 +73,7 @@ export default function EditTaskForm({ open, setOpen, id, data }) {
                         <FiChevronLeft />
                         Voltar
                     </Link>
-                    <Title>Editar Tarefa - {JSON.stringify(data)}</Title>
+                    <Title>Editar Tarefa</Title>
                     <ErrorModal status={status}><p>Ops! Algo deu errado. Mude os valores ou tente novamente!</p></ErrorModal>
                     <Label htmlFor="title">
                         <FiEdit3 color="#9B9B9B" />

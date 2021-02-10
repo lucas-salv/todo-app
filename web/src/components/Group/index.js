@@ -1,9 +1,10 @@
 import { useState, useEffect, useContext } from 'react';
-import { Label, Button, Group } from './styles';
+import { Label, Button, Group, EditGroupContainer } from './styles';
 import { FiEdit3 } from 'react-icons/fi'
 import { HiOutlineDotsVertical } from 'react-icons/hi'
 import DropDownMenu from './../DropDownMenu';
-
+import Link from './../Link';
+import { FiChevronLeft } from 'react-icons/fi'
 import api from './../../utils/api';
 import { Context } from './../../utils/AuthContext';
 import ellipsis from './../../utils/ellipsis';
@@ -88,12 +89,18 @@ export default function GroupItem({ data, initialData, isActive, setActiveIndex,
             <div onClick={onClick}>
                 <p className="name">{ellipsis(groupTitle)}</p>
             </div>
-            <Label open={isEditGroup}>
-                <input type="text" placeholder="Nome da tarefa" value={titleEdit} onChange={(e) => setTitleEdit(e.target.value)} onKeyUp={pressEnterEdit} />
-                <Button id={`editBtn-${data.id}`} onClick={editGroupApi}>
-                    <FiEdit3 color="#FFF" size={20}/>
-                </Button>
-            </Label>
+            <EditGroupContainer open={isEditGroup}>
+                <Link setOpen={() => setEditGroup(false)}>
+                    <FiChevronLeft />
+                    Voltar
+                </Link>
+                <p>Editar grupo</p>
+                <Label>
+                    <FiEdit3 color="#9B9B9B" size={20}/>
+                    <input type="text" placeholder="Editar grupo..." value={titleEdit} onChange={(e) => setTitleEdit(e.target.value)} onKeyUp={pressEnterEdit} />
+                </Label>
+                <Button id={`editBtn-${data.id}`} onClick={editGroupApi}>Editar</Button>
+            </EditGroupContainer>
             <button className="edit-button" onClick={DropDownAnimation}>
                 <DropDownMenu open={isDropDown} position="bottom">
                     <li onClick={EditGroupAnimation}>Editar Grupo</li>

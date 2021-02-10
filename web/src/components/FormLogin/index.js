@@ -1,10 +1,8 @@
 import { useContext, useState } from 'react';
 import { FiLock } from 'react-icons/fi';
 import { HiOutlineMail } from "react-icons/hi";
-//import Link from './../Link';
 import Logo from './../Logo';
 import { Form, Label, Title, Button, ErrorModal } from './styles';
-
 import { Context } from './../../utils/AuthContext';
 import { Link } from 'react-router-dom';
 

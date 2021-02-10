@@ -3,7 +3,6 @@ import { FiLock, FiUser, FiChevronLeft } from 'react-icons/fi';
 import { HiOutlineMail } from "react-icons/hi";
 import Logo from './../Logo';
 import { Form, Label, Title, Button, ErrorModal } from './styles';
-
 import { Link } from 'react-router-dom';
 import { Context } from './../../utils/AuthContext';
 import errorFunction from './../../utils/errorFunction';
@@ -20,19 +19,15 @@ export default function FormCreateAccount() {
     const validateForm = (username, email, pass, confirmPass) => {
         if(!username || username.length < 3) {
             setStatus(true);
-            console.log('username');
             return;
         } else if(!email || email.indexOf('@') === -1) {
             setStatus(true);
-            console.log('email');
             return;
         } else if(!pass || pass.length < 3) {
             setStatus(true);
-            console.log('pass');
             return;
         } else if(pass !== confirmPass){
             setStatus(true);
-            console.log('confirmPass')
             return;
         } else {
             const data = {
