@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom';
 
 export default function FormLogin() {
     const {handleLogin, error, setError} = useContext(Context);
-    const [email, setEmail] = useState();
-    const [pass, setPass] = useState();
+    const [email, setEmail] = useState('');
+    const [pass, setPass] = useState('');
 
     const clickLogin = (e) => {
         e.preventDefault();
@@ -36,11 +36,11 @@ export default function FormLogin() {
             <Title>Faça seu login</Title>
             <Label htmlFor="email" status={error}>
                 <HiOutlineMail color="#9B9B9B" />
-                <input type="email" id="email" name="email" autoFocus placeholder="Email" onChange={(e) => inputChange(setEmail, e)} onFocus={() => setError(false)} onKeyUp={pressEnterLogin}/>
+                <input type="email" id="email" name="email" autoFocus placeholder="Email" value={email} onChange={(e) => inputChange(setEmail, e)} onFocus={() => setError(false)} onKeyUp={pressEnterLogin}/>
             </Label>
             <Label htmlFor="pass" status={error}>
                 <FiLock color="#9B9B9B" />
-                <input type="password" id="pass" name="password" placeholder="Senha" onChange={(e) => inputChange(setPass, e)} onFocus={() => setError(false)} onKeyUp={pressEnterLogin}/>
+                <input type="password" id="pass" name="password" placeholder="Senha" value={pass} onChange={(e) => inputChange(setPass, e)} onFocus={() => setError(false)} onKeyUp={pressEnterLogin}/>
             </Label>
             <Button id="loginBtn" onClick={clickLogin} >Entrar</Button>
             <Link to="/create-account" style={{ textDecoration: 'none', fontFamily: 'sans-serif', fontSize: '0.8rem', color: '#38A0FF'}}>Criar uma conta</Link>

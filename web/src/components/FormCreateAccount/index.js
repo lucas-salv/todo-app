@@ -10,10 +10,10 @@ import api from './../../utils/api';
 
 export default function FormCreateAccount() {
     const { handleLogin } = useContext(Context);
-    const [username, setUsername] = useState();
-    const [email, setEmail] = useState();
-    const [pass, setPass] = useState();
-    const [confirmPass, setConfirmPass] = useState();
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [pass, setPass] = useState('');
+    const [confirmPass, setConfirmPass] = useState('');
     const [status, setStatus] = useState(false);
 
     const validateForm = (username, email, pass, confirmPass) => {
@@ -71,25 +71,25 @@ export default function FormCreateAccount() {
             <Title>Crie sua conta</Title>
             <Label htmlFor="name" status={status}>
                 <FiUser color="#9B9B9B" />
-                <input type="text" id="name" name="name" autoFocus placeholder="Usuário" onChange={(e) => setUsername(e.target.value)} onFocus={() => {
+                <input type="text" id="name" name="name" autoFocus placeholder="Usuário" value={username} onChange={(e) => setUsername(e.target.value)} onFocus={() => {
                     setStatus(false);
                 }} onKeyUp={pressEnterLogin}/>
             </Label>
             <Label htmlFor="email" status={status}>
                 <HiOutlineMail color="#9B9B9B" />
-                <input type="email" id="email" name="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} onFocus={() => {
+                <input type="email" id="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} onFocus={() => {
                     setStatus(false);
                 }} onKeyUp={pressEnterLogin}/>
             </Label>
             <Label htmlFor="pass" status={status}>
                 <FiLock color="#9B9B9B" />
-                <input type="password" id="pass" name="password" placeholder="Senha" onChange={(e) => setPass(e.target.value)} onFocus={() => {
+                <input type="password" id="pass" name="password" placeholder="Senha" value={pass} onChange={(e) => setPass(e.target.value)} onFocus={() => {
                     setStatus(false);
                 }} onKeyUp={pressEnterLogin}/>
             </Label>
             <Label htmlFor="confirm-pass" status={status}>
                 <FiLock color="#9B9B9B" />
-                <input type="password" id="confirm-pass" placeholder="Confirmar senha" onChange={(e) => setConfirmPass(e.target.value)} onFocus={() => {
+                <input type="password" id="confirm-pass" placeholder="Confirmar senha" value={confirmPass} onChange={(e) => setConfirmPass(e.target.value)} onFocus={() => {
                     setStatus(false);
                 }} onKeyUp={pressEnterLogin}/>
             </Label>

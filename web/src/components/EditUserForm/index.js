@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect, useRef } from 'react';
 import { FiLock, FiUser, FiChevronLeft } from 'react-icons/fi';
 import { HiOutlineMail } from "react-icons/hi";
 import { Container, Form, Title, Label, ImgContainer, ImgPerfil, ErrorModal, SuccessModal, Button } from './styles';
@@ -20,6 +20,7 @@ const avatars = [
 ]
 
 export default function EditUserForm({ open, setOpen }) {
+    const wrapperRef = useRef(null);
     const { handleLogout, user, setUser } = useContext(Context);
     const [username, setUsername] = useState(user.name);
     const [email, setEmail] = useState(user.email);
@@ -29,17 +30,24 @@ export default function EditUserForm({ open, setOpen }) {
     const [status, setStatus] = useState(false);
     const [editStatus, setEditStatus] = useState(false);
 
+    const handleClickOutside = (e) => {
+        if (!wrapperRef.current.contains(e.target)) {
+            setEditStatus(false);
+        }
+    }
+
     useEffect(() => {
         socket.on('userEdited', content => {
             setUser(content)
         });
-
-        document.addEventListener('click', e => {
-            if(e.path.indexOf(document.getElementById('modal')) < 0) {
-                setEditStatus(false);
-            }
-        });
     }, []);
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
+    });
 
     const validateForm = (username, email, oldPass, newPass, avatar) => {
         if(username.length > 0 && username.length < 3) {
@@ -92,7 +100,7 @@ export default function EditUserForm({ open, setOpen }) {
 
     return (
         <>
-            <SuccessModal id="modal" status={editStatus}><p>Usuário editado com sucesso!</p></SuccessModal>
+            <SuccessModal ref={wrapperRef} status={editStatus}><p>Usuário editado com sucesso!</p></SuccessModal>
             <Container open={open}>
                 <Form>
                     <Link setOpen={setOpen}>
