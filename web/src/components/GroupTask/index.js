@@ -13,7 +13,6 @@ const groupTaskReducer = (state, action) => {
         case 'EDIT':
             return state.map(item => item.id === action.payload[0].id ? action.payload[0] : item);
         case 'DEL':
-            console.log(state, action.payload[0]);
             const filt = state.filter(item => item.id !== action.payload[0].id);
             return filt;
         default:

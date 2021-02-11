@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { FiEdit3, FiChevronLeft } from 'react-icons/fi';
 import { Container, LoaderContainer, Form, Title, Label, Date, ErrorModal, SuccessModal, Button } from './styles';
 import Link from './../Link';
@@ -7,10 +7,17 @@ import errorFunction from './../../utils/errorFunction';
 import Loading from './../Loading';
 
 export default function EditTaskForm({ open, setOpen, id, data }) {
-    const [title, setTitle] = useState();
-    const [desc, setDesc] = useState();
+    const wrapperRef = useRef(null);
+    const [title, setTitle] = useState('');
+    const [desc, setDesc] = useState('');
     const [status, setStatus] = useState(false);
     const [successStatus, setSuccessStatus] = useState(false);
+
+    const handleClickOutside = (e) => {
+        if (!wrapperRef.current.contains(e.target)) {
+            setSuccessStatus(false);
+        }
+    }
 
     useEffect(() => {
         setTitle(data ? data.title_task : '');
@@ -18,12 +25,11 @@ export default function EditTaskForm({ open, setOpen, id, data }) {
     }, [data]);
 
     useEffect(() => {
-        document.addEventListener('click', e => {
-            if(e.path.indexOf(document.getElementById('modal')) < 0) {
-                setSuccessStatus(false);
-            }
-        });
-    }, []);
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
+    });
 
     const validateForm = (title, desc) => {
         if(title === data.title_task && desc === data.desc_task){
@@ -61,7 +67,7 @@ export default function EditTaskForm({ open, setOpen, id, data }) {
 
     return (
         <>
-            <SuccessModal id="modal" status={successStatus}><p>Tarefa editada com sucesso!</p></SuccessModal>
+            <SuccessModal ref={wrapperRef} status={successStatus}><p>Tarefa editada com sucesso!</p></SuccessModal>
             <Container open={open}>
                 {!data ? 
                 <LoaderContainer>

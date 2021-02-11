@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useRef } from 'react';
 import { Label, Button, Group, EditGroupContainer } from './styles';
 import { FiEdit3 } from 'react-icons/fi'
 import { HiOutlineDotsVertical } from 'react-icons/hi'
@@ -10,11 +10,19 @@ import { Context } from './../../utils/AuthContext';
 import ellipsis from './../../utils/ellipsis';
 
 export default function GroupItem({ data, initialData, isActive, setActiveIndex, index, onClick }) {
+    const wrapperRef = useRef(null);
     const { setDataActivated } = useContext(Context);
     const [isDropDown, setDropDown] = useState(false);
     const [isEditGroup, setEditGroup] = useState(false);
     const [groupTitle, setGroupTitle] = useState('');
     const [titleEdit, setTitleEdit] = useState('');
+
+    const handleClickOutside = (e) => {
+        if (!wrapperRef.current.contains(e.target)) {
+            setDropDown(false);
+            setEditGroup(false);
+        }
+    }
 
     useEffect(() => {
         return isActive ? onClick() : null;
@@ -22,14 +30,11 @@ export default function GroupItem({ data, initialData, isActive, setActiveIndex,
     }, []);
 
     useEffect(() => {
-        document.addEventListener('click', e => {
-            if(e.path.indexOf(document.getElementById(`group-${data.id}`)) < 0) {
-                setDropDown(false);
-                setEditGroup(false);
-            }
-        });
-
-    }, []);
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
+    });
 
     useEffect(() => {
         return isActive ? setDataActivated(data) : null;
@@ -85,7 +90,7 @@ export default function GroupItem({ data, initialData, isActive, setActiveIndex,
     }
 
     return (
-        <Group id={`group-${data.id}`} active={isActive}>
+        <Group ref={wrapperRef} active={isActive}>
             <div onClick={onClick}>
                 <p className="name">{ellipsis(groupTitle)}</p>
             </div>
