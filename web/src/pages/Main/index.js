@@ -44,7 +44,7 @@ export default function Main({ setTheme, theme }) {
                     <AddTaskForm groupName={dataActivated.title_group_task} groupId={dataActivated.id} />
                     <TaskContainer>
                         <EditTaskForm open={isEditTaskForm} setOpen={EditTaskFormAnimation} id={dataActivated.id} data={editFormData} />
-                        <Title>Tarefas</Title>
+                        {dataActivated.tasks.length === 0 ? <h3>Nenhuma tarefa</h3> : <Title>Tarefas</Title>}
                         {dataActivated.tasks.map((item, index) => (
                             <Task key={index} onClick={EditTaskFormAnimation} id={index} groupId={dataActivated.id} data={item}/>
                         ))}
