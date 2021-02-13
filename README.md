@@ -1,6 +1,6 @@
 <h1 align="center">
 <br>
-  <img src="" alt="todo-app" width="120">
+  <img src="./web/public/logo-todoapp.png" alt="todo-app" width="120">
 <br>
 <br>
 </h1>
