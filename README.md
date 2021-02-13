@@ -15,7 +15,7 @@
 
 [//]: # (Add your gifs/images here:)
 <div>
-  <img src="./web/public/web.gif" alt="demo" height="425">
+  <img src="./web/public/web.gif" alt="demo" height="525">
   <img src="./web/public/mobile.gif" alt="demo" height="625">
 </div>
 <hr />
